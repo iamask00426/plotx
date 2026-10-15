@@ -1826,8 +1826,9 @@ body {
 }
 
 /* ==========================================================================
-   RESPONSIVE DESIGN (MOBILE FIRST / ADAPTIVE)
+   RESPONSIVE DESIGN (PHONE & MOBILE OPTIMIZATIONS)
    ========================================================================== */
+
 @media (max-width: 992px) {
   .cards-grid {
     grid-template-columns: 1fr;
@@ -1848,15 +1849,21 @@ body {
 
 @media (max-width: 768px) {
   .hero-section {
-    padding: 3rem 1rem 4rem;
+    padding: 3rem 1rem 3.5rem;
+  }
+
+  .section-vibe,
+  .section-timeline,
+  .section-bouncer {
+    padding: 4rem 1rem;
   }
 
   .countdown-grid {
-    gap: 0.5rem;
+    gap: 0.4rem;
   }
 
   .cd-num {
-    font-size: 1.8rem;
+    font-size: clamp(1.8rem, 6vw, 2.4rem);
   }
 
   .cd-separator {
@@ -1871,7 +1878,8 @@ body {
 
   .timeline-item {
     grid-template-columns: 1fr;
-    gap: 0.5rem;
+    gap: 0.6rem;
+    margin-bottom: 2rem;
   }
 
   .timeline-time-col {
@@ -1880,6 +1888,7 @@ body {
     flex-direction: row;
     gap: 0.75rem;
     align-items: center;
+    padding-top: 0;
   }
 
   .timeline-marker {
@@ -1896,22 +1905,24 @@ body {
 
   .pass-strip-left {
     width: 100%;
-    height: 30px;
+    height: 32px;
   }
 
   .pass-vert-text {
     writing-mode: horizontal-tb;
     transform: none;
+    letter-spacing: 0.15em;
   }
 
   .pass-main {
     border-right: none;
     border-bottom: 2px dashed rgba(255, 255, 255, 0.2);
+    padding: 1.5rem 1.25rem;
   }
 
   .pass-stub {
     width: 100%;
-    padding: 1.5rem;
+    padding: 1.5rem 1rem;
   }
 
   .stub-notch {
@@ -1921,6 +1932,7 @@ body {
   .footer-gps-box {
     flex-direction: column;
     align-items: flex-start;
+    padding: 1.5rem 1.25rem;
   }
 
   .gps-coords {
@@ -1929,6 +1941,358 @@ body {
 
   .cursor-glow,
   .cursor-dot {
-    display: none !important; /* Hide custom cursor on touch screens */
+    display: none !important; /* Touch screen disable */
+  }
+}
+
+/* Specific Phone Mode (iPhone, Android - max-width: 540px) */
+@media (max-width: 540px) {
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
+
+  /* Navigation Bar Compact for Phone */
+  .fixed-nav {
+    padding: 0.65rem 0.85rem;
+  }
+
+  .brand-text {
+    font-size: 0.95rem;
+  }
+
+  .tag-classified {
+    display: none; /* Hide to save horizontal space on small phones */
+  }
+
+  .nav-actions {
+    gap: 0.5rem;
+  }
+
+  .vibe-player-btn {
+    padding: 0.35rem 0.6rem;
+    gap: 0.4rem;
+  }
+
+  .vibe-details .vibe-label {
+    display: none; /* Only show ON/OFF on phone */
+  }
+
+  .vibe-status {
+    font-size: 0.7rem;
+  }
+
+  .nav-cta-btn {
+    padding: 0.45rem 0.75rem;
+    font-size: 0.72rem;
+  }
+
+  .nav-cta-btn span {
+    display: none; /* Show icon only or concise */
+  }
+
+  .nav-cta-btn::after {
+    content: 'VIP';
+    display: inline;
+  }
+
+  /* Hero Section for Phone */
+  .hero-section {
+    padding: 2.25rem 0.75rem 3rem;
+  }
+
+  .hero-badge-row {
+    gap: 0.4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .brutalist-badge {
+    font-size: 0.68rem;
+    padding: 0.35rem 0.65rem;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-pretitle {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+  }
+
+  .hero-headline {
+    font-size: clamp(3.2rem, 15vw, 4.8rem);
+    letter-spacing: -0.04em;
+    word-break: break-word;
+  }
+
+  .hero-subhead {
+    font-size: 1.05rem;
+    margin: 1.25rem auto 1.75rem;
+  }
+
+  /* Full Width CTA Stack on Phone */
+  .hero-cta-group {
+    flex-direction: column;
+    gap: 0.85rem;
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+
+  .brutal-btn {
+    width: 100%;
+    padding: 1rem 1.25rem;
+    font-size: 0.88rem;
+    justify-content: center;
+  }
+
+  /* Countdown Card on Phone */
+  .countdown-card {
+    padding: 1rem 0.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .countdown-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .countdown-title {
+    font-size: 0.75rem;
+  }
+
+  .countdown-tag {
+    font-size: 0.65rem;
+  }
+
+  .cd-num {
+    font-size: 1.55rem;
+  }
+
+  .cd-label {
+    font-size: 0.58rem;
+  }
+
+  .cd-separator {
+    font-size: 1.2rem;
+    margin-bottom: 0.6rem;
+  }
+
+  /* Sticker Badges on Phone */
+  .sticker-container {
+    gap: 0.6rem;
+  }
+
+  .sticker-inner {
+    font-size: 0.72rem;
+    padding: 0.38rem 0.75rem;
+  }
+
+  /* Section Titles */
+  .section-title {
+    font-size: clamp(2rem, 8.5vw, 2.75rem);
+  }
+
+  .section-desc {
+    font-size: 0.95rem;
+  }
+
+  /* Cards on Phone */
+  .vibe-card {
+    padding: 1.5rem 1.15rem;
+  }
+
+  .card-title {
+    font-size: 1.35rem;
+  }
+
+  .card-body {
+    font-size: 0.95rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .card-footer-meta {
+    flex-direction: column;
+    gap: 0.4rem;
+    font-size: 0.68rem;
+  }
+
+  /* Timeline Stage Card on Phone */
+  .timeline-card {
+    padding: 1.25rem 1rem;
+  }
+
+  .stage-title {
+    font-size: 1.25rem;
+  }
+
+  .stage-desc {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .stage-perks {
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.72rem;
+  }
+
+  /* Terminal & Bouncer Gate on Phone */
+  .terminal-chrome {
+    padding: 0.65rem 0.85rem;
+  }
+
+  .terminal-title {
+    font-size: 0.68rem;
+  }
+
+  .terminal-badge {
+    display: none; /* Hide on phone */
+  }
+
+  .terminal-body {
+    padding: 1.5rem 1rem;
+  }
+
+  .terminal-heading {
+    font-size: 1.85rem;
+  }
+
+  .terminal-sub {
+    font-size: 0.88rem;
+  }
+
+  /* Input fields: 16px to prevent iOS zoom */
+  .brutal-input {
+    font-size: 16px;
+    padding: 0.85rem 0.85rem 0.85rem 2.6rem;
+  }
+
+  .preset-pills {
+    gap: 0.35rem;
+  }
+
+  .preset-btn {
+    font-size: 0.65rem;
+    padding: 0.2rem 0.45rem;
+  }
+
+  .terms-text {
+    font-size: 0.72rem;
+  }
+
+  .submit-terminal-btn {
+    padding: 1rem 0.75rem;
+    font-size: 0.92rem;
+  }
+
+  /* Boarding Pass on Phone */
+  .boarding-pass {
+    border-width: 2px;
+  }
+
+  .pass-main {
+    padding: 1.25rem 0.85rem;
+  }
+
+  .pass-top {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+
+  .pass-brand {
+    font-size: 1.25rem;
+  }
+
+  .pass-id-badge {
+    font-size: 0.85rem;
+    padding: 0.2rem 0.5rem;
+    align-self: flex-start;
+  }
+
+  .pass-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.85rem 0.75rem;
+  }
+
+  .pass-cell .p-label {
+    font-size: 0.6rem;
+  }
+
+  .pass-cell .p-val {
+    font-size: 0.85rem;
+    word-break: break-word;
+  }
+
+  .pass-anthem-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+    padding: 0.5rem 0.65rem;
+  }
+
+  .pass-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .pass-stamp {
+    align-self: flex-end;
+    font-size: 0.75rem;
+    padding: 0.2rem 0.5rem;
+  }
+
+  .pass-stub {
+    padding: 1.25rem 0.75rem;
+  }
+
+  .stub-qr {
+    font-size: 2.8rem;
+  }
+
+  .ticket-actions {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .ticket-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Footer on Phone */
+  .footer-classified {
+    padding: 3rem 1rem 2rem;
+  }
+
+  .footer-bottom-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .footer-links {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+}
+
+/* Extra Small Phones (< 360px like iPhone 5/SE 1st gen) */
+@media (max-width: 360px) {
+  .hero-headline {
+    font-size: 2.8rem;
+  }
+
+  .cd-num {
+    font-size: 1.3rem;
+  }
+
+  .pass-grid {
+    grid-template-columns: 1fr;
   }
 }
