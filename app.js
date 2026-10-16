@@ -544,6 +544,12 @@ function initWristbandForm() {
         document.getElementById('anthem-error').textContent = '';
       }
 
+      const ageConsent = document.getElementById('ageConsent');
+      if (ageConsent && !ageConsent.checked) {
+        alert('You must confirm you are 18+ and will carry a Government ID to enter!');
+        return;
+      }
+
       if (!isValid) return;
 
       submitBtn.disabled = true;
@@ -553,9 +559,9 @@ function initWristbandForm() {
       scanningTerminal.classList.remove('hidden');
 
       const steps = [
-        { progress: 25, text: `✨ Reviewing vibe check for @${instaHandle.value.replace('@', '')}...` },
-        { progress: 55, text: `🪩 Adding "${partyAnthem.value}" to the DJ deck queue...` },
-        { progress: 85, text: `🏊 Checking poolside capacity & ratio... [PERFECT MATCH]` },
+        { progress: 25, text: `🔞 Age 18+ requirement checked: Physical or DigiLocker ID mandatory at gate...` },
+        { progress: 50, text: `🍸 All-inclusive bar access authorized (Curated Alcohol, Cocktails & Cold Brews)...` },
+        { progress: 75, text: `🪩 Adding "${partyAnthem.value}" to the DJ deck queue...` },
         { progress: 100, text: `🎉 WRISTBAND ISSUED! WELCOME TO PLOT X.` }
       ];
 
