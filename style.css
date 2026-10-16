@@ -120,29 +120,45 @@ body.party-body {
   position: fixed;
   top: 0;
   left: 0;
-  width: 280px;
-  height: 280px;
+  width: 260px;
+  height: 260px;
   background: radial-gradient(circle, rgba(255, 20, 147, 0.22) 0%, rgba(0, 242, 254, 0.12) 50%, transparent 70%);
   border-radius: 50%;
   pointer-events: none;
   transform: translate(-50%, -50%);
   z-index: 999;
   mix-blend-mode: screen;
+  transition: width 0.25s ease, height 0.25s ease;
+  will-change: transform;
+}
+
+.cursor-glow.cursor-hover {
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(255, 230, 0, 0.25) 0%, rgba(255, 20, 147, 0.15) 50%, transparent 70%);
 }
 
 .cursor-dot {
   position: fixed;
   top: 0;
   left: 0;
-  width: 9px;
-  height: 9px;
+  width: 10px;
+  height: 10px;
   background-color: var(--party-pink);
   border-radius: 50%;
   pointer-events: none;
   transform: translate(-50%, -50%);
   z-index: 1000;
   box-shadow: 0 0 12px var(--party-pink);
-  transition: transform 0.1s ease-out;
+  transition: width 0.15s ease, height 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+  will-change: transform;
+}
+
+.cursor-dot.cursor-hover {
+  width: 18px;
+  height: 18px;
+  background-color: var(--party-gold);
+  box-shadow: 0 0 16px var(--party-gold);
 }
 
 /* Layout Container */

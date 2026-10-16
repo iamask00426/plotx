@@ -27,39 +27,47 @@ function initCustomCursor() {
     return;
   }
 
-  let mouseX = window.innerWidth / 2;
-  let mouseY = window.innerHeight / 2;
-  let glowX = mouseX;
-  let glowY = mouseY;
+  let mouseX = -100;
+  let mouseY = -100;
+  let glowX = -100;
+  let glowY = -100;
 
   window.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
-    cursorDot.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+    cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
   });
 
   function renderGlow() {
     glowX += (mouseX - glowX) * 0.12;
     glowY += (mouseY - glowY) * 0.12;
-    cursorGlow.style.transform = `translate(${glowX}px, ${glowY}px) translate(-50%, -50%)`;
+    cursorGlow.style.transform = `translate3d(${glowX}px, ${glowY}px, 0) translate(-50%, -50%)`;
     requestAnimationFrame(renderGlow);
   }
   renderGlow();
 
-  const interactives = document.querySelectorAll('a, button, input, .perk-card, .timeline-row');
-  interactives.forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      cursorDot.style.transform += ' scale(2.2)';
-      cursorDot.style.backgroundColor = '#FFE600';
-      cursorGlow.style.width = '380px';
-      cursorGlow.style.height = '380px';
-    });
-    el.addEventListener('mouseleave', () => {
-      cursorDot.style.backgroundColor = '#FF1493';
-      cursorGlow.style.width = '280px';
-      cursorGlow.style.height = '280px';
-    });
+  // Use event delegation for hover: toggle class without modifying transform style
+  document.addEventListener('mouseover', (e) => {
+    const isInteractive = e.target.closest('a, button, input, label, .perk-card, .timeline-row, .party-sticker, .preset-btn');
+    if (isInteractive) {
+      cursorDot.classList.add('cursor-hover');
+      cursorGlow.classList.add('cursor-hover');
+    } else {
+      cursorDot.classList.remove('cursor-hover');
+      cursorGlow.classList.remove('cursor-hover');
+    }
   });
+
+  // Ensure continuous scrolling doesn't leave cursor stuck in hover state
+  window.addEventListener('scroll', () => {
+    if (mouseX >= 0 && mouseY >= 0) {
+      const elUnderCursor = document.elementFromPoint(mouseX, mouseY);
+      if (!elUnderCursor || !elUnderCursor.closest('a, button, input, label, .perk-card, .timeline-row, .party-sticker, .preset-btn')) {
+        cursorDot.classList.remove('cursor-hover');
+        cursorGlow.classList.remove('cursor-hover');
+      }
+    }
+  }, { passive: true });
 }
 
 /* ==========================================================================
