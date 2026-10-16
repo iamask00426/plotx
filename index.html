@@ -3,53 +3,52 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PLOT X // UNDERGROUND POOL RAVE // CLASSIFIED</title>
-  <meta name="description" content="Exclusive invite-only underground pool party. 25-30 people. Zero rules. Private pool, live DJ, pure chaos. Noida Sector X.">
+  <title>PLOT X // THE ULTIMATE FARMHOUSE POOL BASH</title>
+  <meta name="description" content="Exclusive invite-only underground pool house party. 30 friends, heated pool, live DJ, sunset BBQ, pure Project X chaos. Noida.">
   
-  <!-- Google Fonts: Syne, Space Grotesk, Space Mono, JetBrains Mono -->
+  <!-- Google Fonts: Syne, Plus Jakarta Sans, Space Grotesk, JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&family=Space+Grotesk:wght@500;700&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800;900&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
   
-  <!-- Canvas Confetti for submission celebration -->
+  <!-- Canvas Confetti -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
   
-  <!-- FontAwesome Icons for clean brutalist iconography -->
+  <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-void text-chrome selection:bg-neon-lime selection:text-black">
+<body class="party-body">
 
-  <!-- Grain & Mesh Gradient Background Overlay -->
-  <div class="grain-overlay" aria-hidden="true"></div>
-  <div class="mesh-glow mesh-glow-1" aria-hidden="true"></div>
-  <div class="mesh-glow mesh-glow-2" aria-hidden="true"></div>
-  <div class="mesh-glow mesh-glow-3" aria-hidden="true"></div>
-  <div class="cyber-grid" aria-hidden="true"></div>
+  <!-- Ambient Party Atmosphere Background Elements -->
+  <div class="party-disco-glow glow-pink" aria-hidden="true"></div>
+  <div class="party-disco-glow glow-cyan" aria-hidden="true"></div>
+  <div class="party-disco-glow glow-gold" aria-hidden="true"></div>
+  <div class="party-pattern-overlay" aria-hidden="true"></div>
 
-  <!-- Custom Neon Cursor Follower -->
+  <!-- Custom Cursor Glow -->
   <div id="cursor-glow" class="cursor-glow" aria-hidden="true"></div>
   <div id="cursor-dot" class="cursor-dot" aria-hidden="true"></div>
 
-  <!-- Top Navigation & Audio Vibe Player Bar -->
+  <!-- Top Sticky Header -->
   <header class="fixed-nav">
     <div class="nav-inner">
       <div class="nav-brand">
-        <span class="status-indicator live-pulse"></span>
-        <span class="brand-text">PLOT_X // 2026</span>
-        <span class="tag-pill tag-classified">INVITE_ONLY</span>
+        <span class="disco-sparkle">✨</span>
+        <span class="brand-text">PLOT X <span class="brand-sub">POOL BASH</span></span>
+        <span class="tag-pill tag-live">30 WRISTBANDS ONLY</span>
       </div>
 
       <div class="nav-actions">
-        <!-- Vibe Player (Synthesized Web Audio Techno Rave Beats) -->
-        <button id="vibe-toggle-btn" class="vibe-player-btn" title="Toggle Underground Sound System" aria-label="Toggle Vibe Audio">
-          <div class="cassette-icon">
-            <i class="fa-solid fa-tape"></i>
+        <!-- Fun Party Music Aux Player -->
+        <button id="vibe-toggle-btn" class="vibe-player-btn" title="Toggle House Party Aux" aria-label="Toggle House Party Music">
+          <div class="player-icon-box">
+            <i class="fa-solid fa-music"></i>
           </div>
           <div class="vibe-details">
-            <span class="vibe-label">VIBE CHECK</span>
-            <span id="vibe-status" class="vibe-status">OFF</span>
+            <span class="vibe-label">AUX CORD</span>
+            <span id="vibe-status" class="vibe-status">PARTY BEATS: OFF</span>
           </div>
           <div class="eq-bars" id="eq-bars">
             <span class="bar"></span>
@@ -59,34 +58,36 @@
           </div>
         </button>
 
-        <a href="#bouncer-gate" class="nav-cta-btn">
-          <span>APPLY GATE</span>
-          <i class="fa-solid fa-arrow-down-right"></i>
+        <a href="#guestlist-door" class="nav-cta-btn">
+          <span>GET WRISTBAND</span>
+          <i class="fa-solid fa-ticket"></i>
         </a>
       </div>
     </div>
   </header>
 
-  <!-- Sticky Marquee Warning Tape Top -->
-  <div class="marquee-wrapper border-b-brutal">
+  <!-- Fun Animated Party Tape Marquee -->
+  <div class="party-marquee">
     <div class="marquee-track">
       <div class="marquee-content">
-        <span>/// CLASSIFIED POOL EXPERIENCE</span>
-        <span>/// 30 SLOTS STRICT CAP</span>
-        <span>/// NO SUITS // NO POLITICS</span>
-        <span>/// BOLLYWOOD EDM X ACID BASS</span>
-        <span>/// NO PASSING ON THE AUX</span>
-        <span>/// PRIVATE FARMHOUSE PIN 12H PRIOR</span>
-        <span>/// ZERO CORPORATE ENERGY</span>
+        <span>🏊 PRIVATE HEATED POOL</span>
+        <span>🍹 BYOB + CHILLED MIXERS</span>
+        <span>🔥 PROJECT X ENERGY</span>
+        <span>🪩 BOLLYWOOD EDM FLIPS</span>
+        <span>🥤 ENDLESS RED SOLO CUPS</span>
+        <span>🍢 LIVE TIKKA & GRILL</span>
+        <span>📸 CANDID POLAROIDS</span>
+        <span>🚫 ZERO BORING PEOPLE</span>
       </div>
       <div class="marquee-content" aria-hidden="true">
-        <span>/// CLASSIFIED POOL EXPERIENCE</span>
-        <span>/// 30 SLOTS STRICT CAP</span>
-        <span>/// NO SUITS // NO POLITICS</span>
-        <span>/// BOLLYWOOD EDM X ACID BASS</span>
-        <span>/// NO PASSING ON THE AUX</span>
-        <span>/// PRIVATE FARMHOUSE PIN 12H PRIOR</span>
-        <span>/// ZERO CORPORATE ENERGY</span>
+        <span>🏊 PRIVATE HEATED POOL</span>
+        <span>🍹 BYOB + CHILLED MIXERS</span>
+        <span>🔥 PROJECT X ENERGY</span>
+        <span>🪩 BOLLYWOOD EDM FLIPS</span>
+        <span>🥤 ENDLESS RED SOLO CUPS</span>
+        <span>🍢 LIVE TIKKA & GRILL</span>
+        <span>📸 CANDID POLAROIDS</span>
+        <span>🚫 ZERO BORING PEOPLE</span>
       </div>
     </div>
   </div>
@@ -94,207 +95,202 @@
   <main>
     <!-- HERO SECTION -->
     <section class="hero-section" id="hero">
-      <div class="hero-container">
+      <div class="container hero-container">
 
         <!-- Top Badges Row -->
         <div class="hero-badge-row">
-          <div class="brutalist-badge badge-lime">
-            <i class="fa-solid fa-satellite-dish fa-spin-pulse"></i>
-            <span>CLASSIFIED // NOIDA SECTOR X</span>
+          <div class="party-pill pill-gold">
+            <span>📍 NOIDA SECTOR X // SECRET FARMHOUSE</span>
           </div>
-          <div class="brutalist-badge badge-cyan">
-            <i class="fa-solid fa-shield-halved"></i>
-            <span>SECURITY LEVEL: PRIVATE DOSSIER</span>
+          <div class="party-pill pill-pink">
+            <i class="fa-solid fa-fire"></i>
+            <span>THE ULTIMATE HOUSE PARTY</span>
           </div>
-          <div class="brutalist-badge badge-warning">
-            <i class="fa-solid fa-triangle-exclamation"></i>
-            <span>STRICT 30 HEADCOUNT CAP</span>
+          <div class="party-pill pill-cyan">
+            <i class="fa-solid fa-champagne-glasses"></i>
+            <span>30 PERSON VIBE CHECK</span>
           </div>
         </div>
 
-        <!-- Massive Kinetic Headline with Glitch Effect -->
+        <!-- Massive Kinetic Headline with Fun House Party Styling -->
         <div class="hero-title-wrapper">
-          <p class="hero-pretitle font-mono">[ TRANSMISSION // UNDERGROUND FREQUENCY ]</p>
-          <h1 class="hero-headline glitch-text" data-text="PLOT X">PLOT X</h1>
-          <div class="headline-underline"></div>
+          <div class="hero-floating-bubble bubble-left">👙 JUMP IN</div>
+          <div class="hero-floating-bubble bubble-right">🪩 LIVE DJ</div>
+          
+          <p class="hero-kicker">WHO LET US COOK? INTRODUCING</p>
+          <h1 class="hero-headline">PLOT X</h1>
+          <p class="hero-tagline">THE UNDERGROUND FARMHOUSE POOL BASH</p>
         </div>
 
         <!-- Subhead -->
         <p class="hero-subhead">
-          25–30 people. Zero rules. Private heated pool, live DJ, underground sound, pure unadulterated chaos.
+          30 friends, heated pool, giant flamingo floaties, live sunset DJ, endless ice & chasers, and zero corporate energy. The night you'll talk about all year.
         </p>
 
-        <!-- Stats Bar Neo-Brutalist -->
-        <div class="stats-panel">
-          <div class="stat-box">
-            <span class="stat-label">INVITES GRANTED</span>
-            <span class="stat-value text-neon-lime"><span id="slots-taken">24</span>/30</span>
-            <div class="progress-bar-brutal">
-              <div class="progress-fill" style="width: 80%;"></div>
+        <!-- Capacity & Live Party Pulse -->
+        <div class="party-status-card">
+          <div class="status-top">
+            <div class="status-left">
+              <span class="pulse-emoji">🚨</span>
+              <div>
+                <div class="status-title">WRISTBANDS STATUS: <span class="highlight-pink">ALMOST FULL</span></div>
+                <div class="status-sub">Strict 30 person cap for the cleanest vibe ratio.</div>
+              </div>
+            </div>
+            <div class="capacity-count">
+              <span class="count-big"><span id="slots-taken">24</span>/30</span>
+              <span class="count-label">WRISTBANDS TAKEN</span>
             </div>
           </div>
-          <div class="stat-box">
-            <span class="stat-label">ATMOSPHERE</span>
-            <span class="stat-value text-electric-cyan">HIGH-VOLTAGE</span>
-            <span class="stat-sub">ACID TECHNO + BOLLYWOOD EDM</span>
+          <div class="capacity-bar">
+            <div class="capacity-progress" style="width: 80%;">
+              <span class="progress-glow"></span>
+            </div>
           </div>
-          <div class="stat-box">
-            <span class="stat-label">LOCATION STATUS</span>
-            <span class="stat-value text-chrome">ENCRYPTED</span>
-            <span class="stat-sub">GPS DROPPED T-12H</span>
+          <div class="status-meta">
+            <span>⚡ 6 SLOTS REMAINING</span>
+            <span>📍 FARMHOUSE GPS T-12H</span>
+            <span>🍻 BYOB + FREE SIZZLERS</span>
           </div>
         </div>
 
         <!-- Live Countdown Timer -->
-        <div class="countdown-card">
-          <div class="countdown-header">
-            <div class="countdown-title">
-              <i class="fa-regular fa-clock text-neon-lime"></i>
-              <span>TIME REMAINING UNTIL DROP</span>
-            </div>
-            <div class="countdown-tag font-mono">OCTOBER DROP // 16:00 IST</div>
+        <div class="party-countdown-box">
+          <div class="countdown-title-wrap">
+            <i class="fa-solid fa-stopwatch text-gold"></i>
+            <span>COUNTDOWN TO THE FIRST CANNONBALL</span>
           </div>
-          <div class="countdown-grid font-mono">
-            <div class="countdown-unit">
-              <span class="cd-num" id="cd-days">02</span>
-              <span class="cd-label">DAYS</span>
+          <div class="countdown-digits">
+            <div class="time-block">
+              <span class="time-num" id="cd-days">02</span>
+              <span class="time-lbl">DAYS</span>
             </div>
-            <div class="cd-separator">:</div>
-            <div class="countdown-unit">
-              <span class="cd-num" id="cd-hours">14</span>
-              <span class="cd-label">HOURS</span>
+            <div class="time-colon">:</div>
+            <div class="time-block">
+              <span class="time-num" id="cd-hours">14</span>
+              <span class="time-lbl">HOURS</span>
             </div>
-            <div class="cd-separator">:</div>
-            <div class="countdown-unit">
-              <span class="cd-num" id="cd-minutes">38</span>
-              <span class="cd-label">MINUTES</span>
+            <div class="time-colon">:</div>
+            <div class="time-block">
+              <span class="time-num" id="cd-minutes">38</span>
+              <span class="time-lbl">MINUTES</span>
             </div>
-            <div class="cd-separator">:</div>
-            <div class="countdown-unit">
-              <span class="cd-num text-neon-lime" id="cd-seconds">49</span>
-              <span class="cd-label">SECONDS</span>
+            <div class="time-colon">:</div>
+            <div class="time-block">
+              <span class="time-num text-pink" id="cd-seconds">49</span>
+              <span class="time-lbl">SECONDS</span>
             </div>
           </div>
         </div>
 
         <!-- Hero Action Buttons -->
         <div class="hero-cta-group">
-          <a href="#bouncer-gate" class="brutal-btn brutal-btn-primary">
-            <span class="btn-text">REQUEST GUESTLIST ACCESS</span>
-            <span class="btn-icon"><i class="fa-solid fa-bolt"></i></span>
+          <a href="#guestlist-door" class="party-btn btn-primary">
+            <span>GRAB YOUR WRISTBAND 🎟️</span>
           </a>
-          <a href="#vibe-cards" class="brutal-btn brutal-btn-secondary">
-            <span class="btn-text">INSPECT THE VIBE</span>
-            <span class="btn-icon"><i class="fa-solid fa-arrow-down"></i></span>
+          <a href="#party-perks" class="party-btn btn-secondary">
+            <span>PEEK THE VIBE 👀</span>
           </a>
         </div>
 
-        <!-- Sticker Badges Floating -->
-        <div class="sticker-container">
-          <div class="sticker-badge sticker-1">
-            <span class="sticker-inner">🔥 LIMITED 30 SLOTS ONLY</span>
+        <!-- Playful Sticker Tape Badges -->
+        <div class="sticker-row">
+          <div class="party-sticker sticker-tape-1">
+            <span>🦩 GIANT POOL FLOATIES</span>
           </div>
-          <div class="sticker-badge sticker-2">
-            <span class="sticker-inner">🚫 NO PASSING ON THE AUX</span>
+          <div class="party-sticker sticker-tape-2">
+            <span>🚫 NO PASSING ON THE AUX</span>
           </div>
-          <div class="sticker-badge sticker-3">
-            <span class="sticker-inner">🏊 POOL ATTIRE STRICT</span>
+          <div class="party-sticker sticker-tape-3">
+            <span>🍢 SUNSET TANDOOR ON DECK</span>
           </div>
         </div>
 
       </div>
     </section>
 
-    <!-- SECTION 2: THE COORDINATES & VIBE -->
-    <section class="section-vibe" id="vibe-cards">
+    <!-- SECTION 2: THE HOUSE PARTY PERKS -->
+    <section class="section-perks" id="party-perks">
       <div class="container">
         
-        <div class="section-header">
-          <div class="section-tag font-mono">// 01: SYSTEM SPECS</div>
-          <h2 class="section-title">THE COORDINATES & VIBE</h2>
-          <p class="section-desc">Engineered for those who reject mid parties. No awkward corners, no corporate networking, strictly sonic therapy.</p>
+        <div class="section-header-party">
+          <span class="party-badge-mini">WHAT’S THE PLAY?</span>
+          <h2 class="section-title">BUILT FOR MAXIMUM FUN</h2>
+          <p class="section-desc">We got tired of mid club nights where you can't hear anyone talk. PLOT X is an actual house party done right.</p>
         </div>
 
-        <!-- 4 Neo-Brutalist 3D Interactive Tilt Cards -->
-        <div class="cards-grid">
+        <!-- 4 Vibrant Party Perks Cards -->
+        <div class="perks-grid">
           
           <!-- Card 1 -->
-          <div class="vibe-card" data-tilt>
-            <div class="card-glow glow-lime"></div>
-            <div class="card-header">
-              <span class="card-idx font-mono">[ 01 // SOUND ]</span>
-              <span class="sticker-chip chip-lime">135+ BPM READY</span>
+          <div class="perk-card card-pool" data-tilt>
+            <div class="perk-emoji">🏊</div>
+            <div class="perk-top">
+              <span class="perk-tag">WATER & LIGHTS</span>
+              <span class="perk-badge">HEATED WATER</span>
             </div>
-            <div class="card-icon-wrap">
-              <i class="fa-solid fa-volume-high"></i>
-            </div>
-            <h3 class="card-title">POOLSIDE SOUND SYSTEM</h3>
-            <p class="card-body">
-              Underground sound system, Bollywood EDM to heavy bass drops post-sunset. Tuned acoustic subs echoing off the water with zero decibel restrictions.
+            <h3 class="perk-title">THE HEATED POOL & FLOATIES</h3>
+            <p class="perk-text">
+              Massive heated private pool loaded with giant flamingo floaties, underwater disco glow, and water so warm you can stay submerged all night. Cannonballs encouraged.
             </p>
-            <div class="card-footer-meta font-mono">
-              <span>FREQUENCY: 20Hz - 20kHz</span>
-              <span>CURATOR: SECRET DJ</span>
+            <div class="perk-chips">
+              <span>🦩 Giant Floaties</span>
+              <span>💦 Cannonball Friendly</span>
+              <span>✨ Underwater LEDs</span>
             </div>
           </div>
 
           <!-- Card 2 -->
-          <div class="vibe-card" data-tilt>
-            <div class="card-glow glow-cyan"></div>
-            <div class="card-header">
-              <span class="card-idx font-mono">[ 02 // BAR ]</span>
-              <span class="sticker-chip chip-cyan">CHILLED ZERO FRICTION</span>
+          <div class="perk-card card-bar" data-tilt>
+            <div class="perk-emoji">🍹</div>
+            <div class="perk-top">
+              <span class="perk-tag">LIQUID REFUEL</span>
+              <span class="perk-badge">BYOB + BAR</span>
             </div>
-            <div class="card-icon-wrap text-electric-cyan">
-              <i class="fa-solid fa-wine-glass"></i>
-            </div>
-            <h3 class="card-title">LIQUID & SMOKE</h3>
-            <p class="card-body">
-              BYOB setup + live mocktails & chasers counter. Premium mixers, endless crystal ice, cut garnishes, and designated cocktail architects on station.
+            <h3 class="perk-title">BYOB + LIVE MIXOLOGY COUNTER</h3>
+            <p class="perk-text">
+              Bring your favorite bottles. We stock endless mountain ice, tonic, ginger beer, cranberry, cut citrus, red solo cups, and dedicated cocktail crafters to pour it up.
             </p>
-            <div class="card-footer-meta font-mono">
-              <span>PROVISIONS: BYOB + BAR</span>
-              <span>CHILL: SUB-ZERO</span>
+            <div class="perk-chips">
+              <span>🥤 Red Solo Cups</span>
+              <span>🧊 Crystal Ice Buckets</span>
+              <span>🍋 Fresh Garnishes</span>
             </div>
           </div>
 
           <!-- Card 3 -->
-          <div class="vibe-card" data-tilt>
-            <div class="card-glow glow-pink"></div>
-            <div class="card-header">
-              <span class="card-idx font-mono">[ 03 // CULTURE ]</span>
-              <span class="sticker-chip chip-pink">UNFILTERED ENERGY</span>
+          <div class="perk-card card-music" data-tilt>
+            <div class="perk-emoji">🪩</div>
+            <div class="perk-top">
+              <span class="perk-tag">SOUND SYSTEM</span>
+              <span class="perk-badge">ALL BANGERS</span>
             </div>
-            <div class="card-icon-wrap text-neon-pink">
-              <i class="fa-solid fa-camera-retro"></i>
-            </div>
-            <h3 class="card-title">UNFILTERED & CANDID</h3>
-            <p class="card-body">
-              Zero corporate energy, raw candid moments, Polaroid/Reel crews on deck capturing high-shutter film memories so you can stay immersed in the moment.
+            <h3 class="perk-title">OPEN-AIR DJ & SUNSET BASS</h3>
+            <p class="perk-text">
+              From sun-drenched afro house and UK garage to Punjabi EDM drops and 2000s sing-alongs when the clock hits 9 PM. Acoustic bass tuned to echo over the water.
             </p>
-            <div class="card-footer-meta font-mono">
-              <span>MEDIA: 35MM + POLAROID</span>
-              <span>VIBE: RAW & REAL</span>
+            <div class="perk-chips">
+              <span>🔊 Bass Heavy Subs</span>
+              <span>⚡ Bollywood EDM Flips</span>
+              <span>🕺 Table Dancing OK</span>
             </div>
           </div>
 
           <!-- Card 4 -->
-          <div class="vibe-card" data-tilt>
-            <div class="card-glow glow-lime"></div>
-            <div class="card-header">
-              <span class="card-idx font-mono">[ 04 // ACCESS ]</span>
-              <span class="sticker-chip chip-warning">DOOR IS STRICT</span>
+          <div class="perk-card card-culture" data-tilt>
+            <div class="perk-emoji">📸</div>
+            <div class="perk-top">
+              <span class="perk-tag">THE ENERGY</span>
+              <span class="perk-badge">ZERO SUITS</span>
             </div>
-            <div class="card-icon-wrap text-neon-lime">
-              <i class="fa-solid fa-fingerprint"></i>
-            </div>
-            <h3 class="card-title">STRICT 30-CAP BOUNCER GATE</h3>
-            <p class="card-body">
-              Locked at 30 invites max. No walk-ins, no plus-ones without clearance. Every single attendee is personally vetted to maintain unmatched ratio & energy.
+            <h3 class="perk-title">CANDID POLAROIDS & REAL VIBES</h3>
+            <p class="perk-text">
+              Strictly zero corporate networking energy. Dedicated 35mm film and Polaroid cameras floating around to capture the blurry, honest memories you’ll laugh at tomorrow.
             </p>
-            <div class="card-footer-meta font-mono">
-              <span>VETTING: 100% MANUAL</span>
-              <span>SECURITY: HIGH</span>
+            <div class="perk-chips">
+              <span>🎞️ Take-Home Polaroids</span>
+              <span>✨ No Weird Vibes</span>
+              <span>🤝 30 Vetted Friends</span>
             </div>
           </div>
 
@@ -304,120 +300,101 @@
     </section>
 
     <!-- SECTION 3: THE RUN OF SHOW -->
-    <section class="section-timeline" id="run-of-show">
+    <section class="section-schedule" id="schedule">
       <div class="container">
         
-        <div class="section-header">
-          <div class="section-tag font-mono">// 02: ITINERARY</div>
+        <div class="section-header-party">
+          <span class="party-badge-mini">THE TIMELINE</span>
           <h2 class="section-title">THE RUN OF SHOW</h2>
-          <p class="section-desc">Timeline calibrated for peak escalation. From daylight poolside lounging to midnight strobe-lit delirium.</p>
+          <p class="section-desc">Paced so you never feel bored or burnt out. From sun-kissed afternoon lounge to midnight strobe splash.</p>
         </div>
 
-        <div class="timeline-container">
+        <div class="party-timeline">
           
-          <!-- Timeline Item 1 -->
-          <div class="timeline-item" data-stage="1">
-            <div class="timeline-time-col font-mono">
-              <span class="time-stamp">04:00 PM</span>
-              <span class="time-phase text-neon-lime">PHASE // 01</span>
+          <!-- Item 1 -->
+          <div class="timeline-row active-row" data-stage="1">
+            <div class="timeline-time-badge">
+              <span class="t-hour">04:00 PM</span>
+              <span class="t-phase">SUNNY WARMUP</span>
             </div>
-            <div class="timeline-marker">
-              <div class="marker-dot"></div>
-              <div class="marker-line"></div>
-            </div>
-            <div class="timeline-card">
-              <div class="timeline-card-header">
-                <span class="stage-tag font-mono">GATES OPEN // POOL CHILL</span>
-                <span class="badge-status">CALM BEFORE CHAOS</span>
+            <div class="timeline-box">
+              <div class="t-box-header">
+                <span class="t-stage-pill">PHASE 01</span>
+                <span class="t-stage-title">DOORS OPEN, SUN LOUNGERS & FIRST DIPS</span>
               </div>
-              <h3 class="stage-title">DOORS OPEN & POOL CHILL</h3>
-              <p class="stage-desc">
-                Sun lounger warm-up beats, chilled welcomes, custom drink mixers, and first plunge into the heated water. Get familiar with the layout and crew.
+              <p class="t-box-desc">
+                Arrive, pop open a cold one, grab your wristband, and claim a poolside lounger. Low-slung tropical house playing while the pool water warms up.
               </p>
-              <div class="stage-perks font-mono">
-                <span><i class="fa-solid fa-water"></i> Heated Pool Active</span>
-                <span><i class="fa-solid fa-cocktail"></i> Cold Sips Flowing</span>
-                <span><i class="fa-solid fa-compact-disc"></i> Deep House / Afro Beats</span>
+              <div class="t-features">
+                <span>🍺 Welcome Sips</span>
+                <span>🩱 Change Rooms Ready</span>
+                <span>🎵 Sunny House Beats</span>
               </div>
             </div>
           </div>
 
-          <!-- Timeline Item 2 -->
-          <div class="timeline-item" data-stage="2">
-            <div class="timeline-time-col font-mono">
-              <span class="time-stamp">06:00 PM</span>
-              <span class="time-phase text-electric-cyan">PHASE // 02</span>
+          <!-- Item 2 -->
+          <div class="timeline-row" data-stage="2">
+            <div class="timeline-time-badge">
+              <span class="t-hour">06:00 PM</span>
+              <span class="t-phase">GOLDEN HOUR</span>
             </div>
-            <div class="timeline-marker">
-              <div class="marker-dot"></div>
-              <div class="marker-line"></div>
-            </div>
-            <div class="timeline-card">
-              <div class="timeline-card-header">
-                <span class="stage-tag font-mono">GOLDEN HOUR // FUEL</span>
-                <span class="badge-status">GASTRONOMY</span>
+            <div class="timeline-box">
+              <div class="t-box-header">
+                <span class="t-stage-pill pill-gold-outline">PHASE 02</span>
+                <span class="t-stage-title">SUNSET SIZZLE & LIVE TIKKA COUNTERS</span>
               </div>
-              <h3 class="stage-title">SUNSET STARTERS & TIKKA COUNTERS</h3>
-              <p class="stage-desc">
-                As the sky turns fiery violet, live charcoal tandoor & artisanal finger food counters go live. Savor hot appetizers poolside as BPM steadily climbs.
+              <p class="t-box-desc">
+                The sky turns golden orange over the farmhouse. Charcoal barbecue fires up poolside with live hot paneer & chicken tikkas, sliders, and sunset photo rounds.
               </p>
-              <div class="stage-perks font-mono">
-                <span><i class="fa-solid fa-fire"></i> Live Tikka & Grill</span>
-                <span><i class="fa-solid fa-sun"></i> Sunset Photo Windows</span>
-                <span><i class="fa-solid fa-music"></i> Melodic Techno Transition</span>
+              <div class="t-features">
+                <span>🍢 Charcoal Grill Live</span>
+                <span>📸 Golden Hour Polaroids</span>
+                <span>🍹 Cocktails Flowing</span>
               </div>
             </div>
           </div>
 
-          <!-- Timeline Item 3 -->
-          <div class="timeline-item" data-stage="3">
-            <div class="timeline-time-col font-mono">
-              <span class="time-stamp">08:00 PM</span>
-              <span class="time-phase text-neon-pink">PHASE // 03</span>
+          <!-- Item 3 -->
+          <div class="timeline-row" data-stage="3">
+            <div class="timeline-time-badge">
+              <span class="t-hour">08:00 PM</span>
+              <span class="t-phase text-pink">PEAK CHAOS</span>
             </div>
-            <div class="timeline-marker">
-              <div class="marker-dot"></div>
-              <div class="marker-line"></div>
-            </div>
-            <div class="timeline-card active-card">
-              <div class="timeline-card-header">
-                <span class="stage-tag font-mono">THE CLIMAX // FULL IGNITION</span>
-                <span class="badge-status badge-pulse">PEAK ENERGY</span>
+            <div class="timeline-box highlight-box">
+              <div class="t-box-header">
+                <span class="t-stage-pill pill-pink-solid">PHASE 03 // THE PEAK</span>
+                <span class="t-stage-title">THE DROP (DJ TAKEOVER + STROBE POOL)</span>
               </div>
-              <h3 class="stage-title">THE DROP (LIVE DJ TAKEOVER)</h3>
-              <p class="stage-desc">
-                Lasers and stroboscopes pierce the darkness over the water. The headliner DJ takes over the deck with non-stop Bollywood EDM flips, tech house drops, and splash mayhem.
+              <p class="t-box-desc">
+                Underwater neon lasers fire up. The DJ turns the dial to 11 with heavy bass drops, crowd sing-alongs, and splash mayhem. You will be in the water.
               </p>
-              <div class="stage-perks font-mono">
-                <span><i class="fa-solid fa-bolt"></i> Strobe & Laser Show</span>
-                <span><i class="fa-solid fa-tower-broadcast"></i> High-BPM Drops</span>
-                <span><i class="fa-solid fa-person-swimming"></i> Night Splash Arena</span>
+              <div class="t-features">
+                <span>⚡ High-Voltage DJ Set</span>
+                <span>💦 Night Pool Splash Arena</span>
+                <span>🪩 Strobe & Laser Lights</span>
               </div>
             </div>
           </div>
 
-          <!-- Timeline Item 4 -->
-          <div class="timeline-item" data-stage="4">
-            <div class="timeline-time-col font-mono">
-              <span class="time-stamp">11:30 PM</span>
-              <span class="time-phase text-chrome">PHASE // 04</span>
+          <!-- Item 4 -->
+          <div class="timeline-row" data-stage="4">
+            <div class="timeline-time-badge">
+              <span class="t-hour">11:30 PM</span>
+              <span class="t-phase">THE AFTERS</span>
             </div>
-            <div class="timeline-marker">
-              <div class="marker-dot"></div>
-            </div>
-            <div class="timeline-card">
-              <div class="timeline-card-header">
-                <span class="stage-tag font-mono">AFTERHOURS // WIND DOWN</span>
-                <span class="badge-status">INNER CIRCLE</span>
+            <div class="timeline-box">
+              <div class="t-box-header">
+                <span class="t-stage-pill">PHASE 04</span>
+                <span class="t-stage-title">AFTERHOURS, PIZZA SLICES & CAMPFIRE</span>
               </div>
-              <h3 class="stage-title">AFTERHOURS & WIND DOWN</h3>
-              <p class="stage-desc">
-                Subdued ambient lighting, acoustic cooldown session, Polaroid distribution, poolside campfire banter, and safe transit dispatch.
+              <p class="t-box-desc">
+                Dry off, gather around the terrace lounge for hot pizza slices, Polaroid photo trading, late-night storytelling, and coordinated cab drops.
               </p>
-              <div class="stage-perks font-mono">
-                <span><i class="fa-solid fa-moon"></i> Ambient Lo-Fi Beats</span>
-                <span><i class="fa-solid fa-images"></i> Instant Photo Prints</span>
-                <span><i class="fa-solid fa-car"></i> Cab Coordination</span>
+              <div class="t-features">
+                <span>🍕 Midnight Pizza Slices</span>
+                <span>🎞️ Collect Your Photos</span>
+                <span>🚗 Safe Cab Dispatch</span>
               </div>
             </div>
           </div>
@@ -427,43 +404,37 @@
       </div>
     </section>
 
-    <!-- SECTION 4: THE BOUNCER GATE (VIP APPLICATION FORM) -->
-    <section class="section-bouncer" id="bouncer-gate">
+    <!-- SECTION 4: GUESTLIST APPLICATION FORM (THE DOOR / VIP WRISTBAND) -->
+    <section class="section-guestlist" id="guestlist-door">
       <div class="container">
         
-        <div class="bouncer-terminal-wrapper">
+        <div class="door-wrapper">
           
-          <!-- Terminal Top Chrome -->
-          <div class="terminal-chrome">
-            <div class="terminal-dots">
-              <span class="dot dot-red"></span>
-              <span class="dot dot-yellow"></span>
-              <span class="dot dot-green"></span>
+          <div class="door-banner">
+            <div class="door-banner-left">
+              <span class="vip-star">⭐</span>
+              <span class="door-title">PLOT X VIP WRISTBAND GATE</span>
             </div>
-            <div class="terminal-title font-mono">
-              <i class="fa-solid fa-terminal text-neon-lime"></i> BOUNCER_VERIFICATION_GATE // PROTOCOL_PX26
-            </div>
-            <div class="terminal-badge font-mono">STATUS: ENCRYPTED</div>
+            <div class="door-spots-left">🚨 ONLY 6 SLOTS LEFT</div>
           </div>
 
-          <div class="terminal-body">
+          <div class="door-content">
             
-            <div class="terminal-intro">
-              <div class="terminal-tag font-mono">[ ADMISSION CLEARANCE TERMINAL ]</div>
-              <h2 class="terminal-heading">GET ON THE LIST</h2>
-              <p class="terminal-sub">
-                Slots are aggressively curated. If selected, your personalized encrypted farmhouse coordinates will be dispatched to your phone/handle 12 hours prior.
+            <div class="door-intro">
+              <h2 class="door-heading">REQUEST YOUR WRISTBAND</h2>
+              <p class="door-sub">
+                No tickets for sale anywhere. Entry is granted through personal vibe-vetting only. Fill this quick form to reserve your spot at the pool.
               </p>
             </div>
 
             <!-- Form -->
-            <form id="bouncer-form" class="bouncer-form" novalidate>
+            <form id="bouncer-form" class="party-form" novalidate>
               
               <div class="form-row">
-                <!-- Field 1: Full Name -->
+                <!-- Field 1: Name -->
                 <div class="form-group">
-                  <label for="fullName" class="form-label font-mono">
-                    <span class="text-neon-lime">01 //</span> FULL LEGAL OR STREET ALIAS <span class="req">*</span>
+                  <label for="fullName" class="form-label">
+                    <span>1. What’s your name or nickname?</span> <span class="req">*</span>
                   </label>
                   <div class="input-wrapper">
                     <i class="fa-solid fa-user input-icon"></i>
@@ -471,9 +442,9 @@
                       type="text" 
                       id="fullName" 
                       name="fullName" 
-                      placeholder="e.g. Aryan Malhotra / Zero" 
+                      placeholder="e.g. Aryan or Kabir" 
                       required
-                      class="brutal-input"
+                      class="party-input"
                     >
                   </div>
                   <span class="field-error" id="name-error"></span>
@@ -481,8 +452,8 @@
 
                 <!-- Field 2: Instagram Handle -->
                 <div class="form-group">
-                  <label for="instaHandle" class="form-label font-mono">
-                    <span class="text-electric-cyan">02 //</span> INSTAGRAM HANDLE (@) <span class="req">*</span>
+                  <label for="instaHandle" class="form-label">
+                    <span>2. Your Instagram handle (@)</span> <span class="req">*</span>
                   </label>
                   <div class="input-wrapper">
                     <i class="fa-brands fa-instagram input-icon"></i>
@@ -492,7 +463,7 @@
                       name="instaHandle" 
                       placeholder="@yourhandle" 
                       required
-                      class="brutal-input"
+                      class="party-input"
                     >
                   </div>
                   <span class="field-error" id="insta-error"></span>
@@ -501,8 +472,8 @@
 
               <!-- Field 3: Party Anthem -->
               <div class="form-group">
-                <label for="partyAnthem" class="form-label font-mono">
-                  <span class="text-neon-pink">03 //</span> WHAT’S YOUR PARTY ANTHEM? <span class="req">*</span>
+                <label for="partyAnthem" class="form-label">
+                  <span>3. What song guarantees you jump into the pool?</span> <span class="req">*</span>
                 </label>
                 <div class="input-wrapper">
                   <i class="fa-solid fa-record-vinyl input-icon"></i>
@@ -510,25 +481,25 @@
                     type="text" 
                     id="partyAnthem" 
                     name="partyAnthem" 
-                    placeholder="e.g. Fred Again x Swedish House Mafia - Turn On The Lights" 
+                    placeholder="e.g. Fred Again - Jungle / Karan Aujla Tech Flip" 
                     required
-                    class="brutal-input"
+                    class="party-input"
                   >
                 </div>
-                <div class="preset-pills font-mono">
-                  <span class="preset-label">QUICK SELECT:</span>
-                  <button type="button" class="preset-btn" data-song="Peggy Gou - (It Goes Like) Nanana">Peggy Gou - Nanana</button>
-                  <button type="button" class="preset-btn" data-song="Karan Aujla X Tech House Flip">Karan Aujla Tech Flip</button>
-                  <button type="button" class="preset-btn" data-song="Mau P - Drugs From Amsterdam">Mau P - Drugs Amsterdam</button>
-                  <button type="button" class="preset-btn" data-song="Nucleya - Bass Rani VIP">Nucleya Bass VIP</button>
+                <div class="preset-song-pills">
+                  <span class="preset-title">TAP TO SELECT:</span>
+                  <button type="button" class="preset-btn" data-song="Peggy Gou - Nanana">Peggy Gou - Nanana 🪩</button>
+                  <button type="button" class="preset-btn" data-song="Karan Aujla X Tech House Flip">Karan Aujla Tech Flip 🔥</button>
+                  <button type="button" class="preset-btn" data-song="Fisher - Losing It">Fisher - Losing It 🔊</button>
+                  <button type="button" class="preset-btn" data-song="Nucleya - Bass Rani">Nucleya - Bass Rani ⚡</button>
                 </div>
                 <span class="field-error" id="anthem-error"></span>
               </div>
 
-              <!-- Field 4: Secret Passcode -->
+              <!-- Field 4: Secret Code / Who Invited You -->
               <div class="form-group">
-                <label for="secretCode" class="form-label font-mono">
-                  <span class="text-chrome">04 //</span> SECRET PASSCODE / REFERRAL CODE (OPTIONAL)
+                <label for="secretCode" class="form-label">
+                  <span>4. Secret Passcode or Who Invited You? (Optional)</span>
                 </label>
                 <div class="input-wrapper">
                   <i class="fa-solid fa-key input-icon"></i>
@@ -536,124 +507,123 @@
                     type="text" 
                     id="secretCode" 
                     name="secretCode" 
-                    placeholder="e.g. ACIDPOOL or PLOTX26" 
-                    class="brutal-input"
+                    placeholder="e.g. PROJECTX or FRIEND_OF_DJ" 
+                    class="party-input"
                   >
                 </div>
-                <div id="referral-status" class="referral-status font-mono"></div>
+                <div id="referral-status" class="referral-status"></div>
               </div>
 
-              <!-- Terms Box -->
-              <div class="bouncer-terms font-mono">
+              <!-- Party Pledge -->
+              <div class="party-pledge">
                 <label class="checkbox-container">
                   <input type="checkbox" id="rulesConsent" required checked>
                   <span class="custom-checkbox"></span>
-                  <span class="terms-text">
-                    I acknowledge: strictly 30 person cap. Zero creep policy. No bad vibes. Pool attire compulsory.
+                  <span class="pledge-text">
+                    🎉 <strong>The House Party Rule:</strong> I promise to jump in the pool, bring good energy, respect everyone, and not sit in the corner on my phone.
                   </span>
                 </label>
               </div>
 
               <!-- Submit Button -->
-              <button type="submit" id="submit-btn" class="submit-terminal-btn">
-                <div class="btn-scanlines"></div>
-                <span class="btn-text font-mono">
-                  <i class="fa-solid fa-shield-virus"></i> GET ON THE LIST // INITIATE SCAN
-                </span>
+              <button type="submit" id="submit-btn" class="party-submit-btn">
+                <span>CLAIM MY WRISTBAND 🎟️</span>
               </button>
 
             </form>
 
-            <!-- Terminal Scanning Progress Simulation (Hidden initially) -->
+            <!-- Verification Progress Bar (Simulated) -->
             <div id="scanning-terminal" class="scanning-terminal hidden">
+              <div class="party-loader-head">
+                <span class="loader-emoji">🪩</span>
+                <span class="loader-title">CHECKING THE VIBE RATIO...</span>
+              </div>
               <div class="scan-bar-container">
                 <div class="scan-bar-fill" id="scan-progress"></div>
               </div>
               <div class="scan-log font-mono" id="scan-log">
-                <p>> INITIATING BIOMETRIC & VIBE HANDSHAKE...</p>
+                <p>✨ Curating guestlist vibe balance...</p>
               </div>
             </div>
 
-            <!-- SUCCESS PASS MODAL / CARD -->
+            <!-- SUCCESS PASS / WRISTBAND DISPLAY -->
             <div id="vip-ticket-result" class="vip-ticket-result hidden">
-              <div class="ticket-header-pill font-mono">
-                <i class="fa-solid fa-circle-check text-neon-lime"></i> CLEARANCE GRANTED // TICKET ISSUED
+              <div class="ticket-celebrate-pill">
+                <span>🎉 YOU'RE ON THE LIST! WRISTBAND RESERVED</span>
               </div>
 
-              <!-- Brutalist Boarding Pass -->
-              <div class="boarding-pass" id="printable-pass">
-                <div class="pass-strip-left">
-                  <span class="pass-vert-text font-mono">PLOT X // 2026</span>
-                </div>
+              <!-- Fun Festival Style VIP Party Pass -->
+              <div class="party-wristband-pass" id="printable-pass">
                 
-                <div class="pass-main">
-                  <div class="pass-top">
-                    <div>
-                      <div class="pass-brand">PLOT X VIP ACCESS</div>
-                      <div class="pass-subtitle font-mono">UNDERGROUND POOL DOSSIER</div>
-                    </div>
-                    <div class="pass-id-badge font-mono" id="ticket-id-display">PX-8492</div>
-                  </div>
-
-                  <div class="pass-grid font-mono">
-                    <div class="pass-cell">
-                      <span class="p-label">GUEST NAME</span>
-                      <span class="p-val" id="ticket-name-display">ARYAN M.</span>
-                    </div>
-                    <div class="pass-cell">
-                      <span class="p-label">INSTAGRAM</span>
-                      <span class="p-val text-electric-cyan" id="ticket-insta-display">@aryan</span>
-                    </div>
-                    <div class="pass-cell">
-                      <span class="p-label">SECTOR CODE</span>
-                      <span class="p-val">NOIDA SEC-X</span>
-                    </div>
-                    <div class="pass-cell">
-                      <span class="p-label">PASS STATUS</span>
-                      <span class="p-val text-neon-lime">CONFIRMED VIBE</span>
-                    </div>
-                  </div>
-
-                  <div class="pass-anthem-banner font-mono">
-                    <span class="p-label">ANTHEM ON FILE:</span>
-                    <span class="p-anthem-text" id="ticket-anthem-display">Peggy Gou - Nanana</span>
-                  </div>
-
-                  <div class="pass-footer">
-                    <div class="barcode-graphic">
-                      <span class="barcode-line"></span><span class="barcode-line w-2"></span>
-                      <span class="barcode-line"></span><span class="barcode-line w-3"></span>
-                      <span class="barcode-line"></span><span class="barcode-line w-1"></span>
-                      <span class="barcode-line w-2"></span><span class="barcode-line"></span>
-                      <span class="barcode-line w-4"></span><span class="barcode-line"></span>
-                      <span class="barcode-line w-2"></span><span class="barcode-line"></span>
-                      <span class="barcode-num font-mono">8921-PX-0030-2026</span>
-                    </div>
-                    <div class="pass-stamp font-mono">
-                      <span>APPROVED</span>
-                    </div>
-                  </div>
+                <div class="wristband-ribbon">
+                  <span>PLOT X VIP ACCESS // ALL ACCESS WRISTBAND</span>
                 </div>
 
-                <div class="pass-stub">
+                <div class="pass-card-content">
+                  
+                  <div class="pass-header-row">
+                    <div>
+                      <div class="pass-main-title">PLOT X // POOL BASH</div>
+                      <div class="pass-edition">2026 EXCLUSIVE FARMHOUSE EDITION</div>
+                    </div>
+                    <div class="pass-wristband-badge" id="ticket-id-display">PASS #PX-4920</div>
+                  </div>
+
+                  <div class="pass-details-grid">
+                    <div class="p-detail-box">
+                      <span class="p-d-label">ATTENDEE</span>
+                      <span class="p-d-val" id="ticket-name-display">ARYAN M.</span>
+                    </div>
+                    <div class="p-detail-box">
+                      <span class="p-d-label">INSTAGRAM</span>
+                      <span class="p-d-val text-cyan" id="ticket-insta-display">@aryan</span>
+                    </div>
+                    <div class="p-detail-box">
+                      <span class="p-d-label">LOCATION</span>
+                      <span class="p-d-val">NOIDA SEC-X</span>
+                    </div>
+                    <div class="p-detail-box">
+                      <span class="p-d-label">ENTRY CLEARANCE</span>
+                      <span class="p-d-val text-gold">CONFIRMED VIBE ✨</span>
+                    </div>
+                  </div>
+
+                  <div class="pass-anthem-badge">
+                    <span class="anthem-lbl">POOL JUMP TRACK:</span>
+                    <span class="anthem-track" id="ticket-anthem-display">Peggy Gou - Nanana</span>
+                  </div>
+
+                  <div class="pass-bottom-row">
+                    <div class="pass-barcode-wrap">
+                      <div class="faux-barcode"></div>
+                      <span class="barcode-txt">PLOTX-2026-CONFIRMED-VIP</span>
+                    </div>
+                    <div class="pass-holo-stamp">
+                      <span>VERIFIED<br>PARTY ANIMAL</span>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="wristband-stub">
                   <div class="stub-notch top"></div>
                   <div class="stub-notch bottom"></div>
-                  <div class="stub-inner font-mono">
-                    <span class="stub-tag">GATE 01</span>
-                    <span class="stub-pool">POOL VOUCHER</span>
-                    <i class="fa-solid fa-qrcode stub-qr"></i>
-                    <span class="stub-note">SHOW AT ENTRY</span>
+                  <div class="stub-content">
+                    <span class="stub-pill">GATE PASS</span>
+                    <i class="fa-solid fa-qrcode stub-qr-icon"></i>
+                    <span class="stub-hint">SCREENSHOT TO ENTER</span>
                   </div>
                 </div>
+
               </div>
 
               <!-- Ticket Action Buttons -->
-              <div class="ticket-actions font-mono">
-                <button type="button" id="screenshot-btn" class="ticket-btn btn-lime">
-                  <i class="fa-solid fa-download"></i> SAVE PASS
+              <div class="ticket-actions">
+                <button type="button" id="screenshot-btn" class="ticket-action-btn btn-save">
+                  <i class="fa-solid fa-download"></i> SAVE WRISTBAND
                 </button>
-                <button type="button" id="reset-form-btn" class="ticket-btn btn-outline">
-                  <i class="fa-solid fa-rotate-left"></i> REGISTER ANOTHER
+                <button type="button" id="reset-form-btn" class="ticket-action-btn btn-reset">
+                  <i class="fa-solid fa-rotate-left"></i> REGISTER A FRIEND
                 </button>
               </div>
 
@@ -668,44 +638,38 @@
 
   </main>
 
-  <!-- FOOTER & CLASSIFIED NOTE -->
-  <footer class="footer-classified border-t-brutal">
+  <!-- FOOTER -->
+  <footer class="party-footer">
     <div class="container">
       
-      <!-- Classified GPS Pin Banner -->
-      <div class="footer-gps-box">
-        <div class="gps-beacon">
-          <span class="beacon-ring"></span>
-          <span class="beacon-core"></span>
+      <!-- Farmhouse GPS Banner -->
+      <div class="footer-pin-card">
+        <div class="pin-icon-box">
+          <i class="fa-solid fa-location-dot"></i>
         </div>
-        <div class="gps-text">
-          <span class="gps-heading font-mono">SECURITY DISPATCH PROTOCOL:</span>
-          <p class="gps-body">
-            Exact farmhouse pin dropped to approved guestlist 12 hours prior via encrypted WhatsApp/Instagram direct broadcast.
+        <div class="pin-text">
+          <span class="pin-title">📍 SECRET FARMHOUSE LOCATION PIN</span>
+          <p class="pin-desc">
+            Exact Google Maps coordinates dropped directly to approved guests via WhatsApp 12 hours prior. Uber/cab pickup zone included.
           </p>
         </div>
-        <div class="gps-coords font-mono">
-          <span>LAT: 28.5355° N</span>
-          <span>LNG: 77.3910° E</span>
+        <div class="pin-badge">
+          <span>NOIDA EXPRESSWAY</span>
         </div>
       </div>
 
-      <!-- Footer Bottom Row -->
-      <div class="footer-bottom-row font-mono">
+      <!-- Footer Bottom -->
+      <div class="footer-links-row">
         <div class="footer-brand">
-          <span class="brand-huge">PLOT X</span>
-          <span class="subtext">PLOT X © 2026 // ALL RIGHTS RESERVED.</span>
+          <span class="footer-huge">PLOT X</span>
+          <span class="footer-sub">PLOT X © 2026 // BEST NIGHT OF THE YEAR // NO REGRETS</span>
         </div>
 
-        <div class="footer-links">
+        <div class="footer-nav">
           <a href="#hero">TOP</a>
-          <a href="#vibe-cards">SPECS</a>
-          <a href="#run-of-show">TIMELINE</a>
-          <a href="#bouncer-gate">GUESTLIST</a>
-        </div>
-
-        <div class="footer-pill">
-          <span class="text-neon-lime">AUTHENTICATED // NO REGRETS</span>
+          <a href="#party-perks">PERKS</a>
+          <a href="#schedule">TIMELINE</a>
+          <a href="#guestlist-door">WRISTBANDS</a>
         </div>
       </div>
 

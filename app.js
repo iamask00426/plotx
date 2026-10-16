@@ -1,19 +1,19 @@
 /**
- * PLOT X // UNDERGROUND POOL PARTY
- * Neo-Brutalist Interactive Engine
+ * PLOT X // THE ULTIMATE FARMHOUSE POOL BASH
+ * High-Energy House Party Interactive Engine
  */
 
 document.addEventListener('DOMContentLoaded', () => {
   initCustomCursor();
   initCountdown();
   init3DCardTilt();
-  initSynthesizerVibePlayer();
+  initHousePartySynth();
   initTimelineInteractions();
-  initBouncerGateForm();
+  initWristbandForm();
 });
 
 /* ==========================================================================
-   1. CUSTOM NEON CURSOR & GLOW EFFECT
+   1. CUSTOM CURSOR & PARTY GLOW
    ========================================================================== */
 function initCustomCursor() {
   const cursorGlow = document.getElementById('cursor-glow');
@@ -21,7 +21,6 @@ function initCustomCursor() {
   
   if (!cursorGlow || !cursorDot) return;
   
-  // Disable on mobile/touch
   if (window.matchMedia('(pointer: coarse)').matches) {
     cursorGlow.style.display = 'none';
     cursorDot.style.display = 'none';
@@ -39,7 +38,6 @@ function initCustomCursor() {
     cursorDot.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
   });
 
-  // Smooth lerp for glow halo
   function renderGlow() {
     glowX += (mouseX - glowX) * 0.12;
     glowY += (mouseY - glowY) * 0.12;
@@ -48,25 +46,24 @@ function initCustomCursor() {
   }
   renderGlow();
 
-  // Hover states for links and buttons
-  const interactives = document.querySelectorAll('a, button, input, .vibe-card, .timeline-item');
+  const interactives = document.querySelectorAll('a, button, input, .perk-card, .timeline-row');
   interactives.forEach(el => {
     el.addEventListener('mouseenter', () => {
       cursorDot.style.transform += ' scale(2.2)';
-      cursorDot.style.backgroundColor = '#00F0FF';
-      cursorGlow.style.width = '420px';
-      cursorGlow.style.height = '420px';
+      cursorDot.style.backgroundColor = '#FFE600';
+      cursorGlow.style.width = '380px';
+      cursorGlow.style.height = '380px';
     });
     el.addEventListener('mouseleave', () => {
-      cursorDot.style.backgroundColor = '#CCFF00';
-      cursorGlow.style.width = '320px';
-      cursorGlow.style.height = '320px';
+      cursorDot.style.backgroundColor = '#FF1493';
+      cursorGlow.style.width = '280px';
+      cursorGlow.style.height = '280px';
     });
   });
 }
 
 /* ==========================================================================
-   2. LIVE COUNTDOWN TIMER
+   2. LIVE PARTY COUNTDOWN
    ========================================================================== */
 function initCountdown() {
   const cdDays = document.getElementById('cd-days');
@@ -76,7 +73,6 @@ function initCountdown() {
 
   if (!cdDays) return;
 
-  // Set target date: 4 days from now at 16:00 IST
   const targetDate = new Date();
   targetDate.setDate(targetDate.getDate() + 3);
   targetDate.setHours(16, 0, 0, 0);
@@ -109,7 +105,7 @@ function initCountdown() {
 }
 
 /* ==========================================================================
-   3. 3D TILT PHYSICS FOR VIBE CARDS
+   3. 3D TILT FOR PARTY CARDS
    ========================================================================== */
 function init3DCardTilt() {
   const cards = document.querySelectorAll('[data-tilt]');
@@ -123,8 +119,8 @@ function init3DCardTilt() {
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
 
-      const rotateX = ((y - centerY) / centerY) * -10;
-      const rotateY = ((x - centerX) / centerX) * 10;
+      const rotateX = ((y - centerY) / centerY) * -8;
+      const rotateY = ((x - centerX) / centerX) * 8;
 
       card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px) scale3d(1.02, 1.02, 1.02)`;
     });
@@ -136,9 +132,9 @@ function init3DCardTilt() {
 }
 
 /* ==========================================================================
-   4. WEB AUDIO SYNTHESIZER: UNDERGROUND ACID TECH-HOUSE GENERATOR
+   4. FUN HOUSE PARTY AUDIO SYNTHESIZER (UPBEAT GROOVY HOUSE BEATS)
    ========================================================================== */
-function initSynthesizerVibePlayer() {
+function initHousePartySynth() {
   const toggleBtn = document.getElementById('vibe-toggle-btn');
   const vibeStatus = document.getElementById('vibe-status');
   if (!toggleBtn || !vibeStatus) return;
@@ -147,34 +143,66 @@ function initSynthesizerVibePlayer() {
   let isPlaying = false;
   let beatTimer = null;
   let currentStep = 0;
-  const bpm = 128;
-  const stepTime = (60 / bpm) / 4; // 16th notes
+  const bpm = 124; // Upbeat bouncy house tempo
+  const stepTime = (60 / bpm) / 4; // 16th note steps
 
-  // Acid bass notes pattern (frequencies in Hz: F1, G#1, C2, D#2)
-  const bassPattern = [
-    55, 0, 55, 110, 0, 55, 0, 82.4,
-    55, 0, 65.4, 0, 110, 0, 98, 55
+  // Bouncy funk house bass notes (A minor groove: A1, C2, D2, E2, G1)
+  const bassNotes = [
+    55, 0, 55, 0,  65.4, 0, 73.4, 0,
+    82.4, 0, 55, 55, 0, 49, 0, 55
   ];
+
+  // Warm house chord frequencies (Am7 and Fmaj7 stabs)
+  const chordAm7 = [220, 261.63, 329.63, 392.00]; // A3, C4, E4, G4
+  const chordFmaj = [174.61, 220, 261.63, 329.63]; // F3, A3, C4, E4
 
   function playKick(time) {
     const osc = audioCtx.createOscillator();
     const gain = audioCtx.createGain();
 
-    osc.frequency.setValueAtTime(140, time);
-    osc.frequency.exponentialRampToValueAtTime(0.01, time + 0.35);
+    osc.frequency.setValueAtTime(150, time);
+    osc.frequency.exponentialRampToValueAtTime(32, time + 0.32);
 
     gain.gain.setValueAtTime(1.0, time);
-    gain.gain.exponentialRampToValueAtTime(0.001, time + 0.35);
+    gain.gain.exponentialRampToValueAtTime(0.001, time + 0.32);
 
     osc.connect(gain);
     gain.connect(audioCtx.destination);
 
     osc.start(time);
-    osc.stop(time + 0.35);
+    osc.stop(time + 0.32);
+  }
+
+  function playClap(time) {
+    const bufferSize = audioCtx.sampleRate * 0.12;
+    const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) {
+      data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (audioCtx.sampleRate * 0.03));
+    }
+
+    const noise = audioCtx.createBufferSource();
+    noise.buffer = buffer;
+
+    const filter = audioCtx.createBiquadFilter();
+    filter.type = 'bandpass';
+    filter.frequency.value = 1200;
+    filter.Q.value = 3;
+
+    const gain = audioCtx.createGain();
+    gain.gain.setValueAtTime(0.5, time);
+    gain.gain.exponentialRampToValueAtTime(0.001, time + 0.15);
+
+    noise.connect(filter);
+    filter.connect(gain);
+    gain.connect(audioCtx.destination);
+
+    noise.start(time);
+    noise.stop(time + 0.15);
   }
 
   function playHiHat(time, open = false) {
-    const bufferSize = audioCtx.sampleRate * 0.05;
+    const bufferSize = audioCtx.sampleRate * (open ? 0.18 : 0.04);
     const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
     const data = buffer.getChannelData(0);
     for (let i = 0; i < bufferSize; i++) {
@@ -186,11 +214,11 @@ function initSynthesizerVibePlayer() {
 
     const filter = audioCtx.createBiquadFilter();
     filter.type = 'highpass';
-    filter.frequency.value = 7500;
+    filter.frequency.value = 8500;
 
     const gain = audioCtx.createGain();
-    const duration = open ? 0.18 : 0.04;
-    gain.gain.setValueAtTime(open ? 0.4 : 0.25, time);
+    const duration = open ? 0.14 : 0.035;
+    gain.gain.setValueAtTime(open ? 0.3 : 0.15, time);
     gain.gain.exponentialRampToValueAtTime(0.001, time + duration);
 
     noise.connect(filter);
@@ -201,23 +229,21 @@ function initSynthesizerVibePlayer() {
     noise.stop(time + duration);
   }
 
-  function playAcidBass(freq, time) {
+  function playHouseBass(freq, time) {
     if (!freq) return;
 
     const osc = audioCtx.createOscillator();
-    osc.type = 'sawtooth';
+    osc.type = 'triangle';
     osc.frequency.setValueAtTime(freq, time);
 
     const filter = audioCtx.createBiquadFilter();
     filter.type = 'lowpass';
-    filter.Q.value = 14; // Resonant acid bite
-    filter.frequency.setValueAtTime(300, time);
-    filter.frequency.exponentialRampToValueAtTime(2200, time + 0.05);
-    filter.frequency.exponentialRampToValueAtTime(400, time + 0.18);
+    filter.frequency.setValueAtTime(450, time);
+    filter.frequency.exponentialRampToValueAtTime(150, time + 0.2);
 
     const gain = audioCtx.createGain();
-    gain.gain.setValueAtTime(0.35, time);
-    gain.gain.exponentialRampToValueAtTime(0.001, time + 0.2);
+    gain.gain.setValueAtTime(0.55, time);
+    gain.gain.exponentialRampToValueAtTime(0.001, time + 0.22);
 
     osc.connect(filter);
     filter.connect(gain);
@@ -227,14 +253,43 @@ function initSynthesizerVibePlayer() {
     osc.stop(time + 0.22);
   }
 
+  function playChordStab(notes, time) {
+    notes.forEach(freq => {
+      const osc = audioCtx.createOscillator();
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(freq, time);
+
+      const filter = audioCtx.createBiquadFilter();
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(1600, time);
+      filter.frequency.exponentialRampToValueAtTime(600, time + 0.16);
+
+      const gain = audioCtx.createGain();
+      gain.gain.setValueAtTime(0.08, time);
+      gain.gain.exponentialRampToValueAtTime(0.001, time + 0.18);
+
+      osc.connect(filter);
+      filter.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start(time);
+      osc.stop(time + 0.18);
+    });
+  }
+
   function scheduleBeats() {
     if (!isPlaying) return;
 
     const now = audioCtx.currentTime;
 
-    // Four-on-the-floor Kick
+    // Four-on-the-floor House Kick
     if (currentStep % 4 === 0) {
       playKick(now);
+    }
+
+    // Handclap on beats 2 & 4
+    if (currentStep === 4 || currentStep === 12) {
+      playClap(now);
     }
 
     // Offbeat Hi-hat
@@ -244,10 +299,17 @@ function initSynthesizerVibePlayer() {
       playHiHat(now, false);
     }
 
-    // Acid Bass
-    const bassNote = bassPattern[currentStep % bassPattern.length];
-    if (bassNote > 0) {
-      playAcidBass(bassNote, now);
+    // Rhythmic House Chords on upbeat 3 & 11
+    if (currentStep === 3 || currentStep === 7) {
+      playChordStab(chordAm7, now);
+    } else if (currentStep === 11 || currentStep === 15) {
+      playChordStab(chordFmaj, now);
+    }
+
+    // Bouncy funk bass
+    const bassFreq = bassNotes[currentStep % bassNotes.length];
+    if (bassFreq > 0) {
+      playHouseBass(bassFreq, now);
     }
 
     currentStep = (currentStep + 1) % 16;
@@ -267,39 +329,33 @@ function initSynthesizerVibePlayer() {
 
     if (isPlaying) {
       toggleBtn.classList.add('active');
-      vibeStatus.textContent = 'ON // 128BPM';
+      vibeStatus.textContent = 'PARTY AUX: ON 🔥';
       scheduleBeats();
     } else {
       toggleBtn.classList.remove('active');
-      vibeStatus.textContent = 'OFF';
+      vibeStatus.textContent = 'PARTY BEATS: OFF';
       clearTimeout(beatTimer);
     }
   });
 }
 
 /* ==========================================================================
-   5. INTERACTIVE TIMELINE STAGES
+   5. TIMELINE STAGES INTERACTION
    ========================================================================== */
 function initTimelineInteractions() {
-  const items = document.querySelectorAll('.timeline-item');
-  items.forEach(item => {
-    item.addEventListener('click', () => {
-      items.forEach(i => {
-        const card = i.querySelector('.timeline-card');
-        if (card) card.classList.remove('active-card');
-      });
-      const card = item.querySelector('.timeline-card');
-      if (card) {
-        card.classList.add('active-card');
-      }
+  const rows = document.querySelectorAll('.timeline-row');
+  rows.forEach(row => {
+    row.addEventListener('click', () => {
+      rows.forEach(r => r.classList.remove('active-row'));
+      row.classList.add('active-row');
     });
   });
 }
 
 /* ==========================================================================
-   6. BOUNCER GATE TERMINAL FORM & VIP PASS GENERATOR
+   6. VIP WRISTBAND REGISTRATION & PASS GENERATOR
    ========================================================================== */
-function initBouncerGateForm() {
+function initWristbandForm() {
   const form = document.getElementById('bouncer-form');
   const scanningTerminal = document.getElementById('scanning-terminal');
   const scanProgress = document.getElementById('scan-progress');
@@ -307,20 +363,18 @@ function initBouncerGateForm() {
   const vipTicketResult = document.getElementById('vip-ticket-result');
   const submitBtn = document.getElementById('submit-btn');
 
-  // Input fields
   const fullName = document.getElementById('fullName');
   const instaHandle = document.getElementById('instaHandle');
   const partyAnthem = document.getElementById('partyAnthem');
   const secretCode = document.getElementById('secretCode');
   const referralStatus = document.getElementById('referral-status');
 
-  // Display elements on generated ticket
   const ticketIdDisplay = document.getElementById('ticket-id-display');
   const ticketNameDisplay = document.getElementById('ticket-name-display');
   const ticketInstaDisplay = document.getElementById('ticket-insta-display');
   const ticketAnthemDisplay = document.getElementById('ticket-anthem-display');
 
-  // Preset song buttons
+  // Song quick select pills
   const presetBtns = document.querySelectorAll('.preset-btn');
   presetBtns.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -329,16 +383,16 @@ function initBouncerGateForm() {
     });
   });
 
-  // Secret Referral Code Live Validator
+  // Secret Referral / Passcode Check
   if (secretCode) {
     secretCode.addEventListener('input', () => {
       const val = secretCode.value.trim().toUpperCase();
-      if (val === 'ACIDPOOL' || val === 'PLOTX26' || val === 'VIP30') {
-        referralStatus.textContent = '✓ PASSCODE VALIDATED: +1 PRIORITY CLEARANCE & DRINK TOKEN';
-        referralStatus.style.color = 'var(--neon-lime)';
+      if (val === 'PROJECTX' || val === 'PLOTX' || val === 'FRIEND_OF_DJ' || val === 'VIP30') {
+        referralStatus.textContent = '⭐ VIP REFERRAL DETECTED: +1 COMPLIMENTARY COCKTAIL TOKEN';
+        referralStatus.style.color = 'var(--party-gold)';
       } else if (val.length > 3) {
-        referralStatus.textContent = 'REFERRAL CODE RECORDED FOR BOUNCER REVIEW.';
-        referralStatus.style.color = '#888';
+        referralStatus.textContent = 'Referral noted for host review.';
+        referralStatus.style.color = 'var(--text-muted)';
       } else {
         referralStatus.textContent = '';
       }
@@ -350,28 +404,24 @@ function initBouncerGateForm() {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
 
-      // Form validation
       let isValid = true;
 
-      // Name check
       if (!fullName.value.trim()) {
-        document.getElementById('name-error').textContent = '! Required for gate check.';
+        document.getElementById('name-error').textContent = 'Please enter your name or nickname!';
         isValid = false;
       } else {
         document.getElementById('name-error').textContent = '';
       }
 
-      // Insta check
       if (!instaHandle.value.trim()) {
-        document.getElementById('insta-error').textContent = '! Required for guestlist curation.';
+        document.getElementById('insta-error').textContent = 'Instagram handle needed for the guestlist check!';
         isValid = false;
       } else {
         document.getElementById('insta-error').textContent = '';
       }
 
-      // Anthem check
       if (!partyAnthem.value.trim()) {
-        document.getElementById('anthem-error').textContent = '! Vibe test requires a track.';
+        document.getElementById('anthem-error').textContent = 'Tell us your anthem track!';
         isValid = false;
       } else {
         document.getElementById('anthem-error').textContent = '';
@@ -379,21 +429,17 @@ function initBouncerGateForm() {
 
       if (!isValid) return;
 
-      // Disable submit button during scan
       submitBtn.disabled = true;
-      submitBtn.style.opacity = '0.5';
+      submitBtn.style.opacity = '0.6';
 
-      // Hide form and show scanning terminal
       form.classList.add('hidden');
       scanningTerminal.classList.remove('hidden');
 
-      // Terminal log simulation steps
       const steps = [
-        { progress: 20, text: `> HANDSHAKE ESTABLISHED WITH PROTOCOL_PX26...` },
-        { progress: 45, text: `> VERIFYING INSTAGRAM IDENTITY [@${instaHandle.value.replace('@', '')}]...` },
-        { progress: 70, text: `> CALCULATING CHAOS INDEX FOR TRACK: "${partyAnthem.value}"... [98.9% MATCH]` },
-        { progress: 90, text: `> RESERVING 1 OF 30 SLOTS // ALLOCATING GATE ENCRYPTION KEY...` },
-        { progress: 100, text: `> CLEARANCE ACCEPTED. WELCOME TO PLOT X.` }
+        { progress: 25, text: `✨ Reviewing vibe check for @${instaHandle.value.replace('@', '')}...` },
+        { progress: 55, text: `🪩 Adding "${partyAnthem.value}" to the DJ deck queue...` },
+        { progress: 85, text: `🏊 Checking poolside capacity & ratio... [PERFECT MATCH]` },
+        { progress: 100, text: `🎉 WRISTBAND ISSUED! WELCOME TO PLOT X.` }
       ];
 
       let stepIndex = 0;
@@ -406,13 +452,11 @@ function initBouncerGateForm() {
           const logEntry = document.createElement('p');
           logEntry.textContent = step.text;
           scanLog.appendChild(logEntry);
-          scanLog.scrollTop = scanLog.scrollHeight;
 
           stepIndex++;
           setTimeout(runScanStep, 450);
         } else {
-          // Completed scan
-          setTimeout(showTicket, 600);
+          setTimeout(showWristband, 500);
         }
       }
 
@@ -420,15 +464,13 @@ function initBouncerGateForm() {
     });
   }
 
-  function showTicket() {
+  function showWristband() {
     scanningTerminal.classList.add('hidden');
     vipTicketResult.classList.remove('hidden');
 
-    // Generate random Pass ID
     const randomPassNum = Math.floor(1000 + Math.random() * 9000);
-    const passCode = `PX-${randomPassNum}`;
+    const passCode = `PASS #PX-${randomPassNum}`;
 
-    // Populate Boarding Pass
     ticketIdDisplay.textContent = passCode;
     ticketNameDisplay.textContent = fullName.value.trim().toUpperCase();
     ticketInstaDisplay.textContent = instaHandle.value.trim().startsWith('@') 
@@ -436,45 +478,43 @@ function initBouncerGateForm() {
       : `@${instaHandle.value.trim()}`;
     ticketAnthemDisplay.textContent = partyAnthem.value.trim();
 
-    // Trigger Canvas Neon Confetti
-    triggerNeonConfetti();
+    // Trigger Party Confetti
+    triggerPartyConfetti();
 
-    // Increment slot count visually
     const slotsEl = document.getElementById('slots-taken');
     if (slotsEl) {
       slotsEl.textContent = '25';
     }
   }
 
-  function triggerNeonConfetti() {
+  function triggerPartyConfetti() {
     if (typeof confetti !== 'undefined') {
       confetti({
-        particleCount: 120,
-        spread: 90,
+        particleCount: 130,
+        spread: 100,
         origin: { y: 0.6 },
-        colors: ['#CCFF00', '#00F0FF', '#FF0055', '#FFFFFF', '#A3A3A3']
+        colors: ['#FF1493', '#00F2FE', '#FFE600', '#FF5E36', '#FFFFFF']
       });
 
       setTimeout(() => {
         confetti({
-          particleCount: 60,
+          particleCount: 70,
           angle: 60,
-          spread: 60,
+          spread: 70,
           origin: { x: 0 },
-          colors: ['#CCFF00', '#00F0FF']
+          colors: ['#FF1493', '#FFE600']
         });
         confetti({
-          particleCount: 60,
+          particleCount: 70,
           angle: 120,
-          spread: 60,
+          spread: 70,
           origin: { x: 1 },
-          colors: ['#CCFF00', '#FF0055']
+          colors: ['#00F2FE', '#FF1493']
         });
-      }, 300);
+      }, 250);
     }
   }
 
-  // Save / Screenshot button
   const screenshotBtn = document.getElementById('screenshot-btn');
   if (screenshotBtn) {
     screenshotBtn.addEventListener('click', () => {
@@ -482,7 +522,6 @@ function initBouncerGateForm() {
     });
   }
 
-  // Reset form button
   const resetBtn = document.getElementById('reset-form-btn');
   if (resetBtn) {
     resetBtn.addEventListener('click', () => {
@@ -491,7 +530,7 @@ function initBouncerGateForm() {
       form.reset();
       submitBtn.disabled = false;
       submitBtn.style.opacity = '1';
-      scanLog.innerHTML = '<p>> INITIATING BIOMETRIC & VIBE HANDSHAKE...</p>';
+      scanLog.innerHTML = '<p>✨ Curating guestlist vibe balance...</p>';
       scanProgress.style.width = '0%';
     });
   }
