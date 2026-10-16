@@ -132,7 +132,7 @@ function init3DCardTilt() {
 }
 
 /* ==========================================================================
-   4. FUN HOUSE PARTY AUDIO SYNTHESIZER (UPBEAT GROOVY HOUSE BEATS)
+   4. YO YO HONEY SINGH - "PARTY ALL NIGHT" (BOLLYWOOD PARTY SYNTH ENGINE)
    ========================================================================== */
 function initHousePartySynth() {
   const toggleBtn = document.getElementById('vibe-toggle-btn');
@@ -140,45 +140,95 @@ function initHousePartySynth() {
   if (!toggleBtn || !vibeStatus) return;
 
   let audioCtx = null;
+  let masterGain = null;
   let isPlaying = false;
   let beatTimer = null;
   let currentStep = 0;
-  const bpm = 124; // Upbeat bouncy house tempo
+  let currentVolumeLevel = 0.18; // Default low background volume (18-20%)
+  
+  const bpm = 128; // Party All Night original tempo
   const stepTime = (60 / bpm) / 4; // 16th note steps
 
-  // Bouncy funk house bass notes (A minor groove: A1, C2, D2, E2, G1)
-  const bassNotes = [
-    55, 0, 55, 0,  65.4, 0, 73.4, 0,
-    82.4, 0, 55, 55, 0, 49, 0, 55
+  // Melody note frequencies (Hz) for "Party All Night" hook
+  const N_E4 = 329.63;
+  const N_G4 = 392.00;
+  const N_A4 = 440.00;
+  const N_B4 = 493.88;
+  const N_D4 = 293.66;
+  const N_FS4 = 369.99;
+  const N_E5 = 659.25;
+
+  // 64-step pattern (4 bars of 16th notes) of Yo Yo Honey Singh's "Party All Night"
+  // Bar 1 & 2: "Party all night, party all night, we do party all night"
+  // Bar 3 & 4: "Party all night, party all night, we do party all night" (D major variation)
+  const leadMelody = [
+    // Bar 1: "Par-ty all night... par-ty all night"
+    N_E4, 0, N_E4, 0, N_G4, 0, N_E4, 0,
+    N_E4, 0, N_E4, 0, N_G4, 0, N_E4, 0,
+
+    // Bar 2: "Par-ty all night... we do par-ty all night!"
+    N_E4, 0, N_E4, 0, N_G4, 0, N_E4, 0,
+    N_E4, 0, N_G4, 0, N_A4, 0, N_B4, N_A4,
+
+    // Bar 3: "Par-ty all night... par-ty all night" (D maj cadence)
+    N_D4, 0, N_D4, 0, N_FS4, 0, N_D4, 0,
+    N_D4, 0, N_D4, 0, N_FS4, 0, N_D4, 0,
+
+    // Bar 4: "Ghar pe karke scene... we do par-ty all night!"
+    N_D4, 0, N_FS4, 0, N_G4, 0, N_A4, 0,
+    N_G4, 0, N_FS4, 0, N_D4, 0, N_E4, 0
   ];
 
-  // Warm house chord frequencies (Am7 and Fmaj7 stabs)
-  const chordAm7 = [220, 261.63, 329.63, 392.00]; // A3, C4, E4, G4
-  const chordFmaj = [174.61, 220, 261.63, 329.63]; // F3, A3, C4, E4
+  // Heavy electro sub bassline notes (E1, E1, D1, D1)
+  const bassNotes = [
+    // Bar 1: E1
+    41.2, 0, 41.2, 0, 41.2, 0, 82.4, 0,
+    41.2, 0, 41.2, 0, 41.2, 0, 82.4, 0,
+    // Bar 2: E1 -> G1
+    41.2, 0, 41.2, 0, 41.2, 0, 82.4, 0,
+    41.2, 0, 49.0, 0, 41.2, 0, 41.2, 0,
+    // Bar 3: D1
+    36.7, 0, 36.7, 0, 36.7, 0, 73.4, 0,
+    36.7, 0, 36.7, 0, 36.7, 0, 73.4, 0,
+    // Bar 4: D1 -> E1
+    36.7, 0, 36.7, 0, 36.7, 0, 73.4, 0,
+    36.7, 0, 41.2, 0, 41.2, 0, 41.2, 0
+  ];
 
+  function ensureAudioContext() {
+    if (!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      masterGain = audioCtx.createGain();
+      masterGain.gain.setValueAtTime(currentVolumeLevel, audioCtx.currentTime);
+      masterGain.connect(audioCtx.destination);
+    }
+  }
+
+  // Punchy electro four-on-the-floor kick
   function playKick(time) {
     const osc = audioCtx.createOscillator();
     const gain = audioCtx.createGain();
 
-    osc.frequency.setValueAtTime(150, time);
-    osc.frequency.exponentialRampToValueAtTime(32, time + 0.32);
+    osc.frequency.setValueAtTime(160, time);
+    osc.frequency.exponentialRampToValueAtTime(35, time + 0.28);
 
     gain.gain.setValueAtTime(1.0, time);
-    gain.gain.exponentialRampToValueAtTime(0.001, time + 0.32);
+    gain.gain.exponentialRampToValueAtTime(0.001, time + 0.28);
 
     osc.connect(gain);
-    gain.connect(audioCtx.destination);
+    gain.connect(masterGain);
 
     osc.start(time);
-    osc.stop(time + 0.32);
+    osc.stop(time + 0.28);
   }
 
+  // Snappy electro clap on 2 and 4
   function playClap(time) {
     const bufferSize = audioCtx.sampleRate * 0.12;
     const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
     const data = buffer.getChannelData(0);
     for (let i = 0; i < bufferSize; i++) {
-      data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (audioCtx.sampleRate * 0.03));
+      data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (audioCtx.sampleRate * 0.025));
     }
 
     const noise = audioCtx.createBufferSource();
@@ -186,23 +236,24 @@ function initHousePartySynth() {
 
     const filter = audioCtx.createBiquadFilter();
     filter.type = 'bandpass';
-    filter.frequency.value = 1200;
-    filter.Q.value = 3;
+    filter.frequency.value = 1400;
+    filter.Q.value = 2.5;
 
     const gain = audioCtx.createGain();
-    gain.gain.setValueAtTime(0.5, time);
-    gain.gain.exponentialRampToValueAtTime(0.001, time + 0.15);
+    gain.gain.setValueAtTime(0.6, time);
+    gain.gain.exponentialRampToValueAtTime(0.001, time + 0.14);
 
     noise.connect(filter);
     filter.connect(gain);
-    gain.connect(audioCtx.destination);
+    gain.connect(masterGain);
 
     noise.start(time);
-    noise.stop(time + 0.15);
+    noise.stop(time + 0.14);
   }
 
+  // Shimmering hi-hats
   function playHiHat(time, open = false) {
-    const bufferSize = audioCtx.sampleRate * (open ? 0.18 : 0.04);
+    const bufferSize = audioCtx.sampleRate * (open ? 0.15 : 0.035);
     const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
     const data = buffer.getChannelData(0);
     for (let i = 0; i < bufferSize; i++) {
@@ -214,129 +265,195 @@ function initHousePartySynth() {
 
     const filter = audioCtx.createBiquadFilter();
     filter.type = 'highpass';
-    filter.frequency.value = 8500;
+    filter.frequency.value = 9000;
 
     const gain = audioCtx.createGain();
-    const duration = open ? 0.14 : 0.035;
-    gain.gain.setValueAtTime(open ? 0.3 : 0.15, time);
+    const duration = open ? 0.12 : 0.03;
+    gain.gain.setValueAtTime(open ? 0.35 : 0.18, time);
     gain.gain.exponentialRampToValueAtTime(0.001, time + duration);
 
     noise.connect(filter);
     filter.connect(gain);
-    gain.connect(audioCtx.destination);
+    gain.connect(masterGain);
 
     noise.start(time);
     noise.stop(time + duration);
   }
 
-  function playHouseBass(freq, time) {
+  // Honey Singh signature bright saw lead
+  function playHoneySinghLead(freq, time) {
+    if (!freq) return;
+
+    // Dual detuned saw oscillators for that wide Bollywood EDM lead sound
+    const osc1 = audioCtx.createOscillator();
+    const osc2 = audioCtx.createOscillator();
+    osc1.type = 'sawtooth';
+    osc2.type = 'sawtooth';
+
+    osc1.frequency.setValueAtTime(freq, time);
+    osc2.frequency.setValueAtTime(freq * 1.008, time); // detune +8 cents
+
+    const filter = audioCtx.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.frequency.setValueAtTime(2800, time);
+    filter.frequency.exponentialRampToValueAtTime(1100, time + 0.14);
+
+    const gain = audioCtx.createGain();
+    gain.gain.setValueAtTime(0.25, time);
+    gain.gain.exponentialRampToValueAtTime(0.001, time + 0.16);
+
+    osc1.connect(filter);
+    osc2.connect(filter);
+    filter.connect(gain);
+    gain.connect(masterGain);
+
+    osc1.start(time);
+    osc2.start(time);
+    osc1.stop(time + 0.16);
+    osc2.stop(time + 0.16);
+  }
+
+  // Pumping party sub-bass
+  function playBass(freq, time) {
     if (!freq) return;
 
     const osc = audioCtx.createOscillator();
-    osc.type = 'triangle';
+    osc.type = 'sawtooth';
     osc.frequency.setValueAtTime(freq, time);
 
     const filter = audioCtx.createBiquadFilter();
     filter.type = 'lowpass';
-    filter.frequency.setValueAtTime(450, time);
-    filter.frequency.exponentialRampToValueAtTime(150, time + 0.2);
+    filter.frequency.setValueAtTime(320, time);
+    filter.frequency.exponentialRampToValueAtTime(110, time + 0.18);
 
     const gain = audioCtx.createGain();
-    gain.gain.setValueAtTime(0.55, time);
-    gain.gain.exponentialRampToValueAtTime(0.001, time + 0.22);
+    gain.gain.setValueAtTime(0.45, time);
+    gain.gain.exponentialRampToValueAtTime(0.001, time + 0.19);
 
     osc.connect(filter);
     filter.connect(gain);
-    gain.connect(audioCtx.destination);
+    gain.connect(masterGain);
 
     osc.start(time);
-    osc.stop(time + 0.22);
+    osc.stop(time + 0.19);
   }
 
-  function playChordStab(notes, time) {
-    notes.forEach(freq => {
-      const osc = audioCtx.createOscillator();
-      osc.type = 'sawtooth';
-      osc.frequency.setValueAtTime(freq, time);
-
-      const filter = audioCtx.createBiquadFilter();
-      filter.type = 'lowpass';
-      filter.frequency.setValueAtTime(1600, time);
-      filter.frequency.exponentialRampToValueAtTime(600, time + 0.16);
-
-      const gain = audioCtx.createGain();
-      gain.gain.setValueAtTime(0.08, time);
-      gain.gain.exponentialRampToValueAtTime(0.001, time + 0.18);
-
-      osc.connect(filter);
-      filter.connect(gain);
-      gain.connect(audioCtx.destination);
-
-      osc.start(time);
-      osc.stop(time + 0.18);
-    });
-  }
-
-  function scheduleBeats() {
+  function schedulePartyBeats() {
     if (!isPlaying) return;
 
     const now = audioCtx.currentTime;
 
-    // Four-on-the-floor House Kick
+    // Four-on-the-floor electro kick
     if (currentStep % 4 === 0) {
       playKick(now);
     }
 
     // Handclap on beats 2 & 4
-    if (currentStep === 4 || currentStep === 12) {
+    if (currentStep % 8 === 4) {
       playClap(now);
     }
 
-    // Offbeat Hi-hat
+    // Upbeat hi-hat
     if (currentStep % 4 === 2) {
       playHiHat(now, true);
     } else if (currentStep % 2 === 0) {
       playHiHat(now, false);
     }
 
-    // Rhythmic House Chords on upbeat 3 & 11
-    if (currentStep === 3 || currentStep === 7) {
-      playChordStab(chordAm7, now);
-    } else if (currentStep === 11 || currentStep === 15) {
-      playChordStab(chordFmaj, now);
+    // Honey Singh "Party All Night" Lead Hook
+    const leadNote = leadMelody[currentStep % leadMelody.length];
+    if (leadNote > 0) {
+      playHoneySinghLead(leadNote, now);
     }
 
-    // Bouncy funk bass
-    const bassFreq = bassNotes[currentStep % bassNotes.length];
-    if (bassFreq > 0) {
-      playHouseBass(bassFreq, now);
+    // Bassline
+    const bassNote = bassNotes[currentStep % bassNotes.length];
+    if (bassNote > 0) {
+      playBass(bassNote, now);
     }
 
-    currentStep = (currentStep + 1) % 16;
-    beatTimer = setTimeout(scheduleBeats, stepTime * 1000);
+    currentStep = (currentStep + 1) % 64;
+    beatTimer = setTimeout(schedulePartyBeats, stepTime * 1000);
   }
 
-  toggleBtn.addEventListener('click', () => {
-    if (!audioCtx) {
-      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    }
+  function startPartyAudio(volume = 0.18) {
+    ensureAudioContext();
 
     if (audioCtx.state === 'suspended') {
       audioCtx.resume();
     }
 
-    isPlaying = !isPlaying;
+    currentVolumeLevel = volume;
+    masterGain.gain.setValueAtTime(currentVolumeLevel, audioCtx.currentTime);
 
-    if (isPlaying) {
+    if (!isPlaying) {
+      isPlaying = true;
       toggleBtn.classList.add('active');
-      vibeStatus.textContent = 'PARTY AUX: ON 🔥';
-      scheduleBeats();
+      vibeStatus.textContent = currentVolumeLevel < 0.3 
+        ? 'PARTY ALL NIGHT: ON (20%) 🎧' 
+        : 'PARTY ALL NIGHT: BOOSTED (75%) 🔥';
+      schedulePartyBeats();
+    }
+  }
+
+  function stopPartyAudio() {
+    isPlaying = false;
+    toggleBtn.classList.remove('active');
+    vibeStatus.textContent = 'PARTY ALL NIGHT: OFF 🔇';
+    clearTimeout(beatTimer);
+  }
+
+  // Nav button toggle behavior: Low (20%) -> Boosted (75%) -> Muted -> Low (20%)
+  toggleBtn.addEventListener('click', () => {
+    ensureAudioContext();
+
+    if (!isPlaying) {
+      startPartyAudio(0.18);
+    } else if (currentVolumeLevel < 0.3) {
+      // Boost volume to party mode
+      currentVolumeLevel = 0.70;
+      masterGain.gain.linearRampToValueAtTime(0.70, audioCtx.currentTime + 0.3);
+      vibeStatus.textContent = 'PARTY ALL NIGHT: BOOSTED (75%) 🔥';
     } else {
-      toggleBtn.classList.remove('active');
-      vibeStatus.textContent = 'PARTY BEATS: OFF';
-      clearTimeout(beatTimer);
+      // Turn off
+      stopPartyAudio();
     }
   });
+
+  // AUTO-PLAY IN LOW BACKGROUND VOLUME ON ENTRY
+  // Attempt immediate playback; if browser requires user interaction first,
+  // seamlessly trigger it on the very first touch, click, or scroll!
+  function attemptAutoPlay() {
+    try {
+      ensureAudioContext();
+      if (audioCtx.state === 'running') {
+        startPartyAudio(0.18);
+      } else {
+        audioCtx.resume().then(() => {
+          startPartyAudio(0.18);
+        }).catch(() => {
+          // Autoplay blocked by browser policy: register one-shot gesture listener
+          armInteractionListener();
+        });
+      }
+    } catch (e) {
+      armInteractionListener();
+    }
+  }
+
+  function armInteractionListener() {
+    const startOnGesture = () => {
+      startPartyAudio(0.18);
+      ['click', 'touchstart', 'scroll', 'pointerdown', 'keydown'].forEach(evt => {
+        window.removeEventListener(evt, startOnGesture);
+      });
+    };
+
+    ['click', 'touchstart', 'scroll', 'pointerdown', 'keydown'].forEach(evt => {
+      window.addEventListener(evt, startOnGesture, { once: true, passive: true });
+    });
+  }
+
 }
 
 /* ==========================================================================
