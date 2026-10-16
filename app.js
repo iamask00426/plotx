@@ -513,10 +513,10 @@ function initWristbandForm() {
     secretCode.addEventListener('input', () => {
       const val = secretCode.value.trim().toUpperCase();
       if (val === 'PROJECTX' || val === 'PLOTX' || val === 'FRIEND_OF_DJ' || val === 'VIP30') {
-        referralStatus.textContent = '⭐ VIP REFERRAL DETECTED: +1 COMPLIMENTARY COCKTAIL TOKEN';
+        referralStatus.textContent = '⭐ VIP RIZZ CONFIRMED: +10,000 AURA & VIP BAR WRISTBAND';
         referralStatus.style.color = 'var(--party-gold)';
       } else if (val.length > 3) {
-        referralStatus.textContent = 'Referral noted for host review.';
+        referralStatus.textContent = 'Passcode noted for host review. We see you.';
         referralStatus.style.color = 'var(--text-muted)';
       } else {
         referralStatus.textContent = '';
@@ -539,14 +539,14 @@ function initWristbandForm() {
       }
 
       if (!instaHandle.value.trim()) {
-        document.getElementById('insta-error').textContent = 'Instagram handle needed for the guestlist check!';
+        document.getElementById('insta-error').textContent = 'Instagram handle needed for the vibe check!';
         isValid = false;
       } else {
         document.getElementById('insta-error').textContent = '';
       }
 
       if (!partyAnthem.value.trim()) {
-        document.getElementById('anthem-error').textContent = 'Tell us your anthem track!';
+        document.getElementById('anthem-error').textContent = 'Drop an anthem track! No sad songs allowed.';
         isValid = false;
       } else {
         document.getElementById('anthem-error').textContent = '';
@@ -554,7 +554,7 @@ function initWristbandForm() {
 
       const ageConsent = document.getElementById('ageConsent');
       if (ageConsent && !ageConsent.checked) {
-        alert('You must confirm you are 18+ and will carry a Government ID to enter!');
+        alert('You must confirm you are 18+ and will carry a Government ID to enter! (No ID = massive L)');
         return;
       }
 
@@ -567,10 +567,11 @@ function initWristbandForm() {
       scanningTerminal.classList.remove('hidden');
 
       const steps = [
-        { progress: 25, text: `🔞 Age 18+ requirement checked: Physical or DigiLocker ID mandatory at gate...` },
-        { progress: 50, text: `🍸 All-inclusive bar access authorized (Curated Alcohol, Cocktails & Cold Brews)...` },
-        { progress: 75, text: `🪩 Adding "${partyAnthem.value}" to the DJ deck queue...` },
-        { progress: 100, text: `🎉 WRISTBAND ISSUED! WELCOME TO PLOT X.` }
+        { progress: 20, text: `🔞 Checking 18+ age & Govt ID status... [NO CAP: PASSED]` },
+        { progress: 45, text: `🍸 Unlimited Bar unlocked: Curated Cocktails & Cold Brews loaded (let us cook)...` },
+        { progress: 70, text: `🪩 NPC detection score: 0.00% | Adding "${partyAnthem.value}" to DJ deck queue...` },
+        { progress: 90, text: `✨ Aura points credited: +10,000 | Main Character status confirmed...` },
+        { progress: 100, text: `🎉 WRISTBAND UNLOCKED! Welcome to PLOT X. Don't fumble the screenshot.` }
       ];
 
       let stepIndex = 0;
