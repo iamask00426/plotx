@@ -104,14 +104,91 @@
       animation: spinSlow 5s linear infinite !important;
     }
 
-    /* Diya Flame Bounce & Glow */
-    @keyframes flameGlow {
-      0%, 100% { transform: scale(1) rotate(-1deg); filter: drop-shadow(0 0 12px #FFD000) drop-shadow(0 0 24px #FF9900); }
-      50% { transform: scale(1.15) rotate(2deg); filter: drop-shadow(0 0 20px #FFD000) drop-shadow(0 0 32px #FF007F); }
+    /* Multi-Layer Organic Dancing Flame */
+    @keyframes flameDance {
+      0% { transform: scale(1, 1) rotate(-1deg) skewX(-1deg); }
+      18% { transform: scale(1.09, 0.93) rotate(4deg) skewX(3deg); }
+      35% { transform: scale(0.95, 1.07) rotate(-3deg) skewX(-2deg); }
+      55% { transform: scale(1.13, 0.97) rotate(3deg) skewX(2deg); }
+      75% { transform: scale(0.96, 1.04) rotate(-2deg) skewX(-1deg); }
+      100% { transform: scale(1, 1) rotate(-1deg) skewX(-1deg); }
     }
-    .diya-flame-anim {
-      animation: flameGlow 2s ease-in-out infinite;
-      transform-origin: bottom center;
+
+    @keyframes flameCoreDance {
+      0% { transform: scale(1, 1) rotate(1deg); }
+      25% { transform: scale(1.12, 0.95) rotate(-2.5deg); }
+      50% { transform: scale(0.93, 1.09) rotate(3.5deg); }
+      75% { transform: scale(1.08, 0.97) rotate(-1.5deg); }
+      100% { transform: scale(1, 1) rotate(1deg); }
+    }
+
+    @keyframes flameHaloPulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 0.8;
+        filter: drop-shadow(0 0 16px #FFD000) drop-shadow(0 0 32px #FF9900) drop-shadow(0 0 55px rgba(255, 0, 127, 0.45));
+      }
+      50% {
+        transform: scale(1.14);
+        opacity: 1;
+        filter: drop-shadow(0 0 28px #FFD000) drop-shadow(0 0 50px #FF7700) drop-shadow(0 0 80px rgba(255, 0, 127, 0.75));
+      }
+    }
+
+    /* Floating Embers Rising from Flame Tip */
+    @keyframes emberFloat1 {
+      0% { transform: translate(0, 0) scale(1); opacity: 1; }
+      100% { transform: translate(-15px, -70px) scale(0); opacity: 0; }
+    }
+    @keyframes emberFloat2 {
+      0% { transform: translate(0, 0) scale(1); opacity: 1; }
+      100% { transform: translate(18px, -80px) scale(0); opacity: 0; }
+    }
+    @keyframes emberFloat3 {
+      0% { transform: translate(0, 0) scale(1); opacity: 1; }
+      100% { transform: translate(-9px, -90px) scale(0); opacity: 0; }
+    }
+    .ember-1 { animation: emberFloat1 1.8s ease-out infinite; }
+    .ember-2 { animation: emberFloat2 2.2s ease-out 0.4s infinite; }
+    .ember-3 { animation: emberFloat3 2.0s ease-out 0.9s infinite; }
+    .ember-4 { animation: emberFloat1 2.4s ease-out 1.3s infinite; }
+    .ember-5 { animation: emberFloat2 1.9s ease-out 1.7s infinite; }
+
+    /* Shimmering Beads on Diya Rim */
+    @keyframes beadShimmer {
+      0%, 100% { fill: #FFFDF0; filter: drop-shadow(0 0 1px #000); }
+      50% { fill: #FFD000; filter: drop-shadow(0 0 6px #FFD000); }
+    }
+    .bead-1 { animation: beadShimmer 2s ease-in-out infinite; }
+    .bead-2 { animation: beadShimmer 2s ease-in-out 0.28s infinite; }
+    .bead-3 { animation: beadShimmer 2s ease-in-out 0.56s infinite; }
+    .bead-4 { animation: beadShimmer 2s ease-in-out 0.84s infinite; }
+    .bead-5 { animation: beadShimmer 2s ease-in-out 1.12s infinite; }
+    .bead-6 { animation: beadShimmer 2s ease-in-out 1.40s infinite; }
+    .bead-7 { animation: beadShimmer 2s ease-in-out 1.68s infinite; }
+
+    /* Diya Bowl Levitation & Gentle Wobble */
+    @keyframes diyaFloatHover {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-8px) rotate(0.8deg); }
+    }
+    .diya-levitate {
+      animation: diyaFloatHover 4.5s ease-in-out infinite;
+    }
+
+    /* Diya Click Flare Burst */
+    .diya-flare-active {
+      transform: scale(1.35) translateY(-8px) !important;
+      filter: drop-shadow(0 0 35px #FFD000) drop-shadow(0 0 70px #FF007F) !important;
+    }
+
+    /* Diya Click Shockwave Ring */
+    @keyframes shockwavePulse {
+      0% { transform: scale(0.4); opacity: 1; border-width: 8px; }
+      100% { transform: scale(2.8); opacity: 0; border-width: 1px; }
+    }
+    .shockwave-anim {
+      animation: shockwavePulse 0.9s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
     }
 
     /* Retro Circular Stamp Wiggle */
@@ -335,40 +412,108 @@
           </svg>
         </div>
 
-        <!-- Big Retro Illustrated Diya -->
-        <div class="relative z-10 flex flex-col items-center cursor-pointer group" onclick="triggerPartyConfetti();">
+        <!-- Big Retro Illustrated Layered Animated Diya -->
+        <div id="diya-interactive-wrap" class="relative z-10 flex flex-col items-center cursor-pointer select-none diya-levitate group" onclick="igniteDiya(event);" title="Click to flare diya!">
           
-          <!-- Animated Flame -->
-          <div class="w-16 h-24 mb-1 diya-flame-anim">
-            <svg viewBox="0 0 50 80" class="w-full h-full drop-shadow-[0_0_20px_#FFD000]">
-              <path d="M25 0 C15 30 5 45 5 60 C5 72 14 78 25 78 C36 78 45 72 45 60 C45 45 35 30 25 0 Z" fill="#FF9900" stroke="#000" stroke-width="2"/>
-              <path d="M25 20 C18 40 12 50 12 62 C12 70 18 74 25 74 C32 74 38 70 38 62 C38 50 32 40 25 20 Z" fill="#FFD000"/>
-              <ellipse cx="25" cy="62" rx="6" ry="9" fill="#FFFDF0"/>
+          <!-- Shockwave Ring Container (Spawned on click) -->
+          <div id="shockwave-box" class="absolute inset-0 pointer-events-none flex items-center justify-center"></div>
+
+          <!-- Rising Glowing Embers from Flame Tip -->
+          <div class="absolute -top-12 z-20 pointer-events-none">
+            <span class="absolute -left-3 w-2 h-2 rounded-full bg-sunYellow ember-1"></span>
+            <span class="absolute left-2 w-2.5 h-2.5 rounded-full bg-warmAmber ember-2"></span>
+            <span class="absolute -left-1 w-1.5 h-1.5 rounded-full bg-gulabiPink ember-3"></span>
+            <span class="absolute left-3 w-2 h-2 rounded-full bg-sunYellow ember-4"></span>
+            <span class="absolute -left-2 w-1.5 h-1.5 rounded-full bg-softCream ember-5"></span>
+          </div>
+
+          <!-- The Multi-Layer Animated Flame Structure -->
+          <div id="diya-flame-box" class="w-20 h-28 sm:w-24 sm:h-32 mb-1 relative origin-bottom transition-all duration-300">
+            <!-- Pulsating Radiant Halo Glow behind flame -->
+            <div class="absolute inset-0 rounded-full bg-gradient-to-t from-sunYellow via-warmAmber to-transparent blur-xl opacity-80 animate-pulse pointer-events-none"></div>
+
+            <svg viewBox="0 0 60 95" class="w-full h-full relative z-10 drop-shadow-[0_0_24px_#FFD000]">
+              <!-- Outer Flame (Amber to Red) -->
+              <path id="flame-outer" d="M30 2 C18 35 6 52 6 70 C6 85 16 93 30 93 C44 93 54 85 54 70 C54 52 42 35 30 2 Z" fill="url(#flameGradOuter)" stroke="#000" stroke-width="2.5" style="transform-origin: 30px 90px; animation: flameDance 1.8s ease-in-out infinite;"/>
+
+              <!-- Middle Flame (Bright Gold/Yellow) -->
+              <path id="flame-mid" d="M30 24 C22 46 15 58 15 72 C15 82 22 88 30 88 C38 88 45 82 45 72 C45 58 38 46 30 24 Z" fill="url(#flameGradMid)" style="transform-origin: 30px 85px; animation: flameCoreDance 1.5s ease-in-out 0.1s infinite;"/>
+
+              <!-- Inner White-Hot Core (White with Soft Cyan Base) -->
+              <ellipse cx="30" cy="74" rx="7.5" ry="12" fill="url(#coreGrad)" style="transform-origin: 30px 74px; animation: flameCoreDance 1.2s ease-in-out 0.2s infinite;"/>
+
+              <!-- Cotton Wick Tip -->
+              <line x1="30" y1="88" x2="30" y2="76" stroke="#121212" stroke-width="3" stroke-linecap="round"/>
+
+              <defs>
+                <linearGradient id="flameGradOuter" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#FFD000"/>
+                  <stop offset="45%" stop-color="#FF7700"/>
+                  <stop offset="100%" stop-color="#D90429"/>
+                </linearGradient>
+                <linearGradient id="flameGradMid" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#FFFDF0"/>
+                  <stop offset="50%" stop-color="#FFD000"/>
+                  <stop offset="100%" stop-color="#FF9900"/>
+                </linearGradient>
+                <linearGradient id="coreGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#FFFFFF"/>
+                  <stop offset="70%" stop-color="#FFFDF0"/>
+                  <stop offset="100%" stop-color="#00F5D4"/>
+                </linearGradient>
+              </defs>
             </svg>
           </div>
 
-          <!-- Terracotta Gold Diya Bowl -->
-          <div class="w-64 sm:w-72 group-hover:scale-105 transition-transform">
-            <svg viewBox="0 0 200 90" class="w-full h-full drop-shadow-[4px_6px_0px_#000]">
-              <ellipse cx="100" cy="20" rx="90" ry="14" fill="#E5A93C" stroke="#000" stroke-width="3"/>
-              <ellipse cx="100" cy="18" rx="80" ry="9" fill="#8B4513" stroke="#000" stroke-width="1.5"/>
-              <path d="M10 20 Q100 90 190 20 Q100 45 10 20 Z" fill="#D48B28" stroke="#000" stroke-width="3"/>
-              <g fill="#FFFDF0" stroke="#000" stroke-width="1.5">
-                <circle cx="35" cy="38" r="4.5"/>
-                <circle cx="55" cy="46" r="4.5"/>
-                <circle cx="78" cy="51" r="4.5"/>
-                <circle cx="100" cy="53" r="5.5"/>
-                <circle cx="122" cy="51" r="4.5"/>
-                <circle cx="145" cy="46" r="4.5"/>
-                <circle cx="165" cy="38" r="4.5"/>
+          <!-- Terracotta Gold Diya Bowl with Glistening Beads -->
+          <div class="w-68 sm:w-80 relative transition-transform duration-200 group-hover:scale-105">
+            <!-- Warm Light Reflection on Bowl Surface -->
+            <div class="absolute top-2 left-1/2 -translate-x-1/2 w-28 h-5 bg-sunYellow/40 rounded-full blur-md animate-pulse pointer-events-none"></div>
+
+            <svg viewBox="0 0 220 96" class="w-full h-full drop-shadow-[5px_7px_0px_#000]">
+              <!-- Bowl Lip / Rim Base -->
+              <ellipse cx="110" cy="22" rx="100" ry="16" fill="#D48B28" stroke="#000" stroke-width="3.5"/>
+              <ellipse cx="110" cy="20" rx="88" ry="10" fill="#7A390B" stroke="#000" stroke-width="2"/>
+              
+              <!-- Pool of Warm Ghee/Oil inside Diya -->
+              <ellipse cx="110" cy="20" rx="82" ry="7.5" fill="#C97A12" opacity="0.9"/>
+              <ellipse cx="110" cy="19" rx="60" ry="4.5" fill="#FFD000" opacity="0.6"/>
+
+              <!-- Terracotta Bowl Underbody -->
+              <path d="M10 22 Q110 100 210 22 Q110 50 10 22 Z" fill="url(#bowlGrad)" stroke="#000" stroke-width="3.5"/>
+
+              <!-- Carved Rim Pattern Line -->
+              <path d="M22 26 Q110 74 198 26" fill="none" stroke="#7A390B" stroke-width="2.5" stroke-dasharray="4,3"/>
+
+              <!-- Glistening Shimmering Decorative Beads -->
+              <g stroke="#000" stroke-width="1.8">
+                <circle cx="38" cy="42" r="5" class="bead-1"/>
+                <circle cx="60" cy="51" r="5" class="bead-2"/>
+                <circle cx="85" cy="57" r="5" class="bead-3"/>
+                <circle cx="110" cy="59" r="6" class="bead-4"/>
+                <circle cx="135" cy="57" r="5" class="bead-5"/>
+                <circle cx="160" cy="51" r="5" class="bead-6"/>
+                <circle cx="182" cy="42" r="5" class="bead-7"/>
               </g>
-              <polygon points="65,70 135,70 150,88 50,88" fill="#B26E1B" stroke="#000" stroke-width="3"/>
+
+              <!-- Diya Stand Pedestal -->
+              <polygon points="72,75 148,75 166,94 54,94" fill="#A3580F" stroke="#000" stroke-width="3.5"/>
+              <!-- Gold Rim Accent on Stand -->
+              <line x1="60" y1="91" x2="160" y2="91" stroke="#FFD000" stroke-width="2.5"/>
+
+              <defs>
+                <linearGradient id="bowlGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#E59837"/>
+                  <stop offset="60%" stop-color="#C46E17"/>
+                  <stop offset="100%" stop-color="#7A390B"/>
+                </linearGradient>
+              </defs>
             </svg>
           </div>
 
-          <!-- Retro Floating Badge -->
-          <div class="mt-4 px-4 py-1.5 rounded-full bg-softCream text-pureBlack border-2 border-pureBlack font-black text-xs uppercase shadow-pop tracking-wider group-hover:bg-sunYellow transition-colors">
-            ✨ PURE DHAMAKA • CLICK TO POP ✨
+          <!-- Retro Floating Interactive Badge -->
+          <div id="diya-badge" class="mt-4 px-4 py-1.5 rounded-full bg-softCream text-pureBlack border-2 border-pureBlack font-black text-xs uppercase shadow-pop tracking-wider group-hover:bg-sunYellow group-hover:scale-105 transition-all">
+            🔥 DIYA JALAO • TAP TO FLARE! ✨
           </div>
 
         </div>
@@ -1043,20 +1188,61 @@
       }
     }
 
+    // --- 2. Interactive Diya Ignition & Flare Animation ---
+    function igniteDiya(e) {
+      triggerPartyConfetti();
+
+      // Flame burst
+      const flameBox = document.getElementById('diya-flame-box');
+      if (flameBox) {
+        flameBox.classList.add('diya-flare-active');
+        setTimeout(() => flameBox.classList.remove('diya-flare-active'), 1800);
+      }
+
+      // Accelerate sunburst
+      const sunburst = document.getElementById('sunburst-ring');
+      if (sunburst) {
+        sunburst.classList.add('sunburst-fast');
+        setTimeout(() => sunburst.classList.remove('sunburst-fast'), 3000);
+      }
+
+      // Shockwave animation ring
+      const shockBox = document.getElementById('shockwave-box');
+      if (shockBox) {
+        const ring = document.createElement('div');
+        ring.className = 'w-48 h-48 rounded-full border-4 border-sunYellow shockwave-anim absolute pointer-events-none';
+        shockBox.appendChild(ring);
+        setTimeout(() => ring.remove(), 900);
+      }
+
+      // Update badge playfully
+      const badge = document.getElementById('diya-badge');
+      if (badge) {
+        badge.innerText = '🔥 DIYA FULL DHAMAKA! (+10,000 AURA) ✨';
+        badge.classList.add('bg-sunYellow', 'scale-105');
+        setTimeout(() => {
+          badge.innerText = '🔥 DIYA JALAO • TAP TO FLARE! ✨';
+          badge.classList.remove('scale-105');
+        }, 3500);
+      }
+
+      // Audio chord pluck
+      if (audioCtx) {
+        playPluck(392.00);
+        setTimeout(() => playPluck(493.88), 120);
+        setTimeout(() => playPluck(587.33), 240);
+      }
+    }
+
     // Jal Gaya Button Event
     const jalBtn = document.getElementById('jal-gaya-btn');
     if (jalBtn) {
       jalBtn.addEventListener('click', () => {
-        triggerPartyConfetti();
-        const sunburst = document.getElementById('sunburst-ring');
-        if (sunburst) {
-          sunburst.classList.add('sunburst-fast');
-          setTimeout(() => sunburst.classList.remove('sunburst-fast'), 2500);
-        }
+        igniteDiya();
         // Smooth scroll to summary after slight pop
         setTimeout(() => {
           document.getElementById('scene-summary').scrollIntoView({ behavior: 'smooth' });
-        }, 450);
+        }, 550);
       });
     }
 
@@ -1140,6 +1326,24 @@
         if (floatingPetals.length > 50) floatingPetals.shift();
       }
     });
+
+    // Diya Hover / Proximity Spark Fountain
+    const diyaWrapEl = document.getElementById('diya-interactive-wrap');
+    if (diyaWrapEl) {
+      diyaWrapEl.addEventListener('mousemove', (e) => {
+        for (let i = 0; i < 2; i++) {
+          const spark = new MarigoldPetal();
+          spark.x = e.clientX + (Math.random() * 24 - 12);
+          spark.y = e.clientY + (Math.random() * 24 - 12);
+          spark.speedY = -(Math.random() * 2.8 + 1.2);
+          spark.speedX = (Math.random() - 0.5) * 2.2;
+          spark.color = Math.random() > 0.5 ? '#FFD000' : '#FF007F';
+          spark.size = Math.random() * 3.5 + 1.5;
+          spark.alpha = 1;
+          floatingPetals.push(spark);
+        }
+      });
+    }
 
     // --- 4. Scroll Reveal via Intersection Observer ---
     const revealObserver = new IntersectionObserver((entries) => {
