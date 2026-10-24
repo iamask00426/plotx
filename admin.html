@@ -297,70 +297,63 @@
       console.warn('Cache read notice:', e);
     }
 
-    // Fetch once on load
-    window.addEventListener('DOMContentLoaded', () => {
-      fetchRsvps();
-    });
-
-    // Fetch RSVPs from Supabase (Optimized)
+    // Direct Native Fetch to Supabase REST API (Lightning Fast & 100% Reliable)
     async function fetchRsvps() {
-      if (isFetching) return;
-      isFetching = true;
-
       const loadingEl = document.getElementById('loading-state');
       const tableEl = document.getElementById('table-container');
       const emptyEl = document.getElementById('empty-state');
 
-      // Only show full loading if we have no cached rows
-      if (allRsvps.length === 0) {
+      if (allRsvps.length === 0 && loadingEl) {
         loadingEl.classList.remove('hidden');
-        tableEl.classList.add('hidden');
-        emptyEl.classList.add('hidden');
-      }
-
-      if (!supabase) {
-        isFetching = false;
-        alert('Supabase client failed to load.');
-        return;
       }
 
       try {
-        const { data, error } = await supabase
-          .from('rsvps')
-          .select('id, created_at, pass_code, name, instagram, category, price, phone, party_vibe, payment_screenshot')
-          .order('created_at', { ascending: false });
+        const endpoint = `${SUPABASE_PROJECT_URL}/rest/v1/rsvps?select=id,created_at,pass_code,name,instagram,category,price,phone,party_vibe,payment_screenshot&order=created_at.desc`;
+        const response = await fetch(endpoint, {
+          method: 'GET',
+          headers: {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+          }
+        });
 
-        isFetching = false;
-        loadingEl.classList.add('hidden');
+        if (loadingEl) loadingEl.classList.add('hidden');
 
-        if (error) {
-          console.error(error);
-          if (allRsvps.length === 0) {
+        if (!response.ok) {
+          const errText = await response.text();
+          console.error('Supabase fetch error:', errText);
+          if (allRsvps.length === 0 && emptyEl) {
             emptyEl.classList.remove('hidden');
-            emptyEl.querySelector('p').innerText = "Table notice: " + error.message;
+            emptyEl.querySelector('p').innerText = "Notice: " + errText;
           }
           return;
         }
 
-        allRsvps = data || [];
-        // Save to fast cache
+        const data = await response.json();
+        allRsvps = Array.isArray(data) ? data : [];
+
         try {
           sessionStorage.setItem('plotx_rsvps_cache', JSON.stringify(allRsvps));
-        } catch (err) {
-          // If storage full due to large screenshots, ignore
-        }
+        } catch (storageErr) {}
 
         updateMetrics(allRsvps);
         applyFilters();
 
       } catch (err) {
-        isFetching = false;
-        console.error(err);
-        loadingEl.classList.add('hidden');
-        if (allRsvps.length === 0) {
+        console.error('Network error fetching RSVPs:', err);
+        if (loadingEl) loadingEl.classList.add('hidden');
+        if (allRsvps.length === 0 && emptyEl) {
           emptyEl.classList.remove('hidden');
+          emptyEl.querySelector('p').innerText = "Network check: " + err.message;
         }
       }
+    }
+
+    // Auto-run immediately
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', fetchRsvps);
+    } else {
+      fetchRsvps();
     }
 
     // Update Summary Metrics
