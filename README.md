@@ -1,22 +1,22 @@
-# PLOT X // UNDERGROUND POOL PARTY
+# PLOT X // दिवाली की रात • The Diwali Villa Scene 🪔✨
 
-A high-energy, Gen Z neo-brutalist landing page for an exclusive, invite-only underground pool rave called **PLOT X**.
+An exclusive, invite-only Diwali celebration experience at a private luxury villa in **Sector 112, Noida** on **2nd November 2026**.
 
-![PLOT X Preview](https://img.shields.io/badge/AESTHETIC-NEO--BRUTALIST-CCFF00?style=for-the-badge&logoColor=000)
-![Atmosphere](https://img.shields.io/badge/VIBE-CYBER--RAVE-00F0FF?style=for-the-badge&logoColor=000)
-![Cap](https://img.shields.io/badge/CAPACITY-30%20INVITES%20ONLY-FF0055?style=for-the-badge&logoColor=fff)
+![Aesthetic](https://img.shields.io/badge/VIBE-DIWALI%20VILLA%20SCENE-FF9E00?style=for-the-badge&logoColor=000)
+![Date](https://img.shields.io/badge/DATE-2ND%20NOV%202026-FF4D6D?style=for-the-badge&logoColor=fff)
+![Location](https://img.shields.io/badge/LOCATION-SEC%20112%20NOIDA-FFD166?style=for-the-badge&logoColor=000)
 
 ---
 
-## ⚡ Highlights
+## 🪔 Highlights
 
-- **Aesthetic**: Deep Void Black (`#080808`), Acid Neon Lime (`#CCFF00`), Electric Cyan (`#00F0FF`), Neon Pink (`#FF0055`), and Muted Chrome with SVG film grain, glowing mesh gradients, and cyber grid.
-- **Typography**: Display font `Syne` (800/900) with kinetic chromatic aberration, paired with `JetBrains Mono` and `Space Grotesk`.
-- **Live Synthesizer**: Built-in 128 BPM underground acid-techno synthesizer powered by the Web Audio API with resonant 303 bassline and animated EQ visualizer.
-- **3D Physics Tilt Cards**: 4 specification cards responding to mouse angle and coordinates.
-- **Run of Show**: Interactive timeline mapping 04:00 PM chill to midnight drop.
-- **The Bouncer Gate**: VIP verification terminal that runs biometric and vibe scans, launches multi-color neon confetti, and generates a personalized Neo-Brutalist VIP Boarding Pass with barcode and QR voucher.
-- **Mobile First**: 100% responsive and touch-optimized for iOS/Android screens.
+- **Aesthetic**: Deep Velvet Maroon (`#14080A`), Terracotta Crimson (`#8C2D38`), Diya Gold (`#FFD166`), and Marigold Amber (`#FF9E00`) with warm floating sparks and festive paper grain.
+- **Bilingual Experience**: Smooth switch between Hindi and English (manual toggle at header).
+- **Festive Synth & Chimes**: Built-in festive ambient Sitar and Tabla chimes powered by Web Audio API.
+- **Patakha Looks (Live Polaroid Booth)**: Take or upload your Diwali fit, add festive stickers, and pin to the guest lookbook wall.
+- **The Baithak Flow**: High-stakes Teen Patti & Poker, Daru & green apple shots, hot starters, desi mithai boxes, and Bollywood/Punjabi bangers.
+- **Shagun RSVP Gate**: Streamlined WhatsApp approval reservation with high-resolution downloadable Shagun Pass canvas voucher.
+- **Countdown**: Real-time live countdown ticking down to villa doors opening on 2nd November 2026, 8:30 PM.
 
 ---
 
@@ -31,8 +31,8 @@ open index.html
 Or run a local static server:
 
 ```bash
-python3 -m http.server 8000
-# Visit http://localhost:8000 in your browser
+python3 -m http.server 3000
+# Visit http://localhost:3000 in your browser
 ```
 
 ---
@@ -41,14 +41,13 @@ python3 -m http.server 8000
 
 ```text
 plotx/
-├── index.html       # Semantic HTML5 markup & neo-brutalist structure
-├── style.css        # Neo-brutalist design system, animations & responsive styling
-├── app.js           # Web Audio API synth, 3D tilt physics & VIP pass generator
-└── README.md        # Project overview & documentation
+├── index.html       # Single-file standalone Diwali Villa Experience
+├── README.md        # Project documentation
+└── .gitignore       # Git ignore rules
 ```
 
 ---
 
-## 📜 License & Access
+## 📜 Access & RSVP
 
-PLOT X © 2026 // Strictly 30 Headcount Cap. All Rights Reserved.
+PLOT X © 2026 // Private Villa, Sector 112, Noida • Official location pin dropped upon WhatsApp approval.
