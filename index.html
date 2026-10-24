@@ -1903,14 +1903,34 @@
         return;
       }
 
-      guestPolaroids.unshift({
+      const newPolaroid = {
         id: Date.now(),
         name: nameVal,
         caption: captionVal,
         stickers: chosenStickers.length ? [...chosenStickers] : ["✨ पटाखा FIT"],
         likes: 1,
         image: currentImgData
-      });
+      };
+
+      guestPolaroids.unshift(newPolaroid);
+
+      // Save to Supabase Cloud if connected
+      if (supabaseClient) {
+        supabaseClient
+          .from('polaroids')
+          .insert([
+            {
+              name: nameVal,
+              caption: captionVal,
+              stickers: newPolaroid.stickers,
+              likes: 1,
+              image: currentImgData
+            }
+          ])
+          .then(({ error }) => {
+            if (!error) console.log('Polaroid synced to cloud!');
+          });
+      }
 
       renderPolaroidWall();
       triggerPartyConfetti();
@@ -1938,6 +1958,22 @@
     window.closePosterModal = function() {
       document.getElementById('poster-modal').classList.add('hidden');
     };
+
+    async function loadCloudPolaroids() {
+      if (!supabaseClient) return;
+      try {
+        const { data, error } = await supabaseClient
+          .from('polaroids')
+          .select('*')
+          .order('created_at', { ascending: false })
+          .limit(12);
+        if (!error && Array.isArray(data) && data.length > 0) {
+          guestPolaroids = [...data, ...guestPolaroids];
+          renderPolaroidWall();
+        }
+      } catch (err) {}
+    }
+    loadCloudPolaroids();
 
     renderPolaroidWall();
   </script>
