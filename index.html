@@ -538,7 +538,7 @@
           </div>
         </div>
 
-        <!-- The 3 Chunky Action Buttons (Exact match to Screenshot 1) -->
+        <!-- The Action Buttons with Poster Preview -->
         <div class="pt-2 flex flex-col sm:flex-row flex-wrap gap-3">
           <!-- Button 1: Share -->
           <button type="button" onclick="copySceneLink();" class="btn-pop px-5 py-3 rounded-xl bg-sunYellow text-pureBlack font-black text-xs uppercase tracking-wide flex items-center gap-2">
@@ -554,6 +554,11 @@
           <a href="#polaroid-scene" class="btn-pop px-5 py-3 rounded-xl bg-gulabiPink text-white font-black text-xs uppercase tracking-wide flex items-center gap-2">
             <span>📸</span> PHOTO WALL DEKH
           </a>
+
+          <!-- Button 4: Official Poster Modal -->
+          <button type="button" onclick="openPosterModal();" class="btn-pop px-5 py-3 rounded-xl bg-cardGreen text-sunYellow font-black text-xs uppercase tracking-wide flex items-center gap-2">
+            <span>🖼️</span> ANNOUNCEMENT POSTER
+          </button>
         </div>
 
       </div>
@@ -1652,7 +1657,57 @@
       alert("Aapki photo Wall pe pin ho gayi hai! 📌🔥");
     });
 
+    // --- 10. Official Poster Modal Handlers ---
+    window.openPosterModal = function() {
+      document.getElementById('poster-modal').classList.remove('hidden');
+      triggerPartyConfetti();
+    };
+
+    window.closePosterModal = function() {
+      document.getElementById('poster-modal').classList.add('hidden');
+    };
+
     renderPolaroidWall();
   </script>
+
+  <!-- ================= ANNOUNCEMENT POSTER MODAL ================= -->
+  <div id="poster-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 bg-pureBlack/80 backdrop-blur-sm animate-fadeIn">
+    <div class="relative max-w-lg w-full bg-softCream border-4 border-pureBlack rounded-3xl p-5 shadow-pop-lg max-h-[95vh] overflow-y-auto">
+      
+      <!-- Close Button -->
+      <button onclick="closePosterModal()" class="absolute top-3 right-3 w-9 h-9 rounded-full bg-festiveRed text-softCream font-black border-2 border-pureBlack flex items-center justify-center hover:scale-110 transition-transform shadow-pop-sm">
+        ✕
+      </button>
+
+      <!-- Modal Title -->
+      <div class="text-center mb-3">
+        <span class="inline-block px-3 py-0.5 rounded-full bg-sunYellow text-pureBlack font-black text-[10px] uppercase border border-pureBlack mb-1">
+          ✨ OFFICIAL THE PLOT X GRAPHIC
+        </span>
+        <h3 class="font-title font-black text-2xl text-festiveRed uppercase">DIWALI PARTY POSTER</h3>
+        <p class="text-xs text-pureBlack/80 font-bold">WhatsApp Status & Instagram Stories Ke Liye Ready!</p>
+      </div>
+
+      <!-- Poster Preview Image -->
+      <div class="rounded-2xl overflow-hidden border-3 border-pureBlack shadow-pop-sm bg-pureBlack flex justify-center">
+        <img src="./plot_x_diwali_announcement.jpg" alt="The Plot X Diwali Party Announcement Poster" class="w-full max-h-[60vh] object-contain">
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="mt-4 flex flex-col sm:flex-row gap-2.5 justify-center">
+        <a href="./plot_x_diwali_announcement.jpg" download="The_Plot_X_Diwali_Party_Poster.jpg" class="btn-pop sheen-btn px-6 py-3 rounded-full bg-sunYellow text-pureBlack font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2">
+          <span>💾</span> DOWNLOAD POSTER (HIGH-RES)
+        </a>
+        <button onclick="closePosterModal()" class="btn-pop px-5 py-3 rounded-full bg-white text-pureBlack font-black text-xs uppercase text-center">
+          BAND KARO ✕
+        </button>
+      </div>
+
+      <p class="text-[10px] text-pureBlack/60 font-semibold text-center mt-2.5">
+        Sector 112, Noida • RSVP: +91-8954600924 • Dress Code: Ethnic Drip (No Pricing on Graphic)
+      </p>
+
+    </div>
+  </div>
 </body>
 </html>
