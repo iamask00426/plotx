@@ -135,25 +135,6 @@
       }
     }
 
-    /* Floating Embers Rising from Flame Tip */
-    @keyframes emberFloat1 {
-      0% { transform: translate(0, 0) scale(1); opacity: 1; }
-      100% { transform: translate(-15px, -70px) scale(0); opacity: 0; }
-    }
-    @keyframes emberFloat2 {
-      0% { transform: translate(0, 0) scale(1); opacity: 1; }
-      100% { transform: translate(18px, -80px) scale(0); opacity: 0; }
-    }
-    @keyframes emberFloat3 {
-      0% { transform: translate(0, 0) scale(1); opacity: 1; }
-      100% { transform: translate(-9px, -90px) scale(0); opacity: 0; }
-    }
-    .ember-1 { animation: emberFloat1 1.8s ease-out infinite; }
-    .ember-2 { animation: emberFloat2 2.2s ease-out 0.4s infinite; }
-    .ember-3 { animation: emberFloat3 2.0s ease-out 0.9s infinite; }
-    .ember-4 { animation: emberFloat1 2.4s ease-out 1.3s infinite; }
-    .ember-5 { animation: emberFloat2 1.9s ease-out 1.7s infinite; }
-
     /* Shimmering Beads on Diya Rim */
     @keyframes beadShimmer {
       0%, 100% { fill: #FFFDF0; filter: drop-shadow(0 0 1px #000); }
@@ -269,9 +250,6 @@
 </head>
 
 <body class="min-h-screen selection:bg-sunYellow selection:text-pureBlack">
-
-  <!-- Interactive Background Canvas for Floating Marigold Petals & Sparkler Sparks -->
-  <canvas id="fx-canvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
 
   <!-- ================= TOP RETRO APP HEADER (Exact match to screenshot) ================= -->
   <header class="sticky top-0 z-50 bg-softCream text-pureBlack border-b-2 border-pureBlack px-4 sm:px-8 py-2.5 flex items-center justify-between shadow-pop-sm">
@@ -417,15 +395,6 @@
           
           <!-- Shockwave Ring Container (Spawned on click) -->
           <div id="shockwave-box" class="absolute inset-0 pointer-events-none flex items-center justify-center"></div>
-
-          <!-- Rising Glowing Embers from Flame Tip -->
-          <div class="absolute -top-12 z-20 pointer-events-none">
-            <span class="absolute -left-3 w-2 h-2 rounded-full bg-sunYellow ember-1"></span>
-            <span class="absolute left-2 w-2.5 h-2.5 rounded-full bg-warmAmber ember-2"></span>
-            <span class="absolute -left-1 w-1.5 h-1.5 rounded-full bg-gulabiPink ember-3"></span>
-            <span class="absolute left-3 w-2 h-2 rounded-full bg-sunYellow ember-4"></span>
-            <span class="absolute -left-2 w-1.5 h-1.5 rounded-full bg-softCream ember-5"></span>
-          </div>
 
           <!-- The Multi-Layer Animated Flame Structure -->
           <div id="diya-flame-box" class="w-20 h-28 sm:w-24 sm:h-32 mb-1 relative origin-bottom transition-all duration-300">
@@ -1246,106 +1215,7 @@
       });
     }
 
-    // --- 3. Background Petals & Cursor Sparklers Canvas ---
-    const fxCanvas = document.getElementById('fx-canvas');
-    const fxCtx = fxCanvas.getContext('2d');
-    let floatingPetals = [];
-
-    function resizeCanvas() {
-      fxCanvas.width = window.innerWidth;
-      fxCanvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-
-    class MarigoldPetal {
-      constructor() {
-        this.reset();
-      }
-      reset() {
-        this.x = Math.random() * fxCanvas.width;
-        this.y = -20;
-        this.size = Math.random() * 4 + 3;
-        this.speedY = Math.random() * 0.7 + 0.35;
-        this.speedX = (Math.random() - 0.5) * 0.5;
-        this.angle = Math.random() * Math.PI * 2;
-        this.rotSpeed = (Math.random() - 0.5) * 0.02;
-        this.sway = Math.random() * 0.02 + 0.01;
-        this.color = Math.random() > 0.45 ? '#FFD000' : '#FFAA00';
-        this.alpha = Math.random() * 0.55 + 0.25;
-      }
-      update() {
-        this.y += this.speedY;
-        this.angle += this.sway;
-        this.x += Math.sin(this.angle) * 0.7 + this.speedX;
-        if (this.y > fxCanvas.height + 25) this.reset();
-      }
-      draw() {
-        fxCtx.save();
-        fxCtx.translate(this.x, this.y);
-        fxCtx.rotate(this.angle);
-        fxCtx.globalAlpha = this.alpha;
-        fxCtx.beginPath();
-        fxCtx.ellipse(0, 0, this.size, this.size * 0.55, 0, 0, Math.PI * 2);
-        fxCtx.fillStyle = this.color;
-        fxCtx.shadowBlur = 8;
-        fxCtx.shadowColor = this.color;
-        fxCtx.fill();
-        fxCtx.restore();
-      }
-    }
-
-    for (let i = 0; i < 28; i++) {
-      const p = new MarigoldPetal();
-      p.y = Math.random() * window.innerHeight;
-      floatingPetals.push(p);
-    }
-
-    function renderFX() {
-      fxCtx.clearRect(0, 0, fxCanvas.width, fxCanvas.height);
-      floatingPetals.forEach(p => {
-        p.update();
-        p.draw();
-      });
-      requestAnimationFrame(renderFX);
-    }
-    renderFX();
-
-    // Mouse Sparkler Glitters
-    window.addEventListener('mousemove', (e) => {
-      if (Math.random() > 0.65) {
-        const star = new MarigoldPetal();
-        star.x = e.clientX + (Math.random() * 16 - 8);
-        star.y = e.clientY + (Math.random() * 16 - 8);
-        star.size = Math.random() * 2.5 + 1.2;
-        star.speedY = (Math.random() - 0.5) * 1.2;
-        star.speedX = (Math.random() - 0.5) * 1.2;
-        star.alpha = 0.85;
-        star.color = '#FFD000';
-        floatingPetals.push(star);
-        if (floatingPetals.length > 50) floatingPetals.shift();
-      }
-    });
-
-    // Diya Hover / Proximity Spark Fountain
-    const diyaWrapEl = document.getElementById('diya-interactive-wrap');
-    if (diyaWrapEl) {
-      diyaWrapEl.addEventListener('mousemove', (e) => {
-        for (let i = 0; i < 2; i++) {
-          const spark = new MarigoldPetal();
-          spark.x = e.clientX + (Math.random() * 24 - 12);
-          spark.y = e.clientY + (Math.random() * 24 - 12);
-          spark.speedY = -(Math.random() * 2.8 + 1.2);
-          spark.speedX = (Math.random() - 0.5) * 2.2;
-          spark.color = Math.random() > 0.5 ? '#FFD000' : '#FF007F';
-          spark.size = Math.random() * 3.5 + 1.5;
-          spark.alpha = 1;
-          floatingPetals.push(spark);
-        }
-      });
-    }
-
-    // --- 4. Scroll Reveal via Intersection Observer ---
+    // --- 3. Scroll Reveal via Intersection Observer ---
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -1358,7 +1228,7 @@
       revealObserver.observe(el);
     });
 
-    // --- 5. Countdown Clock Helper ---
+    // --- 4. Countdown Clock Helper ---
     function updateCountdown() {
       const target = new Date('2026-11-02T20:30:00+05:30').getTime();
       const now = new Date().getTime();
