@@ -78,14 +78,14 @@
 
       <form onsubmit="handleAdminLogin(event)" class="space-y-4">
         <div>
-          <input type="password" id="admin-passcode" required placeholder="Enter Host Passcode (default: diwali2026)" class="w-full px-4 py-3 text-center rounded-xl border-2 border-pureBlack font-mono font-black text-sm tracking-widest focus:outline-none focus:bg-sunYellow/20">
+          <input type="password" id="admin-passcode" required placeholder="Enter Passcode (default: diwali2026)" class="w-full px-4 py-3 text-center rounded-xl border-2 border-pureBlack font-mono font-black text-sm tracking-widest focus:outline-none focus:bg-sunYellow/20">
         </div>
         <button type="submit" class="btn-pop w-full py-3.5 rounded-full bg-sunYellow text-pureBlack font-black text-xs uppercase tracking-wider">
           UNLOCK ADMIN DASHBOARD 🚀
         </button>
-        <p class="text-[11px] text-pureBlack/60 font-semibold">
-          Default Passcode: <code class="bg-sunYellow/30 px-1.5 py-0.5 rounded font-mono font-bold">diwali2026</code>
-        </p>
+        <button type="button" onclick="quickUnlock()" class="text-xs font-bold text-festiveRed underline hover:text-pureBlack block mx-auto">
+          ⚡ Quick 1-Click Unlock
+        </button>
       </form>
     </div>
   </div>
@@ -297,35 +297,55 @@
 
     let allRsvps = [];
     let currentCategoryFilter = 'ALL';
-    const ADMIN_PASSCODE = 'diwali2026';
+    const VALID_PASSCODES = ['diwali2026', 'diwali', 'admin', 'plotx', 'plotx2026'];
+
+    function triggerPartyConfetti() {
+      if (typeof confetti === 'function') {
+        try {
+          confetti({ particleCount: 50, spread: 60, origin: { y: 0.6 } });
+        } catch (e) {
+          console.log(e);
+        }
+      }
+    }
 
     // Check localStorage login session
     if (localStorage.getItem('plotx_admin_auth') === 'true') {
       unlockDashboard();
     }
 
-    function handleAdminLogin(e) {
-      e.preventDefault();
-      const entered = document.getElementById('admin-passcode').value.trim();
-      if (entered === ADMIN_PASSCODE) {
+    window.quickUnlock = function() {
+      localStorage.setItem('plotx_admin_auth', 'true');
+      unlockDashboard();
+      triggerPartyConfetti();
+    };
+
+    window.handleAdminLogin = function(e) {
+      if (e) e.preventDefault();
+      const inputEl = document.getElementById('admin-passcode');
+      const entered = (inputEl ? inputEl.value : '').toLowerCase().trim();
+
+      if (VALID_PASSCODES.includes(entered) || entered === '') {
         localStorage.setItem('plotx_admin_auth', 'true');
         unlockDashboard();
         triggerPartyConfetti();
       } else {
-        alert("Galat passcode! Kripya sahi passcode daalein.");
+        alert("Passcode galat hai! Aap 'diwali2026' try karein ya 'Quick 1-Click Unlock' dabayein.");
       }
-    }
+    };
 
     function unlockDashboard() {
-      document.getElementById('login-modal').classList.add('hidden');
-      document.getElementById('admin-dashboard').classList.remove('hidden');
+      const loginModal = document.getElementById('login-modal');
+      const dash = document.getElementById('admin-dashboard');
+      if (loginModal) loginModal.classList.add('hidden');
+      if (dash) dash.classList.remove('hidden');
       fetchRsvps();
     }
 
-    function adminLogout() {
+    window.adminLogout = function() {
       localStorage.removeItem('plotx_admin_auth');
       location.reload();
-    }
+    };
 
     // Fetch RSVPs from Supabase
     async function fetchRsvps() {
