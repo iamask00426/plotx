@@ -13,6 +13,9 @@
   <!-- Canvas Confetti for Celebration Pops -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
+  <!-- Supabase JS Client for Real-time RSVPs -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -611,7 +614,7 @@
                 <span class="text-[10px] font-black uppercase tracking-wider text-sunYellow block mb-1">RSVP STATUS & PASSES</span>
                 <p class="font-extrabold text-sm text-softCream flex items-center gap-1.5 mb-1.5">
                   <span class="text-sunYellow font-black">Haan bhai, I'm in ✔</span>
-                  <span class="text-[11px] text-white/80 font-normal">— 24/30 Locked</span>
+                  <span id="live-locked-count" class="text-[11px] text-white/80 font-normal">— 24/30 Locked</span>
                 </p>
                 <div class="flex flex-wrap gap-1.5 text-[10px] font-black uppercase">
                   <span class="px-2 py-0.5 rounded-md bg-sunYellow text-pureBlack">Stag Boy ₹1,499</span>
@@ -1153,6 +1156,36 @@
 
   <!-- ================= JAVASCRIPT ANIMATIONS & LOGIC ================= -->
   <script>
+    // --- 0. Supabase Database Configuration ---
+    const SUPABASE_PROJECT_URL = 'https://eitlezsgeqojhuqtkubn.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVpdGxlenNnZXFvamh1cXRrdWJuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI4NTYwMzEsImV4cCI6MjEwODQzMjAzMX0.1ac00TTMhzQ4R9ZCXt9a1Gdlf0Frd-mVn-c8wZuWyiM';
+    
+    let supabaseClient = null;
+    if (window.supabase && window.supabase.createClient) {
+      supabaseClient = window.supabase.createClient(SUPABASE_PROJECT_URL, SUPABASE_ANON_KEY);
+    }
+
+    // Sync live RSVP count from database
+    async function syncLiveRsvpCount() {
+      if (!supabaseClient) return;
+      try {
+        const { count, error } = await supabaseClient
+          .from('rsvps')
+          .select('*', { count: 'exact', head: true });
+        
+        if (!error && typeof count === 'number') {
+          const totalLocked = Math.min(30, 24 + count);
+          const counterEl = document.getElementById('live-locked-count');
+          if (counterEl) {
+            counterEl.innerText = `— ${totalLocked}/30 Locked`;
+          }
+        }
+      } catch (err) {
+        console.warn('Supabase count sync notice:', err);
+      }
+    }
+    syncLiveRsvpCount();
+
     // --- 1. Sound Synth (Festive Sitar & Chimes) ---
     let audioCtx = null;
     let soundPlaying = false;
@@ -1362,11 +1395,39 @@
       }
 
       const randomNum = Math.floor(100 + Math.random() * 900);
-      document.getElementById('pass-code').innerText = `#PX-${randomNum}`;
+      const generatedCode = `#PX-${randomNum}`;
+      const gameVal = document.getElementById('rsvp-game') ? document.getElementById('rsvp-game').value : 'Diwali Vibe';
+
+      document.getElementById('pass-code').innerText = generatedCode;
       document.getElementById('pass-guest-name').innerText = name;
       document.getElementById('pass-guest-gender').innerText = selectedGender;
       document.getElementById('pass-guest-price').innerText = `${selectedPrice} (All-Inclusive Cover)`;
       document.getElementById('pass-guest-phone').innerText = `+91 ${phone}`;
+
+      // Insert into Supabase table in background
+      if (supabaseClient) {
+        supabaseClient
+          .from('rsvps')
+          .insert([
+            {
+              pass_code: generatedCode,
+              name: name,
+              instagram: insta,
+              category: selectedGender,
+              price: selectedPrice,
+              phone: phone,
+              party_vibe: gameVal
+            }
+          ])
+          .then(({ error }) => {
+            if (error) {
+              console.warn('Supabase RSVP insert notice:', error.message);
+            } else {
+              console.log('✅ RSVP successfully saved to Supabase!');
+              syncLiveRsvpCount();
+            }
+          });
+      }
 
       document.getElementById('villa-rsvp-form').classList.add('hidden');
       document.getElementById('shahi-pass-container').classList.remove('hidden');
