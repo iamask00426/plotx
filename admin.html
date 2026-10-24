@@ -269,34 +269,57 @@
 
     let allRsvps = [];
     let currentCategoryFilter = 'ALL';
+    let isFetching = false;
 
     function triggerPartyConfetti() {
       if (typeof confetti === 'function') {
         try {
-          confetti({ particleCount: 50, spread: 60, origin: { y: 0.6 } });
+          confetti({ particleCount: 40, spread: 50, origin: { y: 0.6 } });
         } catch (e) {
           console.log(e);
         }
       }
     }
 
-    // Auto-fetch entries on page load
+    // Fast Cache-First Rendering (Instant display in 0ms)
+    try {
+      const cached = sessionStorage.getItem('plotx_rsvps_cache');
+      if (cached) {
+        allRsvps = JSON.parse(cached);
+        if (allRsvps && allRsvps.length > 0) {
+          updateMetrics(allRsvps);
+          applyFilters();
+          const loadingEl = document.getElementById('loading-state');
+          if (loadingEl) loadingEl.classList.add('hidden');
+        }
+      }
+    } catch (e) {
+      console.warn('Cache read notice:', e);
+    }
+
+    // Fetch once on load
     window.addEventListener('DOMContentLoaded', () => {
       fetchRsvps();
     });
-    fetchRsvps();
 
-    // Fetch RSVPs from Supabase
+    // Fetch RSVPs from Supabase (Optimized)
     async function fetchRsvps() {
+      if (isFetching) return;
+      isFetching = true;
+
       const loadingEl = document.getElementById('loading-state');
       const tableEl = document.getElementById('table-container');
       const emptyEl = document.getElementById('empty-state');
 
-      loadingEl.classList.remove('hidden');
-      tableEl.classList.add('hidden');
-      emptyEl.classList.add('hidden');
+      // Only show full loading if we have no cached rows
+      if (allRsvps.length === 0) {
+        loadingEl.classList.remove('hidden');
+        tableEl.classList.add('hidden');
+        emptyEl.classList.add('hidden');
+      }
 
       if (!supabase) {
+        isFetching = false;
         alert('Supabase client failed to load.');
         return;
       }
@@ -304,26 +327,39 @@
       try {
         const { data, error } = await supabase
           .from('rsvps')
-          .select('*')
+          .select('id, created_at, pass_code, name, instagram, category, price, phone, party_vibe, payment_screenshot')
           .order('created_at', { ascending: false });
 
+        isFetching = false;
         loadingEl.classList.add('hidden');
 
         if (error) {
           console.error(error);
-          emptyEl.classList.remove('hidden');
-          emptyEl.querySelector('p').innerText = "Table check karein: " + error.message;
+          if (allRsvps.length === 0) {
+            emptyEl.classList.remove('hidden');
+            emptyEl.querySelector('p').innerText = "Table notice: " + error.message;
+          }
           return;
         }
 
         allRsvps = data || [];
+        // Save to fast cache
+        try {
+          sessionStorage.setItem('plotx_rsvps_cache', JSON.stringify(allRsvps));
+        } catch (err) {
+          // If storage full due to large screenshots, ignore
+        }
+
         updateMetrics(allRsvps);
         applyFilters();
 
       } catch (err) {
+        isFetching = false;
         console.error(err);
         loadingEl.classList.add('hidden');
-        emptyEl.classList.remove('hidden');
+        if (allRsvps.length === 0) {
+          emptyEl.classList.remove('hidden');
+        }
       }
     }
 
@@ -443,7 +479,7 @@
         const hasScreenshot = item.payment_screenshot && item.payment_screenshot.length > 50;
         const screenshotThumbnail = hasScreenshot
           ? `<button onclick="openLightbox(${idx})" class="group relative rounded-xl border-2 border-pureBlack overflow-hidden w-14 h-16 bg-pureBlack shadow-pop-sm block focus:outline-none">
-              <img src="${item.payment_screenshot}" alt="Receipt" class="w-full h-full object-cover group-hover:scale-110 transition-transform">
+              <img src="${item.payment_screenshot}" alt="Receipt" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-110 transition-transform">
               <span class="absolute inset-0 bg-pureBlack/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity text-white text-[10px] font-black">
                 ZOOM
               </span>

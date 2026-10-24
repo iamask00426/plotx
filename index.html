@@ -1528,11 +1528,11 @@
       reader.onload = function(event) {
         const img = new Image();
         img.onload = function() {
-          // Compress to lightweight JPEG (max 800px width/height)
+          // Compress to ultra-lightweight JPEG (max 600px, 0.6 quality) for super-fast upload
           const canvas = document.createElement('canvas');
           let width = img.width;
           let height = img.height;
-          const maxDim = 800;
+          const maxDim = 600;
 
           if (width > maxDim || height > maxDim) {
             if (width > height) {
@@ -1549,7 +1549,7 @@
           const ctx = canvas.getContext('2d');
           ctx.drawImage(img, 0, 0, width, height);
 
-          currentPaymentScreenshot = canvas.toDataURL('image/jpeg', 0.7);
+          currentPaymentScreenshot = canvas.toDataURL('image/jpeg', 0.6);
 
           // Update Preview UI
           const previewBox = document.getElementById('screenshot-preview-box');
