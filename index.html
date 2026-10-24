@@ -10,6 +10,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Poppins:wght@400;500;600;700;800;900&family=Yatra+One&display=swap" rel="stylesheet">
   
+  <!-- Canvas Confetti for Celebration Pops -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -54,13 +57,15 @@
 
     /* Chunky Neo-Brutalist Pop Button */
     .btn-pop {
-      border: 2px solid #000;
+      border: 2.5px solid #000;
       box-shadow: 4px 4px 0px #000;
-      transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      overflow: hidden;
     }
     .btn-pop:hover {
-      transform: translate(-2px, -2px);
-      box-shadow: 6px 6px 0px #000;
+      transform: translate(-3px, -3px);
+      box-shadow: 7px 7px 0px #000;
     }
     .btn-pop:active {
       transform: translate(2px, 2px);
@@ -71,6 +76,20 @@
     .card-pop {
       border: 2.5px solid #000;
       box-shadow: 5px 5px 0px #000;
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .card-pop:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: 8px 8px 0px #000;
+    }
+
+    /* Floating Card Bobbing Animation */
+    @keyframes gentleFloat {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-8px) rotate(0.4deg); }
+    }
+    .card-float {
+      animation: gentleFloat 5.5s ease-in-out infinite;
     }
 
     /* Rotating Sunburst Ray Background behind Diya */
@@ -79,31 +98,83 @@
       100% { transform: rotate(360deg); }
     }
     .sunburst-spin {
-      animation: spinSlow 38s linear infinite;
+      animation: spinSlow 32s linear infinite;
+    }
+    .sunburst-fast {
+      animation: spinSlow 5s linear infinite !important;
     }
 
     /* Diya Flame Bounce & Glow */
     @keyframes flameGlow {
-      0%, 100% { transform: scale(1) rotate(-1deg); filter: drop-shadow(0 0 10px #FFD000) drop-shadow(0 0 20px #FF9900); }
-      50% { transform: scale(1.14) rotate(2deg); filter: drop-shadow(0 0 16px #FFD000) drop-shadow(0 0 28px #FF007F); }
+      0%, 100% { transform: scale(1) rotate(-1deg); filter: drop-shadow(0 0 12px #FFD000) drop-shadow(0 0 24px #FF9900); }
+      50% { transform: scale(1.15) rotate(2deg); filter: drop-shadow(0 0 20px #FFD000) drop-shadow(0 0 32px #FF007F); }
     }
     .diya-flame-anim {
-      animation: flameGlow 2.2s ease-in-out infinite;
+      animation: flameGlow 2s ease-in-out infinite;
       transform-origin: bottom center;
     }
 
-    /* Retro Circular Stamp */
+    /* Retro Circular Stamp Wiggle */
     @keyframes stampWiggle {
       0%, 100% { transform: rotate(-8deg); }
-      50% { transform: rotate(-5deg) scale(1.04); }
+      50% { transform: rotate(-3deg) scale(1.05); }
     }
     .retro-stamp {
-      animation: stampWiggle 4s ease-in-out infinite;
+      animation: stampWiggle 3.5s ease-in-out infinite;
     }
 
-    /* Marigold Garland Border */
+    /* Floating Marigold Flower Sway */
+    @keyframes flowerSway {
+      0%, 100% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(15deg) scale(1.12); }
+    }
     .marigold-corner {
+      animation: flowerSway 3s ease-in-out infinite;
       filter: drop-shadow(2px 2px 0px #000);
+    }
+
+    /* Floating Playing Card Animation */
+    @keyframes cardDrift {
+      0%, 100% { transform: translateY(0px) rotate(-6deg); }
+      50% { transform: translateY(-14px) rotate(4deg); }
+    }
+    .taash-float-1 {
+      animation: cardDrift 4.5s ease-in-out infinite;
+    }
+    .taash-float-2 {
+      animation: cardDrift 5.5s ease-in-out 1s infinite;
+    }
+
+    /* Button Sheen Sweep */
+    @keyframes sheenSweep {
+      0% { transform: translateX(-120%) skewX(-20deg); }
+      100% { transform: translateX(250%) skewX(-20deg); }
+    }
+    .sheen-btn::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 40%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+      animation: sheenSweep 3.2s infinite;
+      pointer-events: none;
+    }
+
+    /* Scroll Reveal Classes */
+    .reveal-item {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+    .reveal-scale {
+      opacity: 0;
+      transform: scale(0.92) translateY(20px);
+      transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+    .is-revealed {
+      opacity: 1 !important;
+      transform: translateY(0) scale(1) !important;
     }
 
     /* Custom Scrollbar */
@@ -116,19 +187,21 @@
     ::-webkit-scrollbar-thumb {
       background: #FFD000;
       border: 2px solid #000;
-      border-radius: 0;
     }
   </style>
 </head>
 
 <body class="min-h-screen selection:bg-sunYellow selection:text-pureBlack">
 
+  <!-- Interactive Background Canvas for Floating Marigold Petals & Sparkler Sparks -->
+  <canvas id="fx-canvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+
   <!-- ================= TOP RETRO APP HEADER (Exact match to screenshot) ================= -->
   <header class="sticky top-0 z-50 bg-softCream text-pureBlack border-b-2 border-pureBlack px-4 sm:px-8 py-2.5 flex items-center justify-between shadow-pop-sm">
     
     <!-- Left: Brand Logo & Title -->
     <a href="#intro-scene" class="flex items-center gap-2.5 group">
-      <div class="w-8 h-8 rounded-full bg-sunYellow border-2 border-pureBlack flex items-center justify-center font-extrabold text-sm shadow-pop-sm">
+      <div class="w-8 h-8 rounded-full bg-sunYellow border-2 border-pureBlack flex items-center justify-center font-extrabold text-sm shadow-pop-sm group-hover:rotate-12 transition-transform">
         🪔
       </div>
       <div>
@@ -172,16 +245,16 @@
   <section id="intro-scene" class="relative min-h-[92vh] flex items-center justify-center p-4 sm:p-8 overflow-hidden border-b-4 border-pureBlack">
     
     <!-- Corner Decorative Marigold Flowers -->
-    <div class="absolute top-4 left-4 z-20 pointer-events-none select-none text-3xl sm:text-4xl marigold-corner animate-pulse">
+    <div class="absolute top-4 left-4 z-20 pointer-events-none select-none text-3xl sm:text-4xl marigold-corner">
       🌼
     </div>
-    <div class="absolute top-4 right-4 z-20 pointer-events-none select-none text-3xl sm:text-4xl marigold-corner animate-pulse">
+    <div class="absolute top-4 right-4 z-20 pointer-events-none select-none text-3xl sm:text-4xl marigold-corner" style="animation-delay: 1.2s;">
       🌼
     </div>
-    <div class="absolute bottom-4 left-4 z-20 pointer-events-none select-none text-3xl sm:text-4xl marigold-corner">
+    <div class="absolute bottom-4 left-4 z-20 pointer-events-none select-none text-3xl sm:text-4xl marigold-corner" style="animation-delay: 0.6s;">
       🌼
     </div>
-    <div class="absolute bottom-4 right-4 z-20 pointer-events-none select-none text-3xl sm:text-4xl marigold-corner">
+    <div class="absolute bottom-4 right-4 z-20 pointer-events-none select-none text-3xl sm:text-4xl marigold-corner" style="animation-delay: 1.8s;">
       🌼
     </div>
 
@@ -189,7 +262,7 @@
     <div class="max-w-6xl w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10 py-6">
       
       <!-- Left Column: Giant Pop Typography -->
-      <div class="lg:col-span-7 space-y-4 text-left">
+      <div class="lg:col-span-7 space-y-4 text-left reveal-item">
         
         <!-- Top Pill Header Tag -->
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-softCream border-2 border-pureBlack text-pureBlack text-xs font-black shadow-pop-sm uppercase tracking-wider">
@@ -218,33 +291,28 @@
           <span>NO APOLOGIES</span>
         </div>
 
-        <!-- Primary CTA Buttons -->
+        <!-- Primary CTA Buttons with Confetti Pop Trigger -->
         <div class="pt-4 flex flex-wrap items-center gap-4">
-          <a href="#scene-summary" class="btn-pop px-8 py-3.5 rounded-full bg-sunYellow text-pureBlack font-black text-base uppercase tracking-wider flex items-center gap-2">
+          <button id="jal-gaya-btn" type="button" class="btn-pop sheen-btn px-8 py-3.5 rounded-full bg-sunYellow text-pureBlack font-black text-base uppercase tracking-wider flex items-center gap-2">
             <span>JAL GAYA! ✦</span>
-          </a>
+          </button>
           <a href="#rsvp-scene" class="btn-pop px-6 py-3.5 rounded-full bg-softCream text-pureBlack font-extrabold text-sm uppercase tracking-wide">
             SKIP → SEEDHA PASS 🎟️
           </a>
         </div>
 
         <p class="text-xs text-softCream/80 font-medium italic pt-1">
-          Scene loading... scroll karke dekho poora plan! 👇
+          Scene loading... button dabao ya scroll karke aage badho! 👇
         </p>
 
       </div>
 
       <!-- Right Column: Big Retro Sunburst & Diya Art (Screenshot 2 Exact Graphic) -->
-      <div class="lg:col-span-5 flex items-center justify-center relative min-h-[340px] sm:min-h-[420px]">
+      <div class="lg:col-span-5 flex items-center justify-center relative min-h-[340px] sm:min-h-[420px] reveal-scale">
         
         <!-- Rotating Retro Sunburst Rays -->
-        <div class="absolute w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] rounded-full sunburst-spin pointer-events-none select-none opacity-90">
+        <div id="sunburst-ring" class="absolute w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] rounded-full sunburst-spin pointer-events-none select-none opacity-90 transition-all">
           <svg viewBox="0 0 200 200" class="w-full h-full">
-            <defs>
-              <pattern id="rays" width="200" height="200" patternUnits="userSpaceOnUse">
-                <!-- Retro Sunburst Rays radiating from center -->
-              </pattern>
-            </defs>
             <g transform="translate(100, 100)">
               <!-- 16 Sunburst Segments alternating Yellow & Amber -->
               <polygon points="0,0 -20,-100 20,-100" fill="#FFD000" />
@@ -268,7 +336,7 @@
         </div>
 
         <!-- Big Retro Illustrated Diya -->
-        <div class="relative z-10 flex flex-col items-center">
+        <div class="relative z-10 flex flex-col items-center cursor-pointer group" onclick="triggerPartyConfetti();">
           
           <!-- Animated Flame -->
           <div class="w-16 h-24 mb-1 diya-flame-anim">
@@ -280,13 +348,11 @@
           </div>
 
           <!-- Terracotta Gold Diya Bowl -->
-          <div class="w-64 sm:w-72">
+          <div class="w-64 sm:w-72 group-hover:scale-105 transition-transform">
             <svg viewBox="0 0 200 90" class="w-full h-full drop-shadow-[4px_6px_0px_#000]">
-              <!-- Diya Rim & Body -->
               <ellipse cx="100" cy="20" rx="90" ry="14" fill="#E5A93C" stroke="#000" stroke-width="3"/>
               <ellipse cx="100" cy="18" rx="80" ry="9" fill="#8B4513" stroke="#000" stroke-width="1.5"/>
               <path d="M10 20 Q100 90 190 20 Q100 45 10 20 Z" fill="#D48B28" stroke="#000" stroke-width="3"/>
-              <!-- Decorative Diya Beads -->
               <g fill="#FFFDF0" stroke="#000" stroke-width="1.5">
                 <circle cx="35" cy="38" r="4.5"/>
                 <circle cx="55" cy="46" r="4.5"/>
@@ -296,14 +362,13 @@
                 <circle cx="145" cy="46" r="4.5"/>
                 <circle cx="165" cy="38" r="4.5"/>
               </g>
-              <!-- Diya Stand / Base -->
               <polygon points="65,70 135,70 150,88 50,88" fill="#B26E1B" stroke="#000" stroke-width="3"/>
             </svg>
           </div>
 
           <!-- Retro Floating Badge -->
-          <div class="mt-4 px-4 py-1.5 rounded-full bg-softCream text-pureBlack border-2 border-pureBlack font-black text-xs uppercase shadow-pop tracking-wider">
-            ✨ PURE DHAMAKA • ZERO FOMO ✨
+          <div class="mt-4 px-4 py-1.5 rounded-full bg-softCream text-pureBlack border-2 border-pureBlack font-black text-xs uppercase shadow-pop tracking-wider group-hover:bg-sunYellow transition-colors">
+            ✨ PURE DHAMAKA • CLICK TO POP ✨
           </div>
 
         </div>
@@ -321,7 +386,7 @@
     <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
       
       <!-- Left: Giant Headline & Action Buttons -->
-      <div class="lg:col-span-6 space-y-5 text-left">
+      <div class="lg:col-span-6 space-y-5 text-left reveal-item">
         
         <div class="inline-block px-3 py-1 rounded-full bg-sunYellow text-pureBlack font-black text-xs uppercase border-2 border-pureBlack shadow-pop-sm">
           📍 LOCATION & ITINERARY LOCKED
@@ -345,10 +410,24 @@
           No formal drama, no boring speeches. <strong>Sector 112 Noida Villa</strong> mein poori baithak taiyaar hai. Handcrafted cocktails, live tandoori starters, high-stakes Teen Patti, aur non-stop 2000s Bollywood + Punjabi bangers!
         </p>
 
+        <!-- Live Countdown Timer Strip -->
+        <div class="p-3.5 rounded-2xl bg-pureBlack/40 border-2 border-sunYellow/60 flex items-center justify-between text-center max-w-md">
+          <span class="text-xs font-black uppercase text-sunYellow">COUNTDOWN:</span>
+          <div class="flex items-center gap-3 font-mono font-black text-sm text-softCream">
+            <div><span id="c-days" class="text-sunYellow font-bold text-base">08</span>d</div>
+            <div>:</div>
+            <div><span id="c-hours" class="text-sunYellow font-bold text-base">09</span>h</div>
+            <div>:</div>
+            <div><span id="c-mins" class="text-sunYellow font-bold text-base">30</span>m</div>
+            <div>:</div>
+            <div><span id="c-secs" class="text-gulabiPink font-bold text-base">00</span>s</div>
+          </div>
+        </div>
+
         <!-- The 3 Chunky Action Buttons (Exact match to Screenshot 1) -->
-        <div class="pt-3 flex flex-col sm:flex-row flex-wrap gap-3">
+        <div class="pt-2 flex flex-col sm:flex-row flex-wrap gap-3">
           <!-- Button 1: Share -->
-          <button type="button" onclick="navigator.clipboard.writeText(window.location.href); alert('Link copied! Group chat mein aag laga do 🔥');" class="btn-pop px-5 py-3 rounded-xl bg-sunYellow text-pureBlack font-black text-xs uppercase tracking-wide flex items-center gap-2">
+          <button type="button" onclick="copySceneLink();" class="btn-pop px-5 py-3 rounded-xl bg-sunYellow text-pureBlack font-black text-xs uppercase tracking-wide flex items-center gap-2">
             <span>📢</span> SHARE THE SCENE
           </button>
 
@@ -366,9 +445,9 @@
       </div>
 
       <!-- Right: Emerald Green "YOUR SCENE, SUMMARISED" Card (Screenshot 1 Exact Match) -->
-      <div class="lg:col-span-6 flex justify-center">
+      <div class="lg:col-span-6 flex justify-center reveal-scale">
         
-        <div class="relative w-full max-w-md">
+        <div class="relative w-full max-w-md card-float">
           
           <!-- The Emerald Card -->
           <div class="card-pop bg-cardGreen text-softCream p-6 sm:p-8 rounded-3xl relative overflow-hidden shadow-pop-lg">
@@ -448,7 +527,7 @@
     
     <div class="max-w-6xl mx-auto space-y-10">
       
-      <div class="text-left space-y-2">
+      <div class="text-left space-y-2 reveal-item">
         <span class="inline-block px-3 py-1 rounded-full bg-sunYellow border-2 border-pureBlack text-pureBlack text-xs font-black shadow-pop-sm uppercase">
           🥃 KHAANA-PEENA // THE SPREAD
         </span>
@@ -464,7 +543,7 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         
         <!-- Card 1: Daru & Shots -->
-        <div class="card-pop bg-white p-6 rounded-3xl flex flex-col justify-between hover:-translate-y-1 transition-transform">
+        <div class="card-pop bg-white p-6 rounded-3xl flex flex-col justify-between reveal-item">
           <div>
             <div class="w-14 h-14 rounded-2xl bg-gulabiPink text-white border-2 border-pureBlack flex items-center justify-center text-3xl shadow-pop-sm mb-4">
               🥃
@@ -483,7 +562,7 @@
         </div>
 
         <!-- Card 2: Hot Starters -->
-        <div class="card-pop bg-white p-6 rounded-3xl flex flex-col justify-between hover:-translate-y-1 transition-transform">
+        <div class="card-pop bg-white p-6 rounded-3xl flex flex-col justify-between reveal-item" style="transition-delay: 0.15s;">
           <div>
             <div class="w-14 h-14 rounded-2xl bg-sunYellow text-pureBlack border-2 border-pureBlack flex items-center justify-center text-3xl shadow-pop-sm mb-4">
               🍢
@@ -502,7 +581,7 @@
         </div>
 
         <!-- Card 3: Desi Mithai -->
-        <div class="card-pop bg-white p-6 rounded-3xl flex flex-col justify-between hover:-translate-y-1 transition-transform">
+        <div class="card-pop bg-white p-6 rounded-3xl flex flex-col justify-between reveal-item" style="transition-delay: 0.3s;">
           <div>
             <div class="w-14 h-14 rounded-2xl bg-cardGreen text-sunYellow border-2 border-pureBlack flex items-center justify-center text-3xl shadow-pop-sm mb-4">
               🍬
@@ -528,12 +607,20 @@
 
 
   <!-- ================= CHAPTER 4: TAASH & TEEN PATTI BAITHAK ================= -->
-  <section id="taash-scene" class="py-16 px-4 sm:px-8 border-b-4 border-pureBlack bg-festiveRed text-softCream">
+  <section id="taash-scene" class="py-16 px-4 sm:px-8 border-b-4 border-pureBlack bg-festiveRed text-softCream relative overflow-hidden">
     
-    <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+    <!-- Floating Playing Cards (Fun Retro Animations) -->
+    <div class="absolute -top-6 -right-6 text-6xl opacity-20 pointer-events-none taash-float-1 select-none">
+      🂡
+    </div>
+    <div class="absolute bottom-10 left-6 text-6xl opacity-20 pointer-events-none taash-float-2 select-none">
+      🂮
+    </div>
+
+    <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
       
       <!-- Left: Taash Intro & Rules -->
-      <div class="lg:col-span-6 space-y-4 text-left">
+      <div class="lg:col-span-6 space-y-4 text-left reveal-item">
         <span class="inline-block px-3 py-1 rounded-full bg-sunYellow text-pureBlack font-black text-xs uppercase border-2 border-pureBlack shadow-pop-sm">
           🃏 INDOOR LOUNGE BAITHAK
         </span>
@@ -564,7 +651,7 @@
       </div>
 
       <!-- Right: Playful Graphic Taash Card Display -->
-      <div class="lg:col-span-6 flex justify-center">
+      <div class="lg:col-span-6 flex justify-center reveal-scale">
         <div class="card-pop bg-cardGreen p-6 sm:p-8 rounded-3xl w-full max-w-md shadow-pop-lg relative">
           
           <div class="flex items-center justify-between border-b-2 border-sunYellow/30 pb-3 mb-4">
@@ -610,7 +697,7 @@
     
     <div class="max-w-6xl mx-auto space-y-8">
       
-      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 reveal-item">
         <div>
           <span class="inline-block px-3 py-1 rounded-full bg-gulabiPink text-white font-black text-xs uppercase border-2 border-pureBlack shadow-pop-sm">
             📸 GUEST LOOKBOOK
@@ -628,7 +715,7 @@
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         
         <!-- Left: Upload / Camera Card -->
-        <div class="lg:col-span-5 card-pop bg-white p-6 rounded-3xl space-y-4">
+        <div class="lg:col-span-5 card-pop bg-white p-6 rounded-3xl space-y-4 reveal-item">
           
           <div class="flex items-center justify-between border-b-2 border-pureBlack/15 pb-3">
             <span class="font-title font-black text-lg uppercase">TAKE FIT SNAP</span>
@@ -698,7 +785,7 @@
         </div>
 
         <!-- Right: The Polaroid Wall Grid -->
-        <div class="lg:col-span-7 space-y-4">
+        <div class="lg:col-span-7 space-y-4 reveal-item">
           <div class="flex items-center justify-between">
             <span class="text-xs font-black uppercase tracking-wider text-pureBlack">YAARON KA LOOKBOOK</span>
             <span id="wall-count-badge" class="px-3 py-1 rounded-full bg-sunYellow border-2 border-pureBlack text-pureBlack font-black text-xs">2 Polaroids Pinned</span>
@@ -721,7 +808,7 @@
     
     <div class="max-w-3xl mx-auto space-y-8">
       
-      <div class="text-center space-y-2">
+      <div class="text-center space-y-2 reveal-item">
         <span class="inline-block px-4 py-1.5 rounded-full bg-sunYellow text-pureBlack font-black text-xs uppercase border-2 border-pureBlack shadow-pop-sm">
           💌 30 INVITES ONLY // FIRST COME FIRST SERVE
         </span>
@@ -734,7 +821,7 @@
       </div>
 
       <!-- Shagun Lifafa Box Card -->
-      <div class="card-pop bg-softCream text-pureBlack p-6 sm:p-10 rounded-3xl relative">
+      <div class="card-pop bg-softCream text-pureBlack p-6 sm:p-10 rounded-3xl relative reveal-scale">
         
         <!-- Form -->
         <form id="villa-rsvp-form" onsubmit="handleVillaRSVP(event)" class="space-y-5">
@@ -797,8 +884,8 @@
             </select>
           </div>
 
-          <!-- Submit Button -->
-          <button type="submit" class="btn-pop w-full py-4 rounded-full bg-festiveRed text-softCream font-black text-sm uppercase tracking-wider">
+          <!-- Submit Button with Confetti Blast -->
+          <button type="submit" class="btn-pop sheen-btn w-full py-4 rounded-full bg-festiveRed text-softCream font-black text-sm uppercase tracking-wider">
             HAAN BHAI, PASS CONFIRM KARO! 🎟️
           </button>
 
@@ -886,7 +973,7 @@
   </footer>
 
 
-  <!-- ================= JAVASCRIPT LOGIC ================= -->
+  <!-- ================= JAVASCRIPT ANIMATIONS & LOGIC ================= -->
   <script>
     // --- 1. Sound Synth (Festive Sitar & Chimes) ---
     let audioCtx = null;
@@ -928,7 +1015,178 @@
       }
     });
 
-    // --- 2. Add to Google Calendar Helper ---
+    // --- 2. Interactive Confetti Burst Helper ---
+    function triggerPartyConfetti() {
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 120,
+          spread: 80,
+          origin: { y: 0.6 },
+          colors: ['#FFD000', '#FF007F', '#12543A', '#FFFFFF', '#FF9900']
+        });
+        setTimeout(() => {
+          confetti({
+            particleCount: 60,
+            angle: 60,
+            spread: 55,
+            origin: { x: 0 },
+            colors: ['#FFD000', '#FF007F']
+          });
+          confetti({
+            particleCount: 60,
+            angle: 120,
+            spread: 55,
+            origin: { x: 1 },
+            colors: ['#12543A', '#FFD000']
+          });
+        }, 220);
+      }
+    }
+
+    // Jal Gaya Button Event
+    const jalBtn = document.getElementById('jal-gaya-btn');
+    if (jalBtn) {
+      jalBtn.addEventListener('click', () => {
+        triggerPartyConfetti();
+        const sunburst = document.getElementById('sunburst-ring');
+        if (sunburst) {
+          sunburst.classList.add('sunburst-fast');
+          setTimeout(() => sunburst.classList.remove('sunburst-fast'), 2500);
+        }
+        // Smooth scroll to summary after slight pop
+        setTimeout(() => {
+          document.getElementById('scene-summary').scrollIntoView({ behavior: 'smooth' });
+        }, 450);
+      });
+    }
+
+    // --- 3. Background Petals & Cursor Sparklers Canvas ---
+    const fxCanvas = document.getElementById('fx-canvas');
+    const fxCtx = fxCanvas.getContext('2d');
+    let floatingPetals = [];
+
+    function resizeCanvas() {
+      fxCanvas.width = window.innerWidth;
+      fxCanvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class MarigoldPetal {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * fxCanvas.width;
+        this.y = -20;
+        this.size = Math.random() * 4 + 3;
+        this.speedY = Math.random() * 0.7 + 0.35;
+        this.speedX = (Math.random() - 0.5) * 0.5;
+        this.angle = Math.random() * Math.PI * 2;
+        this.rotSpeed = (Math.random() - 0.5) * 0.02;
+        this.sway = Math.random() * 0.02 + 0.01;
+        this.color = Math.random() > 0.45 ? '#FFD000' : '#FFAA00';
+        this.alpha = Math.random() * 0.55 + 0.25;
+      }
+      update() {
+        this.y += this.speedY;
+        this.angle += this.sway;
+        this.x += Math.sin(this.angle) * 0.7 + this.speedX;
+        if (this.y > fxCanvas.height + 25) this.reset();
+      }
+      draw() {
+        fxCtx.save();
+        fxCtx.translate(this.x, this.y);
+        fxCtx.rotate(this.angle);
+        fxCtx.globalAlpha = this.alpha;
+        fxCtx.beginPath();
+        fxCtx.ellipse(0, 0, this.size, this.size * 0.55, 0, 0, Math.PI * 2);
+        fxCtx.fillStyle = this.color;
+        fxCtx.shadowBlur = 8;
+        fxCtx.shadowColor = this.color;
+        fxCtx.fill();
+        fxCtx.restore();
+      }
+    }
+
+    for (let i = 0; i < 28; i++) {
+      const p = new MarigoldPetal();
+      p.y = Math.random() * window.innerHeight;
+      floatingPetals.push(p);
+    }
+
+    function renderFX() {
+      fxCtx.clearRect(0, 0, fxCanvas.width, fxCanvas.height);
+      floatingPetals.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(renderFX);
+    }
+    renderFX();
+
+    // Mouse Sparkler Glitters
+    window.addEventListener('mousemove', (e) => {
+      if (Math.random() > 0.65) {
+        const star = new MarigoldPetal();
+        star.x = e.clientX + (Math.random() * 16 - 8);
+        star.y = e.clientY + (Math.random() * 16 - 8);
+        star.size = Math.random() * 2.5 + 1.2;
+        star.speedY = (Math.random() - 0.5) * 1.2;
+        star.speedX = (Math.random() - 0.5) * 1.2;
+        star.alpha = 0.85;
+        star.color = '#FFD000';
+        floatingPetals.push(star);
+        if (floatingPetals.length > 50) floatingPetals.shift();
+      }
+    });
+
+    // --- 4. Scroll Reveal via Intersection Observer ---
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-revealed');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal-item, .reveal-scale').forEach(el => {
+      revealObserver.observe(el);
+    });
+
+    // --- 5. Countdown Clock Helper ---
+    function updateCountdown() {
+      const target = new Date('2026-11-02T20:30:00+05:30').getTime();
+      const now = new Date().getTime();
+      const diff = target - now;
+
+      if (diff > 0) {
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+        const cdEl = document.getElementById('c-days');
+        const chEl = document.getElementById('c-hours');
+        const cmEl = document.getElementById('c-mins');
+        const csEl = document.getElementById('c-secs');
+
+        if (cdEl) cdEl.innerText = String(d).padStart(2, '0');
+        if (chEl) chEl.innerText = String(h).padStart(2, '0');
+        if (cmEl) cmEl.innerText = String(m).padStart(2, '0');
+        if (csEl) csEl.innerText = String(s).padStart(2, '0');
+      }
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // --- 6. Copy Link & Calendar Handlers ---
+    function copySceneLink() {
+      navigator.clipboard.writeText(window.location.href);
+      triggerPartyConfetti();
+      alert('Link copied! Group chat mein aag laga do 🔥');
+    }
+
     function addToGoogleCalendar() {
       const title = encodeURIComponent("PLOT X // Dil Waali Diwali Villa Scene 🪔");
       const details = encodeURIComponent("Plot X Diwali Villa Scene at Sector 112 Noida! High-stakes Teen Patti, drinks, hot starters & bangers.");
@@ -937,7 +1195,7 @@
       window.open(url, '_blank');
     }
 
-    // --- 3. Shagun RSVP Form Handler ---
+    // --- 7. Shagun RSVP Form Handler ---
     let selectedGender = "Male (गबरू) 🕺";
 
     document.querySelectorAll('.gender-pill').forEach(btn => {
@@ -972,6 +1230,7 @@
       document.getElementById('villa-rsvp-form').classList.add('hidden');
       document.getElementById('shahi-pass-container').classList.remove('hidden');
 
+      triggerPartyConfetti();
       if (audioCtx && soundPlaying) playPluck(523.25);
     };
 
@@ -980,7 +1239,7 @@
       document.getElementById('villa-rsvp-form').classList.remove('hidden');
     });
 
-    // --- 4. High-Res Visual Pass Download (Canvas Graphic) ---
+    // --- 8. High-Res Visual Pass Download (Canvas Graphic) ---
     document.getElementById('download-shahi-pass').addEventListener('click', () => {
       const guestName = document.getElementById('pass-guest-name').innerText;
       const code = document.getElementById('pass-code').innerText;
@@ -992,22 +1251,18 @@
       c.height = 960;
       const ctx = c.getContext('2d');
 
-      // Base Festive Red background
       ctx.fillStyle = '#E12A2A';
       ctx.fillRect(0, 0, 800, 960);
 
-      // Neo-brutalist solid black border
       ctx.strokeStyle = '#000000';
       ctx.lineWidth = 12;
       ctx.strokeRect(20, 20, 760, 920);
 
-      // Inner Emerald Card Box
       ctx.fillStyle = '#12543A';
       ctx.fillRect(50, 50, 700, 860);
       ctx.lineWidth = 6;
       ctx.strokeRect(50, 50, 700, 860);
 
-      // Yellow Header Bar
       ctx.fillStyle = '#FFD000';
       ctx.fillRect(50, 50, 700, 110);
       ctx.strokeRect(50, 50, 700, 110);
@@ -1016,7 +1271,6 @@
       ctx.font = 'bold 36px sans-serif';
       ctx.fillText('🪔 PLOT X : DIL WAALI DIWALI', 80, 118);
 
-      // Card Content
       ctx.fillStyle = '#FFD000';
       ctx.font = 'bold 24px sans-serif';
       ctx.fillText('OFFICIAL VILLA ENTRY PASS', 80, 220);
@@ -1039,7 +1293,6 @@
       drawRow('WHATSAPP NO:', phone, 590);
       drawRow('VENUE:', 'Sector 112, Noida Private Villa', 700);
 
-      // Stamp Graphic
       ctx.fillStyle = '#FFD000';
       ctx.beginPath();
       ctx.arc(630, 730, 70, 0, Math.PI * 2);
@@ -1055,7 +1308,6 @@
       ctx.fillText('100% APPROVED', 630, 748);
       ctx.textAlign = 'left';
 
-      // Footer note
       ctx.fillStyle = '#FFD000';
       ctx.font = 'bold 18px sans-serif';
       ctx.fillText('Sunday, 2 November 2026 • 8:30 PM Onwards', 80, 830);
@@ -1064,9 +1316,10 @@
       link.download = `PlotX_Diwali_Pass_${guestName.replace(/\s+/g, '_')}.png`;
       link.href = c.toDataURL('image/png');
       link.click();
+      triggerPartyConfetti();
     });
 
-    // --- 5. Live Polaroid Photo Booth ---
+    // --- 9. Live Polaroid Photo Booth ---
     const videoEl = document.getElementById('webcam-video');
     const capturedImg = document.getElementById('captured-img');
     const placeholderEl = document.getElementById('cam-placeholder');
@@ -1153,7 +1406,6 @@
       });
     }
 
-    // Seeded Polaroids
     let guestPolaroids = [
       {
         id: 101,
@@ -1223,6 +1475,7 @@
       if (found) {
         found.likes++;
         renderPolaroidWall();
+        triggerPartyConfetti();
       }
     };
 
@@ -1245,6 +1498,7 @@
       });
 
       renderPolaroidWall();
+      triggerPartyConfetti();
 
       // Reset
       currentImgData = null;
