@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PLOT X // HOST ADMIN PANEL • Guest & Payment Review 🪔</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            festiveRed: '#E12A2A',
+            deepRed: '#B81818',
+            sunYellow: '#FFD000',
+            cardGreen: '#12543A',
+            softCream: '#FFFDF0',
+            pureBlack: '#121212',
+          },
+          fontFamily: {
+            title: ['Outfit', 'Poppins', 'sans-serif'],
+            body: ['Poppins', 'Outfit', 'sans-serif'],
+            mono: ['Space Mono', 'monospace'],
+          },
+          boxShadow: {
+            'pop': '4px 4px 0px #000000',
+            'pop-sm': '2.5px 2.5px 0px #000000',
+            'pop-lg': '6px 6px 0px #000000',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    .btn-pop {
+      transition: all 0.15s ease-in-out;
+      border: 2px solid #000;
+      box-shadow: 3px 3px 0px #000;
+    }
+    .btn-pop:hover {
+      transform: translate(-1.5px, -1.5px);
+      box-shadow: 4.5px 4.5px 0px #000;
+    }
+    .btn-pop:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0px #000;
+    }
+    .card-pop {
+      border: 2px solid #000;
+      box-shadow: 4px 4px 0px #000;
+    }
+  </style>
+</head>
+<body class="bg-festiveRed text-pureBlack min-h-screen font-body p-4 sm:p-8">
+
+  <!-- ================= PASSCODE LOCK SCREEN ================= -->
+  <div id="login-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-pureBlack/90 backdrop-blur-sm">
+    <div class="card-pop bg-softCream max-w-md w-full p-6 sm:p-8 rounded-3xl text-center space-y-5">
+      <div class="inline-block p-3 rounded-2xl bg-sunYellow border-2 border-pureBlack text-3xl">
+        🔒
+      </div>
+      <div>
+        <span class="text-[10px] font-black uppercase tracking-widest text-festiveRed">PLOT X DIWALI SCENE</span>
+        <h2 class="font-title font-black text-3xl text-pureBlack uppercase">HOST ADMIN ACCESS</h2>
+        <p class="text-xs text-pureBlack/70 font-semibold mt-1">
+          Guest entries aur payment screenshots dekhne ke liye Passcode enter karein:
+        </p>
+      </div>
+
+      <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+        <div>
+          <input type="password" id="admin-passcode" required placeholder="Enter Host Passcode (default: diwali2026)" class="w-full px-4 py-3 text-center rounded-xl border-2 border-pureBlack font-mono font-black text-sm tracking-widest focus:outline-none focus:bg-sunYellow/20">
+        </div>
+        <button type="submit" class="btn-pop w-full py-3.5 rounded-full bg-sunYellow text-pureBlack font-black text-xs uppercase tracking-wider">
+          UNLOCK ADMIN DASHBOARD 🚀
+        </button>
+        <p class="text-[11px] text-pureBlack/60 font-semibold">
+          Default Passcode: <code class="bg-sunYellow/30 px-1.5 py-0.5 rounded font-mono font-bold">diwali2026</code>
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= MAIN ADMIN CONTAINER ================= -->
+  <div id="admin-dashboard" class="max-w-7xl mx-auto space-y-6 hidden">
+    
+    <!-- Header Bar -->
+    <header class="card-pop bg-softCream p-5 sm:p-6 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <a href="./index.html" class="p-2.5 rounded-xl bg-sunYellow border-2 border-pureBlack font-black text-xs hover:bg-white transition-colors" title="Go to Website">
+          🏠
+        </a>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-black bg-festiveRed text-softCream px-2 py-0.5 rounded-md uppercase">PLOT X // HOST</span>
+            <span class="text-[10px] font-mono font-bold bg-cardGreen text-sunYellow px-2 py-0.5 rounded-md flex items-center gap-1">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> LIVE SUPABASE SYNC
+            </span>
+          </div>
+          <h1 class="font-title font-black text-2xl sm:text-3xl text-pureBlack uppercase tracking-tight">
+            RSVP & PAYMENT REVIEW PANEL
+          </h1>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-wrap items-center gap-2.5">
+        <button onclick="fetchRsvps()" class="btn-pop px-4 py-2.5 rounded-xl bg-white text-pureBlack font-black text-xs uppercase flex items-center gap-1.5">
+          <span>🔄</span> REFRESH
+        </button>
+        <button onclick="exportToCSV()" class="btn-pop px-4 py-2.5 rounded-xl bg-cardGreen text-sunYellow font-black text-xs uppercase flex items-center gap-1.5">
+          <span>📊</span> EXPORT CSV
+        </button>
+        <button onclick="adminLogout()" class="btn-pop px-3.5 py-2.5 rounded-xl bg-festiveRed text-softCream font-black text-xs uppercase" title="Lock Dashboard">
+          🔒 LOCK
+        </button>
+      </div>
+    </header>
+
+    <!-- Metrics Strip -->
+    <div class="grid grid-cols-2 lg:grid-cols-5 gap-3.5">
+      
+      <!-- Card 1: Total RSVPs -->
+      <div class="card-pop p-4 rounded-2xl bg-sunYellow text-pureBlack text-center">
+        <span class="text-[10px] font-black uppercase tracking-wider block text-pureBlack/80">TOTAL GUESTS</span>
+        <div class="flex items-baseline justify-center gap-1 my-1">
+          <span id="metric-total-count" class="font-title font-black text-3xl sm:text-4xl">0</span>
+          <span class="font-bold text-xs text-pureBlack/70">/ 30 Cap</span>
+        </div>
+        <span class="text-[10px] font-bold block bg-white/70 py-0.5 rounded-md border border-pureBlack/20">Headcount</span>
+      </div>
+
+      <!-- Card 2: Estimated Revenue -->
+      <div class="card-pop p-4 rounded-2xl bg-cardGreen text-softCream text-center">
+        <span class="text-[10px] font-black uppercase tracking-wider block text-sunYellow">TOTAL COLLECTION</span>
+        <div class="flex items-baseline justify-center gap-1 my-1">
+          <span id="metric-total-revenue" class="font-title font-black text-2xl sm:text-3xl text-sunYellow">₹0</span>
+        </div>
+        <span class="text-[10px] font-bold block bg-pureBlack/30 text-sunYellow py-0.5 rounded-md">From Passes</span>
+      </div>
+
+      <!-- Card 3: Stag Boys -->
+      <div class="card-pop p-4 rounded-2xl bg-white text-pureBlack text-center">
+        <span class="text-[10px] font-black uppercase tracking-wider block text-pureBlack/80">🕺 STAG BOYS</span>
+        <div class="my-1">
+          <span id="metric-stag-boys" class="font-title font-black text-3xl text-pureBlack">0</span>
+        </div>
+        <span class="text-[10px] font-bold block bg-sunYellow/30 text-pureBlack py-0.5 rounded-md">₹1,499 Each</span>
+      </div>
+
+      <!-- Card 4: Stag Girls -->
+      <div class="card-pop p-4 rounded-2xl bg-softCream text-pureBlack text-center">
+        <span class="text-[10px] font-black uppercase tracking-wider block text-festiveRed">💃 STAG GIRLS</span>
+        <div class="my-1">
+          <span id="metric-stag-girls" class="font-title font-black text-3xl text-festiveRed">0</span>
+        </div>
+        <span class="text-[10px] font-bold block bg-festiveRed/10 text-festiveRed py-0.5 rounded-md">₹1,399 Each</span>
+      </div>
+
+      <!-- Card 5: Couples -->
+      <div class="card-pop p-4 rounded-2xl bg-white text-pureBlack text-center col-span-2 lg:col-span-1">
+        <span class="text-[10px] font-black uppercase tracking-wider block text-cardGreen">👩‍❤️‍👨 COUPLES</span>
+        <div class="my-1">
+          <span id="metric-couples" class="font-title font-black text-3xl text-cardGreen">0</span>
+        </div>
+        <span class="text-[10px] font-bold block bg-cardGreen/10 text-cardGreen py-0.5 rounded-md">₹2,399 Each</span>
+      </div>
+
+    </div>
+
+    <!-- Search & Filter Controls -->
+    <div class="card-pop bg-softCream p-4 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="relative w-full sm:w-80">
+        <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs">🔍</span>
+        <input type="text" id="search-input" oninput="applyFilters()" placeholder="Search name, phone, insta..." class="w-full pl-9 pr-4 py-2.5 rounded-xl border-2 border-pureBlack text-xs font-bold focus:outline-none focus:bg-sunYellow/20">
+      </div>
+
+      <!-- Filter Buttons -->
+      <div class="flex items-center gap-1.5 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0">
+        <button onclick="filterCategory('ALL')" class="cat-filter-btn btn-pop px-3 py-1.5 rounded-lg bg-sunYellow text-pureBlack text-xs font-black">
+          ALL (<span id="count-all">0</span>)
+        </button>
+        <button onclick="filterCategory('Male')" class="cat-filter-btn btn-pop px-3 py-1.5 rounded-lg bg-white text-pureBlack text-xs font-bold">
+          STAG BOY (<span id="count-male">0</span>)
+        </button>
+        <button onclick="filterCategory('Female')" class="cat-filter-btn btn-pop px-3 py-1.5 rounded-lg bg-white text-pureBlack text-xs font-bold">
+          STAG GIRL (<span id="count-female">0</span>)
+        </button>
+        <button onclick="filterCategory('Couple')" class="cat-filter-btn btn-pop px-3 py-1.5 rounded-lg bg-white text-pureBlack text-xs font-bold">
+          COUPLE (<span id="count-couple">0</span>)
+        </button>
+      </div>
+    </div>
+
+    <!-- Entries Data Section -->
+    <div class="card-pop bg-softCream rounded-3xl p-5 sm:p-6 overflow-hidden">
+      
+      <div class="flex items-center justify-between pb-4 border-b-2 border-pureBlack/15 mb-4">
+        <div>
+          <h3 class="font-title font-black text-xl text-pureBlack uppercase">CONFIRMED ENTRIES</h3>
+          <p class="text-xs text-pureBlack/70 font-semibold">Click on screenshot thumbnail to verify payment receipt / UTR.</p>
+        </div>
+        <span id="filtered-records-text" class="text-xs font-mono font-bold bg-sunYellow px-2.5 py-1 rounded-md border border-pureBlack">
+          Showing 0 entries
+        </span>
+      </div>
+
+      <!-- Empty State -->
+      <div id="empty-state" class="hidden text-center py-12 space-y-3">
+        <span class="text-5xl block">📭</span>
+        <h4 class="font-title font-black text-xl text-pureBlack">ABHI TAK KOI ENTRY NAHI AAYI</h4>
+        <p class="text-xs text-pureBlack/70 font-medium max-w-md mx-auto">
+          Website pe visitors jab Shagun RSVP form bhar kar submit karenge, unki details aur payment screenshot yahan real-time aayenge.
+        </p>
+      </div>
+
+      <!-- Loading State -->
+      <div id="loading-state" class="text-center py-12 space-y-3">
+        <div class="w-10 h-10 border-4 border-festiveRed border-t-sunYellow rounded-full animate-spin mx-auto"></div>
+        <p class="font-title font-black text-base text-pureBlack uppercase">Supabase se data load ho raha hai...</p>
+      </div>
+
+      <!-- Responsive Table for Desktop -->
+      <div id="table-container" class="hidden overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="border-b-2 border-pureBlack bg-sunYellow/30 text-[11px] font-black uppercase text-pureBlack tracking-wider">
+              <th class="p-3">GUEST & INSTA</th>
+              <th class="p-3">PASS TYPE & PRICE</th>
+              <th class="p-3">WHATSAPP</th>
+              <th class="p-3">PAYMENT RECEIPT</th>
+              <th class="p-3">TAASH VIBE</th>
+              <th class="p-3">SUBMITTED AT</th>
+              <th class="p-3 text-right">ACTION</th>
+            </tr>
+          </thead>
+          <tbody id="rsvps-tbody" class="divide-y divide-pureBlack/15 text-xs font-medium">
+            <!-- Dynamic Rows -->
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ================= LIGHTBOX MODAL FOR PAYMENT SCREENSHOT ================= -->
+  <div id="screenshot-lightbox" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 bg-pureBlack/85 backdrop-blur-sm animate-fadeIn">
+    <div class="relative max-w-2xl w-full bg-softCream border-4 border-pureBlack rounded-3xl p-5 shadow-pop-lg max-h-[95vh] overflow-y-auto space-y-4">
+      
+      <!-- Close Button -->
+      <button onclick="closeLightbox()" class="absolute top-3.5 right-3.5 w-9 h-9 rounded-full bg-festiveRed text-softCream font-black border-2 border-pureBlack flex items-center justify-center hover:scale-110 transition-transform shadow-pop-sm">
+        ✕
+      </button>
+
+      <div>
+        <span class="text-[10px] font-black uppercase tracking-wider text-festiveRed block">VERIFY TRANSACTION & UTR</span>
+        <h3 id="lightbox-guest-name" class="font-title font-black text-2xl text-pureBlack uppercase">PAYMENT RECEIPT</h3>
+        <p id="lightbox-guest-details" class="text-xs text-pureBlack/70 font-semibold"></p>
+      </div>
+
+      <!-- Screenshot Full Preview -->
+      <div class="rounded-2xl border-3 border-pureBlack bg-pureBlack flex justify-center overflow-hidden max-h-[65vh]">
+        <img id="lightbox-img" src="" alt="Payment Screenshot" class="object-contain max-h-[65vh] w-auto">
+      </div>
+
+      <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+        <a id="lightbox-download-link" href="#" download="Payment_Receipt.jpg" class="btn-pop px-4 py-2.5 rounded-xl bg-sunYellow text-pureBlack font-black text-xs uppercase flex items-center gap-1.5">
+          <span>💾</span> DOWNLOAD RECEIPT
+        </a>
+        <button onclick="closeLightbox()" class="btn-pop px-4 py-2.5 rounded-xl bg-white text-pureBlack font-black text-xs uppercase">
+          CLOSE ✕
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ================= JAVASCRIPT LOGIC ================= -->
+  <script>
+    const SUPABASE_PROJECT_URL = 'https://eitlezsgeqojhuqtkubn.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVpdGxlenNnZXFvamh1cXRrdWJuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI4NTYwMzEsImV4cCI6MjEwODQzMjAzMX0.1ac00TTMhzQ4R9ZCXt9a1Gdlf0Frd-mVn-c8wZuWyiM';
+
+    const supabase = (window.supabase && window.supabase.createClient)
+      ? window.supabase.createClient(SUPABASE_PROJECT_URL, SUPABASE_ANON_KEY)
+      : null;
+
+    let allRsvps = [];
+    let currentCategoryFilter = 'ALL';
+    const ADMIN_PASSCODE = 'diwali2026';
+
+    // Check localStorage login session
+    if (localStorage.getItem('plotx_admin_auth') === 'true') {
+      unlockDashboard();
+    }
+
+    function handleAdminLogin(e) {
+      e.preventDefault();
+      const entered = document.getElementById('admin-passcode').value.trim();
+      if (entered === ADMIN_PASSCODE) {
+        localStorage.setItem('plotx_admin_auth', 'true');
+        unlockDashboard();
+        triggerPartyConfetti();
+      } else {
+        alert("Galat passcode! Kripya sahi passcode daalein.");
+      }
+    }
+
+    function unlockDashboard() {
+      document.getElementById('login-modal').classList.add('hidden');
+      document.getElementById('admin-dashboard').classList.remove('hidden');
+      fetchRsvps();
+    }
+
+    function adminLogout() {
+      localStorage.removeItem('plotx_admin_auth');
+      location.reload();
+    }
+
+    // Fetch RSVPs from Supabase
+    async function fetchRsvps() {
+      const loadingEl = document.getElementById('loading-state');
+      const tableEl = document.getElementById('table-container');
+      const emptyEl = document.getElementById('empty-state');
+
+      loadingEl.classList.remove('hidden');
+      tableEl.classList.add('hidden');
+      emptyEl.classList.add('hidden');
+
+      if (!supabase) {
+        alert('Supabase client failed to load.');
+        return;
+      }
+
+      try {
+        const { data, error } = await supabase
+          .from('rsvps')
+          .select('*')
+          .order('created_at', { ascending: false });
+
+        loadingEl.classList.add('hidden');
+
+        if (error) {
+          console.error(error);
+          emptyEl.classList.remove('hidden');
+          emptyEl.querySelector('p').innerText = "Table check karein: " + error.message;
+          return;
+        }
+
+        allRsvps = data || [];
+        updateMetrics(allRsvps);
+        applyFilters();
+
+      } catch (err) {
+        console.error(err);
+        loadingEl.classList.add('hidden');
+        emptyEl.classList.remove('hidden');
+      }
+    }
+
+    // Update Summary Metrics
+    function updateMetrics(list) {
+      document.getElementById('metric-total-count').innerText = list.length;
+      
+      let revenue = 0;
+      let stagBoys = 0;
+      let stagGirls = 0;
+      let couples = 0;
+
+      list.forEach(item => {
+        const cat = (item.category || '').toLowerCase();
+        const priceNum = parseInt((item.price || '').replace(/[^0-9]/g, '')) || 0;
+
+        if (cat.includes('male') || cat.includes('boy') || cat.includes('गबरू')) {
+          stagBoys++;
+          revenue += (priceNum || 1499);
+        } else if (cat.includes('female') || cat.includes('girl') || cat.includes('पटाखा')) {
+          stagGirls++;
+          revenue += (priceNum || 1399);
+        } else if (cat.includes('couple') || cat.includes('जोड़ी')) {
+          couples++;
+          revenue += (priceNum || 2399);
+        } else {
+          revenue += priceNum;
+        }
+      });
+
+      document.getElementById('metric-total-revenue').innerText = '₹' + revenue.toLocaleString('en-IN');
+      document.getElementById('metric-stag-boys').innerText = stagBoys;
+      document.getElementById('metric-stag-girls').innerText = stagGirls;
+      document.getElementById('metric-couples').innerText = couples;
+
+      document.getElementById('count-all').innerText = list.length;
+      document.getElementById('count-male').innerText = stagBoys;
+      document.getElementById('count-female').innerText = stagGirls;
+      document.getElementById('count-couple').innerText = couples;
+    }
+
+    // Filter Buttons
+    function filterCategory(cat) {
+      currentCategoryFilter = cat;
+      document.querySelectorAll('.cat-filter-btn').forEach(btn => {
+        btn.classList.remove('bg-sunYellow');
+        btn.classList.add('bg-white');
+      });
+      event.target.closest('.cat-filter-btn').classList.remove('bg-white');
+      event.target.closest('.cat-filter-btn').classList.add('bg-sunYellow');
+      applyFilters();
+    }
+
+    // Filter logic
+    function applyFilters() {
+      const searchTerm = document.getElementById('search-input').value.toLowerCase().trim();
+      
+      const filtered = allRsvps.filter(item => {
+        const matchesCategory = (currentCategoryFilter === 'ALL') ||
+          (currentCategoryFilter === 'Male' && (item.category || '').toLowerCase().includes('male')) ||
+          (currentCategoryFilter === 'Female' && (item.category || '').toLowerCase().includes('female')) ||
+          (currentCategoryFilter === 'Couple' && (item.category || '').toLowerCase().includes('couple'));
+
+        const matchesSearch = !searchTerm ||
+          (item.name || '').toLowerCase().includes(searchTerm) ||
+          (item.phone || '').toLowerCase().includes(searchTerm) ||
+          (item.instagram || '').toLowerCase().includes(searchTerm) ||
+          (item.pass_code || '').toLowerCase().includes(searchTerm);
+
+        return matchesCategory && matchesSearch;
+      });
+
+      renderTable(filtered);
+    }
+
+    // Render Table Rows
+    function renderTable(list) {
+      const tbody = document.getElementById('rsvps-tbody');
+      const tableEl = document.getElementById('table-container');
+      const emptyEl = document.getElementById('empty-state');
+      const countText = document.getElementById('filtered-records-text');
+
+      countText.innerText = `Showing ${list.length} of ${allRsvps.length} entries`;
+
+      if (list.length === 0) {
+        tableEl.classList.add('hidden');
+        emptyEl.classList.remove('hidden');
+        return;
+      }
+
+      emptyEl.classList.add('hidden');
+      tableEl.classList.remove('hidden');
+
+      tbody.innerHTML = list.map((item, idx) => {
+        const createdDate = item.created_at ? new Date(item.created_at).toLocaleString('en-IN', {
+          day: 'numeric',
+          month: 'short',
+          hour: '2-digit',
+          minute: '2-digit'
+        }) : 'N/A';
+
+        const cleanPhone = (item.phone || '').replace(/[^0-9]/g, '');
+        const instaClean = (item.instagram || '').replace('@', '').trim();
+        const instaUrl = instaClean ? `https://instagram.com/${instaClean}` : '#';
+
+        // Pre-filled WhatsApp Approval Message
+        const waApprovalMsg = encodeURIComponent(
+          `Hi ${item.name}! 🪔\n\nAapka PLOT X // DIL WAALI DIWALI Pass (${item.pass_code || '#PX'}) confirm ho gaya hai! 🎉\n\n` +
+          `🗓️ Date: Sunday, 2 Nov 2026 (8:30 PM)\n` +
+          `📍 Venue: Sector 112, Noida Private Villa\n` +
+          `📌 Google Maps Pin: https://maps.google.com/?q=Sector+112+Noida\n\n` +
+          `Scene set hai, see you on the dance floor & Teen Patti table! 🕺💃`
+        );
+        const waLink = `https://wa.me/91${cleanPhone}?text=${waApprovalMsg}`;
+
+        // Screenshot thumbnail or placeholder
+        const hasScreenshot = item.payment_screenshot && item.payment_screenshot.length > 50;
+        const screenshotThumbnail = hasScreenshot
+          ? `<button onclick="openLightbox(${idx})" class="group relative rounded-xl border-2 border-pureBlack overflow-hidden w-14 h-16 bg-pureBlack shadow-pop-sm block focus:outline-none">
+              <img src="${item.payment_screenshot}" alt="Receipt" class="w-full h-full object-cover group-hover:scale-110 transition-transform">
+              <span class="absolute inset-0 bg-pureBlack/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity text-white text-[10px] font-black">
+                ZOOM
+              </span>
+            </button>`
+          : `<span class="inline-block px-2.5 py-1 rounded bg-pureBlack/10 text-pureBlack/60 font-mono text-[10px] font-bold">No receipt</span>`;
+
+        return `
+          <tr class="hover:bg-sunYellow/15 transition-colors">
+            <!-- Guest & Insta -->
+            <td class="p-3">
+              <div class="flex items-center gap-2">
+                <span class="w-7 h-7 rounded-full bg-festiveRed text-softCream font-black flex items-center justify-center text-xs border border-pureBlack">
+                  ${(item.name || 'G')[0].toUpperCase()}
+                </span>
+                <div>
+                  <div class="font-black text-sm text-pureBlack flex items-center gap-1.5">
+                    <span>${item.name || 'Guest'}</span>
+                    <span class="text-[10px] font-mono px-1.5 py-0.2 rounded bg-sunYellow border border-pureBlack">${item.pass_code || '#PX'}</span>
+                  </div>
+                  ${instaClean ? `<a href="${instaUrl}" target="_blank" class="text-xs font-bold text-festiveRed hover:underline flex items-center gap-1">@${instaClean} ↗</a>` : '<span class="text-[10px] text-pureBlack/50">No Insta</span>'}
+                </div>
+              </div>
+            </td>
+
+            <!-- Pass Type & Price -->
+            <td class="p-3">
+              <span class="font-black text-xs text-pureBlack block">${item.category || 'Pass'}</span>
+              <span class="font-title font-black text-xs text-festiveRed bg-festiveRed/10 px-2 py-0.5 rounded border border-festiveRed/30 inline-block mt-0.5">${item.price || '₹1,499'}</span>
+            </td>
+
+            <!-- WhatsApp Phone -->
+            <td class="p-3">
+              <a href="https://wa.me/91${cleanPhone}" target="_blank" class="font-mono font-bold text-xs text-pureBlack hover:text-cardGreen hover:underline flex items-center gap-1">
+                <span>💬</span> +91 ${cleanPhone}
+              </a>
+            </td>
+
+            <!-- Screenshot Thumbnail -->
+            <td class="p-3">
+              ${screenshotThumbnail}
+            </td>
+
+            <!-- Taash Vibe -->
+            <td class="p-3 text-[11px] text-pureBlack/80 font-bold max-w-[160px] truncate" title="${item.party_vibe || 'Diwali Party'}">
+              ${item.party_vibe || 'Diwali Vibe'}
+            </td>
+
+            <!-- Timestamp -->
+            <td class="p-3 text-[11px] font-mono text-pureBlack/70">
+              ${createdDate}
+            </td>
+
+            <!-- Action: WhatsApp Approval -->
+            <td class="p-3 text-right">
+              <a href="${waLink}" target="_blank" class="btn-pop inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cardGreen text-sunYellow text-[11px] font-black uppercase tracking-wider">
+                <span>📲</span> APPROVE & PIN
+              </a>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // Open Lightbox for Payment Screenshot
+    window.openLightbox = function(index) {
+      const item = allRsvps[index];
+      if (!item || !item.payment_screenshot) return;
+
+      document.getElementById('lightbox-guest-name').innerText = (item.name || 'GUEST') + "'S PAYMENT RECEIPT";
+      document.getElementById('lightbox-guest-details').innerText = 
+        `Pass Code: ${item.pass_code || '#PX'} • ${item.category || 'Pass'} (${item.price || 'Cover'}) • WhatsApp: +91 ${item.phone || ''}`;
+      
+      const img = document.getElementById('lightbox-img');
+      img.src = item.payment_screenshot;
+
+      const downloadLink = document.getElementById('lightbox-download-link');
+      downloadLink.href = item.payment_screenshot;
+      downloadLink.download = `Receipt_${(item.name || 'guest').replace(/\s+/g, '_')}_${item.pass_code || 'PX'}.jpg`;
+
+      document.getElementById('screenshot-lightbox').classList.remove('hidden');
+      triggerPartyConfetti();
+    };
+
+    window.closeLightbox = function() {
+      document.getElementById('screenshot-lightbox').classList.add('hidden');
+    };
+
+    // Export RSVPs to CSV
+    window.exportToCSV = function() {
+      if (!allRsvps.length) {
+        alert("Export karne ke liye koi data nahi hai!");
+        return;
+      }
+
+      const headers = ["Pass Code", "Name", "Instagram", "Category", "Price", "WhatsApp Phone", "Party Vibe", "Submitted At", "Has Screenshot"];
+      const rows = allRsvps.map(item => [
+        `"${item.pass_code || ''}"`,
+        `"${item.name || ''}"`,
+        `"${item.instagram || ''}"`,
+        `"${item.category || ''}"`,
+        `"${item.price || ''}"`,
+        `"+91 ${item.phone || ''}"`,
+        `"${item.party_vibe || ''}"`,
+        `"${item.created_at || ''}"`,
+        `"${item.payment_screenshot ? 'YES' : 'NO'}"`
+      ]);
+
+      const csvContent = "data:text/csv;charset=utf-8," + [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement('a');
+      link.setAttribute('href', encodedUri);
+      link.setAttribute('download', `PlotX_Diwali_RSVP_List_${new Date().toISOString().slice(0,10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      triggerPartyConfetti();
+    };
+  </script>
+</body>
+</html>
