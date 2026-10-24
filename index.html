@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PLOT X // दिवाली की रात • The Diwali Villa Scene 🪔✨</title>
+  <title>PLOT X // DIL WAALI DIWALI • Scene Set Hai! 🪔✨</title>
   
-  <!-- Google Fonts: Festive Playfair, Modern Outfit, Joyful Yatra One & Clean Poppins -->
+  <!-- Google Fonts: Punchy Condensed Sans, Playful Retro Italic Serif & Clean Poppins -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700&family=Poppins:wght@400;500;600;700;800&family=Yatra+One&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Poppins:wght@400;500;600;700;800;900&family=Yatra+One&display=swap" rel="stylesheet">
   
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -17,32 +17,27 @@
       theme: {
         extend: {
           colors: {
-            midnight: '#0b0217',     // Deep Royal Midnight Indigo-Plum base
-            velvet: '#140529',       // Deep royal violet
-            mahogany: '#200a3b',     // Jewel-tone card surface
-            plum: '#2d0f4d',         // Rich festive plum
-            raniPink: '#ff007f',     // Glowing Rani Hot Pink (Festive Bollywood)
-            terracotta: '#d90429',   // Vibrant celebration crimson
-            marigold: '#ff7b00',     // Warm Marigold Tangerine
-            amberFlame: '#ffaa00',   // Bright festive amber
-            diyaGold: '#ffd166',     // Sparkling warm gold
-            peacock: '#00f5d4',      // Vibrant peacock teal
-            emeraldGlow: '#10b981',  // Festive emerald
-            cream: '#ffffff',        // Crisp luminous white
-            sand: '#f5e9f7',         // Clean soft text
+            festiveRed: '#E12A2A',    // Signature bold festive vermilion red
+            deepRed: '#B81818',       // Rich darker red
+            sunYellow: '#FFD000',     // Bright poppy marigold yellow
+            warmAmber: '#FF9900',     // Warm festive amber
+            cardGreen: '#12543A',     // Emerald pop green summary card
+            darkGreen: '#0B3826',     // Deep green border
+            gulabiPink: '#FF007F',    // Electric Gulabi Hot Pink
+            softCream: '#FFFDF0',     // Warm vintage cream white
+            pureBlack: '#121212',     // Neo-brutalist ink black
           },
           fontFamily: {
-            display: ['Playfair Display', 'serif'],
-            hindiDisplay: ['Yatra One', 'Poppins', 'sans-serif'],
-            hindiSans: ['Poppins', 'sans-serif'],
-            sans: ['Outfit', 'Poppins', 'sans-serif'],
+            title: ['Outfit', 'Poppins', 'sans-serif'],
+            script: ['Playfair Display', 'serif'],
+            hindi: ['Yatra One', 'sans-serif'],
+            body: ['Poppins', 'Outfit', 'sans-serif'],
           },
           boxShadow: {
-            'candle': '0 10px 40px -10px rgba(255, 123, 0, 0.45)',
-            'gold-glow': '0 0 35px -5px rgba(255, 209, 102, 0.5)',
-            'pink-glow': '0 0 35px -5px rgba(255, 0, 127, 0.5)',
-            'teal-glow': '0 0 30px -5px rgba(0, 245, 212, 0.45)',
-            'festive-card': '0 20px 45px -10px rgba(11, 2, 23, 0.8), 0 0 20px -5px rgba(255, 0, 127, 0.15)',
+            'pop': '4px 4px 0px #000000',
+            'pop-sm': '2.5px 2.5px 0px #000000',
+            'pop-lg': '6px 6px 0px #000000',
+            'pop-hover': '7px 7px 0px #000000',
           }
         }
       }
@@ -51,1077 +46,908 @@
 
   <style>
     body {
-      background-color: #0b0217;
-      color: #fffdfa;
-      font-family: 'Outfit', sans-serif;
+      background-color: #E12A2A;
+      color: #FFFDF0;
+      font-family: 'Poppins', sans-serif;
       overflow-x: hidden;
-      background-image: 
-        radial-gradient(circle at 10% 10%, rgba(255, 0, 127, 0.26) 0%, transparent 42%),
-        radial-gradient(circle at 90% 15%, rgba(255, 123, 0, 0.30) 0%, transparent 45%),
-        radial-gradient(circle at 50% 40%, rgba(0, 245, 212, 0.15) 0%, transparent 48%),
-        radial-gradient(circle at 15% 70%, rgba(255, 209, 102, 0.22) 0%, transparent 45%),
-        radial-gradient(circle at 85% 85%, rgba(255, 0, 127, 0.24) 0%, transparent 50%);
     }
 
-    /* Soft Festive Grain & Warmth */
-    .paper-grain {
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
+    /* Chunky Neo-Brutalist Pop Button */
+    .btn-pop {
+      border: 2px solid #000;
+      box-shadow: 4px 4px 0px #000;
+      transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .btn-pop:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0px #000;
+    }
+    .btn-pop:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0px #000;
     }
 
-    /* Vibrant Celebration Gradient Text */
-    .gold-gradient-text {
-      background: linear-gradient(135deg, #FFFFFF 0%, #FFD166 28%, #FFAA00 55%, #FF007F 85%, #FFFFFF 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    /* Pop Card */
+    .card-pop {
+      border: 2.5px solid #000;
+      box-shadow: 5px 5px 0px #000;
     }
 
-    .festive-gradient-text {
-      background: linear-gradient(135deg, #FFD166 0%, #FF7B00 45%, #FF007F 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    /* Rotating Sunburst Ray Background behind Diya */
+    @keyframes spinSlow {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .sunburst-spin {
+      animation: spinSlow 38s linear infinite;
     }
 
-    /* Shagun Card Surface - Vibrant & Luxurious */
-    .shagun-envelope {
-      background: linear-gradient(145deg, rgba(38, 12, 68, 0.95) 0%, rgba(20, 5, 40, 0.98) 100%);
-      border: 2px solid rgba(255, 209, 102, 0.45);
-      box-shadow: 0 15px 45px -10px rgba(255, 0, 127, 0.35), 0 0 35px -5px rgba(255, 209, 102, 0.25);
+    /* Diya Flame Bounce & Glow */
+    @keyframes flameGlow {
+      0%, 100% { transform: scale(1) rotate(-1deg); filter: drop-shadow(0 0 10px #FFD000) drop-shadow(0 0 20px #FF9900); }
+      50% { transform: scale(1.14) rotate(2deg); filter: drop-shadow(0 0 16px #FFD000) drop-shadow(0 0 28px #FF007F); }
+    }
+    .diya-flame-anim {
+      animation: flameGlow 2.2s ease-in-out infinite;
+      transform-origin: bottom center;
     }
 
-    /* Frosted Glass Festive Cards */
-    .festive-card {
-      background: rgba(27, 9, 48, 0.82);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border: 1px solid rgba(255, 209, 102, 0.28);
-      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    /* Retro Circular Stamp */
+    @keyframes stampWiggle {
+      0%, 100% { transform: rotate(-8deg); }
+      50% { transform: rotate(-5deg) scale(1.04); }
     }
-    .festive-card:hover {
-      border-color: rgba(255, 123, 0, 0.65);
-      box-shadow: 0 18px 45px -10px rgba(255, 0, 127, 0.35), 0 0 25px -5px rgba(255, 209, 102, 0.3);
-      transform: translateY(-5px);
+    .retro-stamp {
+      animation: stampWiggle 4s ease-in-out infinite;
     }
 
-    /* Auto-Morphing Text Transition */
-    .morph-text {
-      display: inline-block;
-      transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1), transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), filter 0.35s ease;
+    /* Marigold Garland Border */
+    .marigold-corner {
+      filter: drop-shadow(2px 2px 0px #000);
     }
-    .morph-fade-out {
-      opacity: 0;
-      transform: translateY(6px) scale(0.98);
-      filter: blur(3px);
-    }
-    .morph-fade-in {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-      filter: blur(0px);
-    }
-
-    /* Top Infinite Marquee */
-    .marquee-track {
-      display: flex;
-      width: max-content;
-      animation: scrollMarquee 26s linear infinite;
-    }
-    .marquee-track:hover {
-      animation-play-state: paused;
-    }
-    @keyframes scrollMarquee {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-
-    /* Polaroid Frame */
-    .polaroid-frame {
-      background: #fffdfa;
-      color: #120524;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-    .polaroid-frame:hover {
-      transform: translateY(-8px) rotate(1.2deg);
-      box-shadow: 0 22px 45px rgba(0, 0, 0, 0.65), 0 0 30px rgba(255, 0, 127, 0.35);
-    }
-
-    /* Glowing Diya Flame Flicker */
-    @keyframes flameFlicker {
-      0%, 100% { transform: scale(1) rotate(-2deg); filter: drop-shadow(0 0 10px #ff7b00) drop-shadow(0 0 18px #ff007f); }
-      50% { transform: scale(1.15) rotate(2deg); filter: drop-shadow(0 0 15px #ffd166) drop-shadow(0 0 24px #ff7b00); }
-    }
-    .diya-flame {
-      display: inline-block;
-      animation: flameFlicker 2s ease-in-out infinite;
-    }
-
-    /* Fairy Lights Twinkle */
-    @keyframes fairyTwinkle {
-      0%, 100% { opacity: 0.95; filter: drop-shadow(0 0 8px currentColor); }
-      50% { opacity: 0.4; filter: drop-shadow(0 0 2px currentColor); }
-    }
-    .bulb-1 { animation: fairyTwinkle 2.1s ease-in-out infinite; }
-    .bulb-2 { animation: fairyTwinkle 1.7s ease-in-out 0.4s infinite; }
-    .bulb-3 { animation: fairyTwinkle 2.4s ease-in-out 0.8s infinite; }
-    .bulb-4 { animation: fairyTwinkle 1.9s ease-in-out 1.2s infinite; }
-    .bulb-5 { animation: fairyTwinkle 2.3s ease-in-out 1.6s infinite; }
 
     /* Custom Scrollbar */
     ::-webkit-scrollbar {
-      width: 8px;
+      width: 10px;
     }
     ::-webkit-scrollbar-track {
-      background: #0b0217;
+      background: #B81818;
     }
     ::-webkit-scrollbar-thumb {
-      background: linear-gradient(180deg, #ff007f 0%, #ff7b00 50%, #ffd166 100%);
-      border-radius: 4px;
+      background: #FFD000;
+      border: 2px solid #000;
+      border-radius: 0;
     }
   </style>
 </head>
 
-<body class="relative min-h-screen selection:bg-raniPink selection:text-white">
-  <!-- Floating Colorful Diya Lanterns, Marigold Petals & Sparklers Canvas -->
-  <canvas id="diya-canvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
-  <div class="fixed inset-0 paper-grain pointer-events-none z-0"></div>
+<body class="min-h-screen selection:bg-sunYellow selection:text-pureBlack">
 
-  <!-- FESTIVE FAIRY STRING LIGHTS (दिवाली की लड़ियाँ) HANGING ACROSS TOP -->
-  <div class="fixed top-0 left-0 right-0 z-40 pointer-events-none overflow-hidden h-9 flex justify-around items-start px-2 sm:px-6">
-    <!-- Fairy Light Wire with Glowing Bulbs -->
-    <div class="w-full flex justify-between items-start opacity-90">
-      <span class="w-3.5 h-3.5 rounded-full bg-amberFlame text-amberFlame bulb-1 shadow-[0_0_12px_#ffaa00]"></span>
-      <span class="w-3.5 h-3.5 rounded-full bg-raniPink text-raniPink bulb-2 shadow-[0_0_12px_#ff007f]"></span>
-      <span class="w-3.5 h-3.5 rounded-full bg-peacock text-peacock bulb-3 shadow-[0_0_12px_#00f5d4]"></span>
-      <span class="w-3.5 h-3.5 rounded-full bg-diyaGold text-diyaGold bulb-4 shadow-[0_0_12px_#ffd166]"></span>
-      <span class="w-3.5 h-3.5 rounded-full bg-marigold text-marigold bulb-5 shadow-[0_0_12px_#ff7b00]"></span>
-      <span class="w-3.5 h-3.5 rounded-full bg-raniPink text-raniPink bulb-1 shadow-[0_0_12px_#ff007f]"></span>
-      <span class="w-3.5 h-3.5 rounded-full bg-peacock text-peacock bulb-2 shadow-[0_0_12px_#00f5d4]"></span>
-      <span class="w-3.5 h-3.5 rounded-full bg-amberFlame text-amberFlame bulb-3 shadow-[0_0_12px_#ffaa00]"></span>
-      <span class="w-3.5 h-3.5 rounded-full bg-diyaGold text-diyaGold bulb-4 shadow-[0_0_12px_#ffd166]"></span>
-      <span class="w-3.5 h-3.5 rounded-full bg-raniPink text-raniPink bulb-5 shadow-[0_0_12px_#ff007f]"></span>
-      <span class="w-3.5 h-3.5 rounded-full bg-peacock text-peacock bulb-1 shadow-[0_0_12px_#00f5d4]"></span>
-      <span class="w-3.5 h-3.5 rounded-full bg-amberFlame text-amberFlame bulb-2 shadow-[0_0_12px_#ffaa00]"></span>
-      <span class="w-3.5 h-3.5 rounded-full bg-diyaGold text-diyaGold bulb-3 shadow-[0_0_12px_#ffd166]"></span>
-      <span class="w-3.5 h-3.5 rounded-full bg-marigold text-marigold bulb-4 shadow-[0_0_12px_#ff7b00]"></span>
-      <span class="w-3.5 h-3.5 rounded-full bg-raniPink text-raniPink bulb-5 shadow-[0_0_12px_#ff007f]"></span>
+  <!-- ================= TOP RETRO APP HEADER (Exact match to screenshot) ================= -->
+  <header class="sticky top-0 z-50 bg-softCream text-pureBlack border-b-2 border-pureBlack px-4 sm:px-8 py-2.5 flex items-center justify-between shadow-pop-sm">
+    
+    <!-- Left: Brand Logo & Title -->
+    <a href="#intro-scene" class="flex items-center gap-2.5 group">
+      <div class="w-8 h-8 rounded-full bg-sunYellow border-2 border-pureBlack flex items-center justify-center font-extrabold text-sm shadow-pop-sm">
+        🪔
+      </div>
+      <div>
+        <span class="font-title font-black text-sm tracking-wider uppercase text-pureBlack">DIWALI SCENE</span>
+        <span class="text-[10px] font-bold text-festiveRed block -mt-1 tracking-tight">PLOT X • SEC 112 VILLA</span>
+      </div>
+    </a>
+
+    <!-- Center: Scrollytelling Progress Stepper (Emoji Steps) -->
+    <div class="hidden md:flex items-center gap-2 text-xs font-bold bg-white px-3 py-1 rounded-full border border-pureBlack shadow-sm">
+      <a href="#intro-scene" class="hover:text-festiveRed transition-colors">🔥 Intro</a>
+      <span class="text-gray-300">•</span>
+      <a href="#scene-summary" class="hover:text-festiveRed transition-colors">📍 Summary</a>
+      <span class="text-gray-300">•</span>
+      <a href="#menu-scene" class="hover:text-festiveRed transition-colors">🍹 Menu</a>
+      <span class="text-gray-300">•</span>
+      <a href="#taash-scene" class="hover:text-festiveRed transition-colors">🃏 Taash</a>
+      <span class="text-gray-300">•</span>
+      <a href="#polaroid-scene" class="hover:text-festiveRed transition-colors">📸 Wall</a>
+      <span class="text-gray-300">•</span>
+      <a href="#rsvp-scene" class="text-festiveRed font-extrabold">🎟️ RSVP</a>
     </div>
-  </div>
 
-  <!-- 1. UPGRADED INTERACTIVE HEADER: TOP MARQUEE + FLOATING GLASS PILL -->
-  <div class="relative z-50 bg-gradient-to-r from-velvet via-terracotta/90 to-velvet border-b border-diyaGold/40 py-2 overflow-hidden shadow-pink-glow">
-    <div class="marquee-track text-[11px] font-bold tracking-widest uppercase text-cream flex items-center gap-8">
-      <!-- Set 1 -->
-      <div class="flex items-center gap-8 px-4">
-        <span class="text-diyaGold font-extrabold flex items-center gap-1.5">🪔 PLOT X : THE DIWALI VILLA SCENE</span>
-        <span class="text-peacock">✦</span>
-        <span class="text-cream">🗓️ 2ND NOVEMBER 2026</span>
-        <span class="text-peacock">✦</span>
-        <span class="text-diyaGold">🏡 PRIVATE VILLA, SECTOR 112, NOIDA</span>
-        <span class="text-peacock">✦</span>
-        <span class="text-cream">🥃 DARU & GREEN APPLE SHOTS</span>
-        <span class="text-peacock">✦</span>
-        <span class="text-diyaGold">🍢 GARMA-GARAM STARTERS</span>
-        <span class="text-peacock">✦</span>
-        <span class="text-cream">🍬 KAJU KATLI & GULAB JAMUN</span>
-        <span class="text-peacock">✦</span>
-        <span class="text-diyaGold">🃏 HIGH-STAKES TEEN PATTI & POKER</span>
-        <span class="text-peacock">✦</span>
-        <span class="text-cream">💃 BOLLYWOOD & PUNJABI BANGERS</span>
-      </div>
-      <!-- Set 2 (Seamless Loop) -->
-      <div class="flex items-center gap-8 px-4">
-        <span class="text-diyaGold font-extrabold flex items-center gap-1.5">🪔 PLOT X : THE DIWALI VILLA SCENE</span>
-        <span class="text-peacock">✦</span>
-        <span class="text-cream">🗓️ 2ND NOVEMBER 2026</span>
-        <span class="text-peacock">✦</span>
-        <span class="text-diyaGold">🏡 PRIVATE VILLA, SECTOR 112, NOIDA</span>
-        <span class="text-peacock">✦</span>
-        <span class="text-cream">🥃 DARU & GREEN APPLE SHOTS</span>
-        <span class="text-peacock">✦</span>
-        <span class="text-diyaGold">🍢 GARMA-GARAM STARTERS</span>
-        <span class="text-peacock">✦</span>
-        <span class="text-cream">🍬 KAJU KATLI & GULAB JAMUN</span>
-        <span class="text-peacock">✦</span>
-        <span class="text-diyaGold">🃏 HIGH-STAKES TEEN PATTI & POKER</span>
-        <span class="text-peacock">✦</span>
-        <span class="text-cream">💃 BOLLYWOOD & PUNJABI BANGERS</span>
-      </div>
-    </div>
-  </div>
+    <!-- Right Controls: Audio Synth + Skip / Get Pass CTA -->
+    <div class="flex items-center gap-2.5">
+      <!-- Ambient Mehfil Music Toggle -->
+      <button id="sound-btn" type="button" class="btn-pop px-3 py-1 rounded-full bg-sunYellow text-pureBlack font-bold text-xs flex items-center gap-1.5" title="BGM Chimes">
+        <span id="sound-icon">🪕</span>
+        <span id="sound-text" class="hidden sm:inline">Sound: OFF</span>
+      </button>
 
-  <!-- Floating Glassmorphic Pill Header -->
-  <header class="sticky top-3 z-50 px-3 sm:px-6">
-    <div class="max-w-6xl mx-auto rounded-full backdrop-blur-xl bg-mahogany/90 border border-diyaGold/50 shadow-pink-glow px-4 sm:px-6 py-2.5 flex items-center justify-between gap-2">
-      
-      <!-- Left: Brand Crest + Live Location Pill -->
-      <div class="flex items-center gap-3">
-        <a href="#" class="flex items-center gap-2.5 group">
-          <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-terracotta via-raniPink to-amberFlame border border-diyaGold flex items-center justify-center shadow-gold-glow group-hover:scale-110 transition-transform">
-            <span class="text-lg diya-flame">🪔</span>
-          </div>
-          <div>
-            <div class="flex items-center gap-1.5">
-              <span class="font-display font-extrabold text-lg sm:text-xl tracking-wider text-cream">PLOT X</span>
-              <span class="hidden sm:inline-block text-[10px] px-2.5 py-0.5 rounded-full bg-gradient-to-r from-raniPink to-marigold border border-diyaGold/60 text-white font-bold tracking-wide shadow-sm">
-                VILLA '26
-              </span>
-            </div>
-            <p class="text-[10px] text-diyaGold font-medium tracking-wider uppercase flex items-center gap-1">
-              <span class="w-1.5 h-1.5 rounded-full bg-peacock animate-ping"></span>
-              <span>2ND NOV • SEC 112 NOIDA</span>
-            </p>
-          </div>
-        </a>
-      </div>
-
-      <!-- Center: Navigation Links with Auto-Morphing Labels -->
-      <nav class="hidden lg:flex items-center gap-6 text-xs font-semibold text-sand">
-        <a href="#mahfil" class="hover:text-diyaGold transition-colors flex items-center gap-1">
-          <span>✨</span>
-          <span class="morph-text" data-hi="महफ़िल और मेन्यू" data-en="THE VILLA MENU">महफ़िल और मेन्यू</span>
-        </a>
-        <a href="#patakha-wall" class="hover:text-diyaGold transition-colors flex items-center gap-1">
-          <span>📸</span>
-          <span class="morph-text" data-hi="पटाखा लुक्स" data-en="PATAKHA FITS">पटाखा लुक्स</span>
-        </a>
-        <a href="#baithak" class="hover:text-diyaGold transition-colors flex items-center gap-1">
-          <span>🌙</span>
-          <span class="morph-text" data-hi="रात का माहौल" data-en="NIGHT FLOW">रात का माहौल</span>
-        </a>
-        <a href="#shagun-rsvp" class="hover:text-diyaGold transition-colors flex items-center gap-1">
-          <span>💌</span>
-          <span class="morph-text" data-hi="शगुन निमंत्रण" data-en="SHAGUN RSVP">शगुन निमंत्रण</span>
-        </a>
-      </nav>
-
-      <!-- Right: Interactive Controls (Manual Language Switch + Tabla/Chime Beat + RSVP CTA) -->
-      <div class="flex items-center gap-2 sm:gap-2.5">
-        
-        <!-- Manual Bilingual Toggle Badge (Auto-convert OFF) -->
-        <button id="lang-flip-btn" type="button" title="Click to switch language (हिन्दी / English)" class="px-2.5 py-1.5 rounded-full bg-velvet/95 border border-diyaGold/45 hover:border-amberFlame text-[11px] font-bold text-diyaGold flex items-center gap-1.5 transition-all shadow-sm">
-          <span class="w-2 h-2 rounded-full bg-amberFlame"></span>
-          <span id="lang-indicator-text">अ ⇄ A</span>
-        </button>
-
-        <!-- Ambient Festive Tabla & Sitar Synth Button -->
-        <button id="sound-btn" type="button" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-velvet/95 border border-diyaGold/45 hover:border-amberFlame text-xs text-sand transition-all shadow-sm">
-          <span id="sound-icon">🪕</span>
-          <span id="sound-text" class="hidden md:inline text-[11px] font-medium">महफ़िल धुन: OFF</span>
-        </button>
-
-        <!-- Primary CTA -->
-        <a href="#shagun-rsvp" class="px-4 py-2 rounded-full bg-gradient-to-r from-raniPink via-amberFlame to-marigold text-white font-extrabold text-xs uppercase tracking-wider shadow-pink-glow hover:scale-105 active:scale-95 transition-all">
-          <span class="morph-text" data-hi="शगुन PASS" data-en="GET PASS">शगुन PASS</span>
-        </a>
-      </div>
-
+      <!-- Jump To RSVP CTA -->
+      <a href="#rsvp-scene" class="btn-pop px-4 py-1 rounded-full bg-festiveRed text-softCream font-extrabold text-xs uppercase tracking-wide">
+        PASS LE LO →
+      </a>
     </div>
   </header>
 
-  <main class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-24">
 
-    <!-- 2. HERO SECTION: WARM VILLA DIWALI INVITE WITH JOYFUL GOOD-VIBES -->
-    <section class="relative pt-6 pb-8 md:pt-12 md:pb-14 text-center flex flex-col items-center">
+  <!-- ================= CHAPTER 1: DIL WAALI DIWALI (Exact Screenshot 2 Match) ================= -->
+  <section id="intro-scene" class="relative min-h-[92vh] flex items-center justify-center p-4 sm:p-8 overflow-hidden border-b-4 border-pureBlack">
+    
+    <!-- Corner Decorative Marigold Flowers -->
+    <div class="absolute top-4 left-4 z-20 pointer-events-none select-none text-3xl sm:text-4xl marigold-corner animate-pulse">
+      🌼
+    </div>
+    <div class="absolute top-4 right-4 z-20 pointer-events-none select-none text-3xl sm:text-4xl marigold-corner animate-pulse">
+      🌼
+    </div>
+    <div class="absolute bottom-4 left-4 z-20 pointer-events-none select-none text-3xl sm:text-4xl marigold-corner">
+      🌼
+    </div>
+    <div class="absolute bottom-4 right-4 z-20 pointer-events-none select-none text-3xl sm:text-4xl marigold-corner">
+      🌼
+    </div>
+
+    <!-- Central Two-Column Hero Grid -->
+    <div class="max-w-6xl w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10 py-6">
       
-      <!-- Top Festive Party Badge -->
-      <div class="inline-flex flex-wrap items-center justify-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-velvet via-mahogany to-velvet border-2 border-diyaGold/50 text-xs text-sand mb-6 shadow-pink-glow">
-        <span class="text-diyaGold font-bold morph-text" data-hi="✨ ताश, जाम, मिठाई और बवाल गाने" data-en="✨ CARDS, BOOZE, SWEETS & BANGER BEATS">✨ ताश, जाम, मिठाई और बवाल गाने</span>
-        <span class="text-peacock font-bold">|</span>
-        <span class="text-white font-extrabold">SECTOR 112, NOIDA VILLA 🏡</span>
-      </div>
-
-      <!-- Main Hero Headline -->
-      <div class="max-w-4xl mx-auto space-y-4">
-        <div class="min-h-[3.2rem] sm:min-h-[4.5rem] flex items-center justify-center">
-          <p class="font-hindiDisplay text-3xl sm:text-5xl md:text-6xl text-amberFlame tracking-wide drop-shadow-[0_2px_15px_rgba(255,123,0,0.5)] morph-text" 
-             data-hi="दिवाली की रात, यारों के साथ" 
-             data-en="DIWALI NIGHT WITH THE TRIBE">
-            दिवाली की रात, यारों के साथ
-          </p>
-        </div>
-
-        <h1 class="font-display font-extrabold text-5xl sm:text-7xl lg:text-8xl tracking-tight leading-none gold-gradient-text drop-shadow-[0_5px_25px_rgba(255,0,127,0.35)]">
-          PLOT X : VILLA SCENE
-        </h1>
-
-        <p class="font-display italic text-xl sm:text-2xl text-sand/90 pt-1 max-w-2xl mx-auto morph-text"
-           data-hi="“शगुन के लिफ़ाफ़े, गरमा-गरम चखना, काजू कतली और तीन पत्ती की महफ़िल।”"
-           data-en="“Shagun envelopes, hot starters, kaju katli & high-stakes Teen Patti in a cozy private villa.”">
-          “शगुन के लिफ़ाफ़े, गरमा-गरम चखना, काजू कतली और तीन पत्ती की महफ़िल।”
-        </p>
-      </div>
-
-      <!-- Warm Conversational Description -->
-      <p class="mt-5 max-w-2xl text-sm sm:text-base text-sand/90 leading-relaxed font-normal">
-        Koi pool nahi, koi formal drama nahi—sirf <strong class="text-diyaGold">Sector 112 Noida</strong> ka ek khubsurat fairy-lit private villa! Lawn mein yaaron ke saath baithak, living room mein Teen Patti & Poker ke daav, haath mein pasandida daru, garma-garam starters, desi mithai aur speakers pe non-stop Bollywood-Punjabi bangers.
-      </p>
-
-      <!-- Key Villa Highlights Pills with Vibrant Borders -->
-      <div class="mt-6 flex flex-wrap items-center justify-center gap-2.5 text-xs font-semibold">
-        <span class="px-4 py-2 rounded-full bg-mahogany/95 border border-diyaGold/50 text-white flex items-center gap-1.5 shadow-sm">
-          <span>🗓️</span> <strong>2nd November 2026</strong> (8:30 PM Onwards)
-        </span>
-        <span class="px-4 py-2 rounded-full bg-mahogany/95 border border-peacock/50 text-white flex items-center gap-1.5 shadow-sm">
-          <span>🏡</span> <strong>Private Villa</strong>, Sector 112, Noida (Pure Lawn & Lounge)
-        </span>
-        <span class="px-4 py-2 rounded-full bg-mahogany/95 border border-raniPink/60 text-white flex items-center gap-1.5 shadow-sm">
-          <span>👗</span> <strong>Dress Code:</strong> <span class="morph-text text-diyaGold font-bold" data-hi="पटाखा देसी लुक (Ethnic)" data-en="Patakha Desi Drip">पटाखा देसी लुक (Ethnic)</span>
-        </span>
-      </div>
-
-      <!-- Live Countdown to 2nd Nov 2026 -->
-      <div class="mt-9 p-6 rounded-3xl shagun-envelope max-w-xl w-full relative overflow-hidden">
-        <div class="text-xs text-diyaGold uppercase tracking-widest mb-4 flex items-center justify-center gap-2 font-bold">
-          <span class="text-amberFlame">🪔</span>
-          <span class="morph-text" data-hi="महफ़िल शुरू होने में वक़्त // 2 नवंबर की रात" data-en="COUNTDOWN TO VILLA DOORS // 2ND NOV NIGHT">महफ़िल शुरू होने में वक़्त // 2 नवंबर की रात</span>
-          <span class="text-amberFlame">🪔</span>
-        </div>
-        <div class="grid grid-cols-4 gap-3 text-center">
-          <div class="bg-velvet/90 border border-diyaGold/40 rounded-2xl p-3 shadow-inner">
-            <span id="cd-days" class="font-display font-extrabold text-3xl sm:text-4xl text-cream">08</span>
-            <p class="text-[10px] text-amberFlame font-bold uppercase tracking-wider mt-1 morph-text" data-hi="दिन" data-en="DAYS">दिन</p>
-          </div>
-          <div class="bg-velvet/90 border border-diyaGold/40 rounded-2xl p-3 shadow-inner">
-            <span id="cd-hours" class="font-display font-extrabold text-3xl sm:text-4xl text-diyaGold">09</span>
-            <p class="text-[10px] text-amberFlame font-bold uppercase tracking-wider mt-1 morph-text" data-hi="घंटे" data-en="HOURS">घंटे</p>
-          </div>
-          <div class="bg-velvet/90 border border-diyaGold/40 rounded-2xl p-3 shadow-inner">
-            <span id="cd-mins" class="font-display font-extrabold text-3xl sm:text-4xl text-raniPink">30</span>
-            <p class="text-[10px] text-amberFlame font-bold uppercase tracking-wider mt-1 morph-text" data-hi="मिनट" data-en="MINS">मिनट</p>
-          </div>
-          <div class="bg-velvet/90 border border-diyaGold/40 rounded-2xl p-3 shadow-inner">
-            <span id="cd-secs" class="font-display font-extrabold text-3xl sm:text-4xl text-peacock">00</span>
-            <p class="text-[10px] text-amberFlame font-bold uppercase tracking-wider mt-1 morph-text" data-hi="सेकंड" data-en="SECS">सेकंड</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Hero Action Buttons -->
-      <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
-        <a href="#shagun-rsvp" class="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-raniPink via-amberFlame to-marigold text-white font-extrabold text-sm uppercase tracking-wider shadow-pink-glow hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2">
-          <span>💌</span>
-          <span class="morph-text" data-hi="शगुन का निमंत्रण (WhatsApp RSVP)" data-en="REQUEST SHAGUN PASS (WhatsApp RSVP)">शगुन का निमंत्रण (WhatsApp RSVP)</span>
-        </a>
-        <a href="#patakha-wall" class="w-full sm:w-auto px-7 py-4 rounded-full bg-mahogany/90 border-2 border-diyaGold/50 hover:border-peacock text-cream font-bold text-sm transition-all flex items-center justify-center gap-2 shadow-sm">
-          <span>📸</span>
-          <span class="morph-text" data-hi="पटाखा फोटो बूथ (Live Fit Check)" data-en="PATAKHA POLAROID BOOTH">पटाखा फोटो बूथ (Live Fit Check)</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- 3. WHAT'S ON THE TABLE ("क्या-क्या मिलेगा? <-> WHAT'S ON THE MENU?") -->
-    <section id="mahfil" class="space-y-10 scroll-mt-24">
-      <div class="text-center max-w-2xl mx-auto space-y-2">
-        <span class="text-xs uppercase tracking-widest text-amberFlame block font-bold morph-text" data-hi="मेहमाननवाज़ी // PURE VILLA VIBES" data-en="HOSPITALITY // PURE VILLA VIBES">मेहमाननवाज़ी // PURE VILLA VIBES</span>
-        <h2 class="font-hindiDisplay text-3xl sm:text-5xl text-cream min-h-[3rem] flex items-center justify-center">
-          <span class="morph-text gold-gradient-text" data-hi="क्या-क्या मिलेगा?" data-en="WHAT'S ON THE MENU?">क्या-क्या मिलेगा?</span>
-        </h2>
-        <p class="text-xs sm:text-sm text-sand/85">
-          2nd November ki raat Sector 112 Noida ke Villa mein aapke liye ye 5 cheezein full-on taiyaar rahengi:
-        </p>
-      </div>
-
-      <!-- 5 Villa Offerings Grid with Vibrant Jewel Aesthetics -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Left Column: Giant Pop Typography -->
+      <div class="lg:col-span-7 space-y-4 text-left">
         
-        <!-- 1. Daru & Mixes (Rani Pink Jewel) -->
-        <div class="p-6 rounded-3xl festive-card flex flex-col justify-between relative overflow-hidden group">
-          <div class="absolute -top-12 -right-12 w-32 h-32 rounded-full bg-raniPink/20 blur-2xl group-hover:bg-raniPink/35 transition-all"></div>
-          <div>
-            <div class="flex items-center justify-between mb-4">
-              <span class="w-12 h-12 rounded-2xl bg-gradient-to-br from-raniPink to-terracotta border border-diyaGold/50 flex items-center justify-center text-2xl shadow-pink-glow">🥃</span>
-              <span class="text-[11px] px-3 py-1 rounded-full bg-velvet text-diyaGold border border-diyaGold/30 font-bold">BOOZE & SHOTS</span>
+        <!-- Top Pill Header Tag -->
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-softCream border-2 border-pureBlack text-pureBlack text-xs font-black shadow-pop-sm uppercase tracking-wider">
+          <span>🪔</span>
+          <span>PLOT X : THE DIWALI VILLA SCENE</span>
+        </div>
+
+        <!-- Giant Headline: DIL WAALI Diwali -->
+        <div class="leading-none pt-2">
+          <h1 class="font-title font-black text-6xl sm:text-7xl md:text-8xl tracking-tight text-softCream uppercase drop-shadow-[4px_4px_0px_#000]">
+            DIL WAALI
+          </h1>
+          <span class="block font-script italic font-black text-6xl sm:text-8xl md:text-9xl text-sunYellow -mt-3 sm:-mt-6 drop-shadow-[4px_4px_0px_#000]">
+            Diwali
+          </span>
+        </div>
+
+        <!-- Punchy Hinglish Copy -->
+        <p class="font-body text-base sm:text-lg text-softCream font-medium max-w-lg leading-relaxed pt-2">
+          This Diwali, we're skipping the small talk and formal drama — seedha chalte hain <strong class="text-sunYellow font-extrabold underline decoration-pureBlack">mithai, daru, taash</strong> aur full main character moments pe! 🪔✨
+        </p>
+
+        <div class="text-xs font-black uppercase tracking-widest text-sunYellow flex items-center gap-2 pt-1">
+          <span>HOSTED BY PLOT X // 30 INVITES ONLY</span>
+          <span class="text-softCream">•</span>
+          <span>NO APOLOGIES</span>
+        </div>
+
+        <!-- Primary CTA Buttons -->
+        <div class="pt-4 flex flex-wrap items-center gap-4">
+          <a href="#scene-summary" class="btn-pop px-8 py-3.5 rounded-full bg-sunYellow text-pureBlack font-black text-base uppercase tracking-wider flex items-center gap-2">
+            <span>JAL GAYA! ✦</span>
+          </a>
+          <a href="#rsvp-scene" class="btn-pop px-6 py-3.5 rounded-full bg-softCream text-pureBlack font-extrabold text-sm uppercase tracking-wide">
+            SKIP → SEEDHA PASS 🎟️
+          </a>
+        </div>
+
+        <p class="text-xs text-softCream/80 font-medium italic pt-1">
+          Scene loading... scroll karke dekho poora plan! 👇
+        </p>
+
+      </div>
+
+      <!-- Right Column: Big Retro Sunburst & Diya Art (Screenshot 2 Exact Graphic) -->
+      <div class="lg:col-span-5 flex items-center justify-center relative min-h-[340px] sm:min-h-[420px]">
+        
+        <!-- Rotating Retro Sunburst Rays -->
+        <div class="absolute w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] rounded-full sunburst-spin pointer-events-none select-none opacity-90">
+          <svg viewBox="0 0 200 200" class="w-full h-full">
+            <defs>
+              <pattern id="rays" width="200" height="200" patternUnits="userSpaceOnUse">
+                <!-- Retro Sunburst Rays radiating from center -->
+              </pattern>
+            </defs>
+            <g transform="translate(100, 100)">
+              <!-- 16 Sunburst Segments alternating Yellow & Amber -->
+              <polygon points="0,0 -20,-100 20,-100" fill="#FFD000" />
+              <polygon points="0,0 100,-20 100,20" fill="#FFD000" />
+              <polygon points="0,0 -20,100 20,100" fill="#FFD000" />
+              <polygon points="0,0 -100,-20 -100,20" fill="#FFD000" />
+              <polygon points="0,0 56,-82 82,-56" fill="#FF9900" />
+              <polygon points="0,0 82,56 56,82" fill="#FF9900" />
+              <polygon points="0,0 -56,82 -82,56" fill="#FF9900" />
+              <polygon points="0,0 -82,-56 -56,-82" fill="#FF9900" />
+              <polygon points="0,0 20,-100 56,-82" fill="#FFD000" />
+              <polygon points="0,0 82,-56 100,-20" fill="#FF9900" />
+              <polygon points="0,0 100,20 82,56" fill="#FFD000" />
+              <polygon points="0,0 56,82 20,100" fill="#FF9900" />
+              <polygon points="0,0 -20,100 -56,82" fill="#FFD000" />
+              <polygon points="0,0 -82,56 -100,20" fill="#FF9900" />
+              <polygon points="0,0 -100,-20 -82,-56" fill="#FFD000" />
+              <polygon points="0,0 -56,-82 -20,-100" fill="#FF9900" />
+            </g>
+          </svg>
+        </div>
+
+        <!-- Big Retro Illustrated Diya -->
+        <div class="relative z-10 flex flex-col items-center">
+          
+          <!-- Animated Flame -->
+          <div class="w-16 h-24 mb-1 diya-flame-anim">
+            <svg viewBox="0 0 50 80" class="w-full h-full drop-shadow-[0_0_20px_#FFD000]">
+              <path d="M25 0 C15 30 5 45 5 60 C5 72 14 78 25 78 C36 78 45 72 45 60 C45 45 35 30 25 0 Z" fill="#FF9900" stroke="#000" stroke-width="2"/>
+              <path d="M25 20 C18 40 12 50 12 62 C12 70 18 74 25 74 C32 74 38 70 38 62 C38 50 32 40 25 20 Z" fill="#FFD000"/>
+              <ellipse cx="25" cy="62" rx="6" ry="9" fill="#FFFDF0"/>
+            </svg>
+          </div>
+
+          <!-- Terracotta Gold Diya Bowl -->
+          <div class="w-64 sm:w-72">
+            <svg viewBox="0 0 200 90" class="w-full h-full drop-shadow-[4px_6px_0px_#000]">
+              <!-- Diya Rim & Body -->
+              <ellipse cx="100" cy="20" rx="90" ry="14" fill="#E5A93C" stroke="#000" stroke-width="3"/>
+              <ellipse cx="100" cy="18" rx="80" ry="9" fill="#8B4513" stroke="#000" stroke-width="1.5"/>
+              <path d="M10 20 Q100 90 190 20 Q100 45 10 20 Z" fill="#D48B28" stroke="#000" stroke-width="3"/>
+              <!-- Decorative Diya Beads -->
+              <g fill="#FFFDF0" stroke="#000" stroke-width="1.5">
+                <circle cx="35" cy="38" r="4.5"/>
+                <circle cx="55" cy="46" r="4.5"/>
+                <circle cx="78" cy="51" r="4.5"/>
+                <circle cx="100" cy="53" r="5.5"/>
+                <circle cx="122" cy="51" r="4.5"/>
+                <circle cx="145" cy="46" r="4.5"/>
+                <circle cx="165" cy="38" r="4.5"/>
+              </g>
+              <!-- Diya Stand / Base -->
+              <polygon points="65,70 135,70 150,88 50,88" fill="#B26E1B" stroke="#000" stroke-width="3"/>
+            </svg>
+          </div>
+
+          <!-- Retro Floating Badge -->
+          <div class="mt-4 px-4 py-1.5 rounded-full bg-softCream text-pureBlack border-2 border-pureBlack font-black text-xs uppercase shadow-pop tracking-wider">
+            ✨ PURE DHAMAKA • ZERO FOMO ✨
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= CHAPTER 2: SCENE SET HAI. TU BAS AAJA (Exact Screenshot 1 Match) ================= -->
+  <section id="scene-summary" class="relative py-16 px-4 sm:px-8 border-b-4 border-pureBlack bg-festiveRed">
+    
+    <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      
+      <!-- Left: Giant Headline & Action Buttons -->
+      <div class="lg:col-span-6 space-y-5 text-left">
+        
+        <div class="inline-block px-3 py-1 rounded-full bg-sunYellow text-pureBlack font-black text-xs uppercase border-2 border-pureBlack shadow-pop-sm">
+          📍 LOCATION & ITINERARY LOCKED
+        </div>
+
+        <!-- Headline: SCENE SET HAI. TU BAS aaja. -->
+        <div class="leading-none">
+          <h2 class="font-title font-black text-6xl sm:text-7xl md:text-8xl tracking-tight text-sunYellow uppercase drop-shadow-[4px_4px_0px_#000]">
+            SCENE SET HAI.
+          </h2>
+          <h2 class="font-title font-black text-5xl sm:text-6xl md:text-7xl tracking-tight text-softCream uppercase drop-shadow-[4px_4px_0px_#000] -mt-1">
+            TU BAS <span class="font-script italic font-black text-6xl sm:text-7xl md:text-8xl text-softCream lowercase">aaja.</span>
+          </h2>
+        </div>
+
+        <p class="font-body text-base sm:text-lg text-softCream font-medium italic max-w-md">
+          “Outfit sorted. Plans locked. Ab mithai aur chakne ka hisaab baad mein.”
+        </p>
+
+        <p class="text-sm text-softCream/90 font-normal leading-relaxed max-w-lg">
+          No formal drama, no boring speeches. <strong>Sector 112 Noida Villa</strong> mein poori baithak taiyaar hai. Handcrafted cocktails, live tandoori starters, high-stakes Teen Patti, aur non-stop 2000s Bollywood + Punjabi bangers!
+        </p>
+
+        <!-- The 3 Chunky Action Buttons (Exact match to Screenshot 1) -->
+        <div class="pt-3 flex flex-col sm:flex-row flex-wrap gap-3">
+          <!-- Button 1: Share -->
+          <button type="button" onclick="navigator.clipboard.writeText(window.location.href); alert('Link copied! Group chat mein aag laga do 🔥');" class="btn-pop px-5 py-3 rounded-xl bg-sunYellow text-pureBlack font-black text-xs uppercase tracking-wide flex items-center gap-2">
+            <span>📢</span> SHARE THE SCENE
+          </button>
+
+          <!-- Button 2: Calendar -->
+          <button type="button" onclick="addToGoogleCalendar();" class="btn-pop px-5 py-3 rounded-xl bg-softCream text-pureBlack font-black text-xs uppercase tracking-wide flex items-center gap-2">
+            <span>🗓️</span> ADD TO CALENDAR
+          </button>
+
+          <!-- Button 3: Photo Wall -->
+          <a href="#polaroid-scene" class="btn-pop px-5 py-3 rounded-xl bg-gulabiPink text-white font-black text-xs uppercase tracking-wide flex items-center gap-2">
+            <span>📸</span> PHOTO WALL DEKH
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Right: Emerald Green "YOUR SCENE, SUMMARISED" Card (Screenshot 1 Exact Match) -->
+      <div class="lg:col-span-6 flex justify-center">
+        
+        <div class="relative w-full max-w-md">
+          
+          <!-- The Emerald Card -->
+          <div class="card-pop bg-cardGreen text-softCream p-6 sm:p-8 rounded-3xl relative overflow-hidden shadow-pop-lg">
+            
+            <!-- Card Header -->
+            <div class="flex items-center justify-between border-b-2 border-sunYellow/30 pb-4 mb-5">
+              <div>
+                <span class="text-[11px] font-black tracking-widest uppercase text-sunYellow block">OFFICIAL ITINERARY</span>
+                <h3 class="font-title font-black text-2xl text-softCream tracking-wide uppercase">YOUR SCENE, SUMMARISED</h3>
+              </div>
+              <span class="text-2xl text-sunYellow">✦</span>
             </div>
-            <h3 class="font-hindiDisplay text-2xl text-cream morph-text" data-hi="दारू और कॉकटेल" data-en="Booze, Shots & Mixes">दारू और कॉकटेल</h3>
-            <p class="font-display italic text-base text-diyaGold mb-2">Green Apple Shots, Punch & Pints</p>
-            <p class="text-xs text-sand/85 leading-relaxed">
-              Entry pe 30ml <strong>Green Apple Vodka shots</strong>, self-serve <strong>Plot X Jungle Juice Punch</strong>, Greater Than Gin & Tonic, Old Monk & Coke ke classic pegs aur chilled Kingfisher pints.
+
+            <!-- Detail Rows with Dotted Lines -->
+            <div class="space-y-4 text-xs font-medium">
+              
+              <!-- 1. WHEN -->
+              <div class="pb-3 border-b border-white/15">
+                <span class="text-[10px] font-black uppercase tracking-wider text-sunYellow block mb-1">WHEN</span>
+                <p class="font-bold text-sm text-softCream">Sunday, 2 November 2026 • 8:30 PM onwards</p>
+              </div>
+
+              <!-- 2. WHERE -->
+              <div class="pb-3 border-b border-white/15">
+                <span class="text-[10px] font-black uppercase tracking-wider text-sunYellow block mb-1">WHERE</span>
+                <p class="font-bold text-sm text-softCream">At The Private Villa, Sector 112, Noida</p>
+                <p class="text-[11px] text-white/70 italic mt-0.5">(Exact GPS pin drops on WhatsApp upon RSVP)</p>
+              </div>
+
+              <!-- 3. YOUR FIT -->
+              <div class="pb-3 border-b border-white/15">
+                <span class="text-[10px] font-black uppercase tracking-wider text-sunYellow block mb-1">YOUR FIT</span>
+                <div class="flex items-center gap-2">
+                  <span class="w-3 h-3 rounded-full bg-gulabiPink border border-pureBlack"></span>
+                  <p class="font-bold text-sm text-softCream">Gulabi Scene • Hot Pink & Desi Ethnic Drip</p>
+                </div>
+                <p class="text-[10px] text-sunYellow font-semibold mt-0.5">✨ +10,000 Aura Guaranteed</p>
+              </div>
+
+              <!-- 4. RSVP STATUS -->
+              <div class="pt-1">
+                <span class="text-[10px] font-black uppercase tracking-wider text-sunYellow block mb-1">RSVP STATUS</span>
+                <p class="font-extrabold text-sm text-softCream flex items-center gap-1.5">
+                  <span class="text-sunYellow font-black">Haan bhai, I'm in ✔</span>
+                  <span class="text-[11px] text-white/80 font-normal">— 24/30 Locked</span>
+                </p>
+              </div>
+
+            </div>
+
+            <!-- Card Bottom Bar -->
+            <div class="mt-6 pt-4 border-t-2 border-sunYellow/30 flex items-center justify-between text-[11px] font-bold text-sunYellow">
+              <span>🎟️ ENTRY: WRISTBAND ONLY</span>
+              <span>🔞 18+ ID VERIFIED</span>
+            </div>
+
+          </div>
+
+          <!-- Fun Retro Circular Seal Stamp on Top of Card (Screenshot 1 Exact Graphic) -->
+          <div class="absolute -bottom-6 -right-4 sm:-right-6 w-28 h-28 rounded-full bg-sunYellow text-pureBlack border-2 border-pureBlack flex flex-col items-center justify-center text-center p-2 retro-stamp shadow-pop select-none pointer-events-none">
+            <span class="text-lg">✦</span>
+            <span class="font-title font-black text-[10px] leading-tight uppercase tracking-tight">GHAR KA SCENE</span>
+            <span class="text-[8px] font-bold leading-none mt-0.5">100% APPROVED</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= CHAPTER 3: KHAANE PEENE KA SCENE (Menu & Bar) ================= -->
+  <section id="menu-scene" class="py-16 px-4 sm:px-8 border-b-4 border-pureBlack bg-softCream text-pureBlack">
+    
+    <div class="max-w-6xl mx-auto space-y-10">
+      
+      <div class="text-left space-y-2">
+        <span class="inline-block px-3 py-1 rounded-full bg-sunYellow border-2 border-pureBlack text-pureBlack text-xs font-black shadow-pop-sm uppercase">
+          🥃 KHAANA-PEENA // THE SPREAD
+        </span>
+        <h2 class="font-title font-black text-5xl sm:text-6xl text-festiveRed uppercase drop-shadow-[2px_2px_0px_#000]">
+          CHAKNA AUR DARU KA BANDOOBAST
+        </h2>
+        <p class="font-body text-sm sm:text-base text-pureBlack/80 font-medium max-w-xl">
+          Fumble mat karna, unlimited complimentary bar aur chef-crafted hot starters pool & lawn mein ready rahenge!
+        </p>
+      </div>
+
+      <!-- 3 Pop Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Card 1: Daru & Shots -->
+        <div class="card-pop bg-white p-6 rounded-3xl flex flex-col justify-between hover:-translate-y-1 transition-transform">
+          <div>
+            <div class="w-14 h-14 rounded-2xl bg-gulabiPink text-white border-2 border-pureBlack flex items-center justify-center text-3xl shadow-pop-sm mb-4">
+              🥃
+            </div>
+            <span class="text-[10px] font-black uppercase tracking-wider text-festiveRed block">WELCOME DRIP</span>
+            <h3 class="font-title font-black text-2xl text-pureBlack uppercase mt-0.5">DARU & SHOTS</h3>
+            <p class="font-script italic text-base text-festiveRed font-bold mt-1">Green Apple Shots & Jungle Juice</p>
+            <p class="text-xs text-pureBlack/80 font-medium leading-relaxed mt-2">
+              Entry pe cold 30ml <strong>Green Apple Vodka shots</strong>! Unlimited Greater Than Gin & Tonics, Old Monk classics, chilled Kingfisher pints aur legendary <strong>Plot X Jungle Juice Bowl</strong>.
             </p>
           </div>
-          <div class="mt-4 pt-3 border-t border-diyaGold/20 text-[11px] text-amberFlame flex justify-between font-bold">
-            <span>🍏 Welcome Shots</span>
-            <span>🍹 Jungle Juice Bowl</span>
+          <div class="mt-5 pt-3 border-t-2 border-pureBlack/15 text-[11px] font-black text-festiveRed flex justify-between">
+            <span>🍹 Self-Serve Bowl</span>
+            <span>🧊 Chilled Pints</span>
           </div>
         </div>
 
-        <!-- 2. Garma-Garam Starters (Marigold Flame Jewel) -->
-        <div class="p-6 rounded-3xl festive-card flex flex-col justify-between relative overflow-hidden group">
-          <div class="absolute -top-12 -right-12 w-32 h-32 rounded-full bg-marigold/20 blur-2xl group-hover:bg-marigold/35 transition-all"></div>
+        <!-- Card 2: Hot Starters -->
+        <div class="card-pop bg-white p-6 rounded-3xl flex flex-col justify-between hover:-translate-y-1 transition-transform">
           <div>
-            <div class="flex items-center justify-between mb-4">
-              <span class="w-12 h-12 rounded-2xl bg-gradient-to-br from-marigold to-amberFlame border border-diyaGold/50 flex items-center justify-center text-2xl shadow-candle">🍢</span>
-              <span class="text-[11px] px-3 py-1 rounded-full bg-velvet text-diyaGold border border-diyaGold/30 font-bold">HOT PLATTERS</span>
+            <div class="w-14 h-14 rounded-2xl bg-sunYellow text-pureBlack border-2 border-pureBlack flex items-center justify-center text-3xl shadow-pop-sm mb-4">
+              🍢
             </div>
-            <h3 class="font-hindiDisplay text-2xl text-cream morph-text" data-hi="गरमा-गरम स्टार्टर्स" data-en="Mouth-Watering Starters">गरमा-गरम स्टार्टर्स</h3>
-            <p class="font-display italic text-base text-diyaGold mb-2">Tandoori Platters & Crispy Chakna</p>
-            <p class="text-xs text-sand/85 leading-relaxed">
-              Har peg ke saath garma-garam swaad! Smoky Paneer & Chicken Tikka platters, crispy peri-peri fries, loaded nachos with salsa dip, dahi ke sholay aur late-night dinner feast.
+            <span class="text-[10px] font-black uppercase tracking-wider text-festiveRed block">SIZZLING CHAKNA</span>
+            <h3 class="font-title font-black text-2xl text-pureBlack uppercase mt-0.5">GARMA-GARAM STARTERS</h3>
+            <p class="font-script italic text-base text-festiveRed font-bold mt-1">Smoky Tandoor & Loaded Fries</p>
+            <p class="text-xs text-pureBlack/80 font-medium leading-relaxed mt-2">
+              Har peg ke saath taaza chakna! Smoky Paneer & Chicken Tikka platters, loaded peri-peri fries with salsa dip, Dahi ke Sholay aur midnight feast — bhookh ka no scene.
             </p>
           </div>
-          <div class="mt-4 pt-3 border-t border-diyaGold/20 text-[11px] text-amberFlame flex justify-between font-bold">
-            <span>🔥 Tandoori Platter</span>
-            <span>🧀 Loaded Chakna</span>
+          <div class="mt-5 pt-3 border-t-2 border-pureBlack/15 text-[11px] font-black text-festiveRed flex justify-between">
+            <span>🔥 Live Tandoor</span>
+            <span>🧀 Loaded Nachos</span>
           </div>
         </div>
 
-        <!-- 3. Desi Mithai (Champagne Diya Gold Jewel) -->
-        <div class="p-6 rounded-3xl festive-card flex flex-col justify-between relative overflow-hidden group">
-          <div class="absolute -top-12 -right-12 w-32 h-32 rounded-full bg-diyaGold/20 blur-2xl group-hover:bg-diyaGold/35 transition-all"></div>
+        <!-- Card 3: Desi Mithai -->
+        <div class="card-pop bg-white p-6 rounded-3xl flex flex-col justify-between hover:-translate-y-1 transition-transform">
           <div>
-            <div class="flex items-center justify-between mb-4">
-              <span class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amberFlame to-diyaGold border border-diyaGold/50 flex items-center justify-center text-2xl shadow-gold-glow">🍬</span>
-              <span class="text-[11px] px-3 py-1 rounded-full bg-velvet text-diyaGold border border-diyaGold/30 font-bold">FESTIVE SWEETS</span>
+            <div class="w-14 h-14 rounded-2xl bg-cardGreen text-sunYellow border-2 border-pureBlack flex items-center justify-center text-3xl shadow-pop-sm mb-4">
+              🍬
             </div>
-            <h3 class="font-hindiDisplay text-2xl text-cream morph-text" data-hi="देसी मिठाई का डिब्बा" data-en="Festive Desi Mithai">देसी मिठाई का डिब्बा</h3>
-            <p class="font-display italic text-base text-diyaGold mb-2">Kaju Katli & Hot Gulab Jamun</p>
-            <p class="text-xs text-sand/85 leading-relaxed">
-              Diwali bina meethe ke adhuri hai! Chandi ke vark wali <strong>Kaju Katli</strong>, chashni mein doobe garma-garam <strong>Gulab Jamun</strong>, aur roasted dry-fruit festive bites.
+            <span class="text-[10px] font-black uppercase tracking-wider text-cardGreen block">SWEET CRAVINGS</span>
+            <h3 class="font-title font-black text-2xl text-pureBlack uppercase mt-0.5">MITHAI KA DIBBA</h3>
+            <p class="font-script italic text-base text-festiveRed font-bold mt-1">Chandi Wali Kaju Katli</p>
+            <p class="text-xs text-pureBlack/80 font-medium leading-relaxed mt-2">
+              Diwali bina meethi masti ke adhuri hai! Chandi ke vark wali <strong>Kaju Katli</strong> aur chashni mein tairte garma-garam <strong>Gulab Jamun</strong>. Kaju Katli pe lafda allowed nahi hai boss!
             </p>
           </div>
-          <div class="mt-4 pt-3 border-t border-diyaGold/20 text-[11px] text-amberFlame flex justify-between font-bold">
-            <span>✨ Kaju Katli</span>
+          <div class="mt-5 pt-3 border-t-2 border-pureBlack/15 text-[11px] font-black text-cardGreen flex justify-between">
+            <span>✨ 100% Kaju Katli</span>
             <span>🍮 Hot Gulab Jamun</span>
           </div>
         </div>
 
-        <!-- 4. High-Stakes Taash (Peacock Emerald Jewel) -->
-        <div class="p-6 rounded-3xl festive-card flex flex-col justify-between relative overflow-hidden group">
-          <div class="absolute -top-12 -right-12 w-32 h-32 rounded-full bg-peacock/20 blur-2xl group-hover:bg-peacock/35 transition-all"></div>
-          <div>
-            <div class="flex items-center justify-between mb-4">
-              <span class="w-12 h-12 rounded-2xl bg-gradient-to-br from-peacock to-emeraldGlow border border-diyaGold/50 flex items-center justify-center text-2xl shadow-teal-glow">🃏</span>
-              <span class="text-[11px] px-3 py-1 rounded-full bg-velvet text-peacock border border-peacock/30 font-bold">VILLA BAITHAK</span>
-            </div>
-            <h3 class="font-hindiDisplay text-2xl text-cream morph-text" data-hi="ताश की बैठक" data-en="High-Stakes Taash">ताश की बैठक</h3>
-            <p class="font-display italic text-base text-diyaGold mb-2">Teen Patti, Poker & Party Games</p>
-            <p class="text-xs text-sand/85 leading-relaxed">
-              Villa ke cozy indoor lounge mein sajegi <strong>Teen Patti aur Poker</strong> ki baithak! Blind khelne wale shoorveer, bluff masters, Red Cup Beer Pong aur Truth-or-Drink ke mazedar rounds.
-            </p>
-          </div>
-          <div class="mt-4 pt-3 border-t border-diyaGold/20 text-[11px] text-peacock flex justify-between font-bold">
-            <span>♠️ Plot X Chips</span>
-            <span>🎲 Drinking Games</span>
-          </div>
-        </div>
-
-        <!-- 5. Dhamakedar Songs (Bollywood & Bhangra Disco Jewel) -->
-        <div class="p-6 rounded-3xl festive-card flex flex-col justify-between md:col-span-2 lg:col-span-2 relative overflow-hidden group">
-          <div class="absolute -top-12 -right-12 w-48 h-48 rounded-full bg-raniPink/20 blur-3xl group-hover:bg-raniPink/35 transition-all"></div>
-          <div>
-            <div class="flex items-center justify-between mb-4">
-              <span class="w-12 h-12 rounded-2xl bg-gradient-to-br from-raniPink via-terracotta to-amberFlame border border-diyaGold/50 flex items-center justify-center text-2xl shadow-pink-glow">🎶</span>
-              <span class="text-[11px] px-3 py-1 rounded-full bg-velvet text-diyaGold border border-diyaGold/30 font-bold">AUX & ANTHEMS</span>
-            </div>
-            <h3 class="font-hindiDisplay text-2xl text-cream morph-text" data-hi="धमाकेदार गाने और ठुमके" data-en="Bollywood Bangers & Aux Anthems">धमाकेदार गाने और ठुमके</h3>
-            <p class="font-display italic text-base text-diyaGold mb-2">Sufi Lawn Vibes to Midnight Desi Dance Floor</p>
-            <p class="text-xs sm:text-sm text-sand/85 leading-relaxed">
-              Shuruat hogi fairy-lit villa lawn mein cozy Sufi aur indie vibes se. Aur jaise hi sab tipsy honge—2000s Bollywood hits (Kajra Re, Beedi, Gallan Goodiyaan), Punjabi bangers aur desi afterhours drops pe poora villa thirkega!
-            </p>
-          </div>
-          <div class="mt-4 pt-3 border-t border-diyaGold/20 text-[11px] text-amberFlame flex flex-wrap gap-4 justify-between font-bold">
-            <span>🎸 8:30 PM: Lawn Gup-Shup & Acoustic</span>
-            <span>💃 11:00 PM+: Full Bollywood & Punjabi Dance Floor</span>
-            <span>🏡 Venue: Private Villa, Sector 112, Noida</span>
-          </div>
-        </div>
-
       </div>
-    </section>
 
-    <!-- 4. STREAMLINED SHAGUN RSVP GATE (GENDER + WHATSAPP APPROVAL) -->
-    <section id="shagun-rsvp" class="scroll-mt-24">
-      <div class="max-w-3xl mx-auto">
-        
-        <div class="text-center mb-8 space-y-2">
-          <span class="text-xs uppercase tracking-widest text-amberFlame block font-bold morph-text" data-hi="शाही बुलावा // WHATSAPP APPROVAL GATE" data-en="ROYAL INVITE // WHATSAPP APPROVAL GATE">शाही बुलावा // WHATSAPP APPROVAL GATE</span>
-          <h2 class="font-hindiDisplay text-3xl sm:text-5xl text-cream min-h-[3.2rem] flex items-center justify-center">
-            <span class="morph-text gold-gradient-text" data-hi="शगुन का निमंत्रण (RSVP)" data-en="SHAGUN INVITE (RSVP)">शगुन का निमंत्रण (RSVP)</span>
-          </h2>
-          <p class="text-xs sm:text-sm text-sand/85 max-w-xl mx-auto">
-            Apna naam, Gender aur <strong class="text-diyaGold">WhatsApp Number</strong> submit karo. Host approval ke baad official invite pass aur <strong class="text-cream">Sector 112 Noida Villa</strong> ki exact Google Maps pin seedha aapke WhatsApp par aayegi!
-          </p>
+    </div>
+
+  </section>
+
+
+  <!-- ================= CHAPTER 4: TAASH & TEEN PATTI BAITHAK ================= -->
+  <section id="taash-scene" class="py-16 px-4 sm:px-8 border-b-4 border-pureBlack bg-festiveRed text-softCream">
+    
+    <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      
+      <!-- Left: Taash Intro & Rules -->
+      <div class="lg:col-span-6 space-y-4 text-left">
+        <span class="inline-block px-3 py-1 rounded-full bg-sunYellow text-pureBlack font-black text-xs uppercase border-2 border-pureBlack shadow-pop-sm">
+          🃏 INDOOR LOUNGE BAITHAK
+        </span>
+        <h2 class="font-title font-black text-5xl sm:text-6xl text-sunYellow uppercase drop-shadow-[3px_3px_0px_#000]">
+          TEEN PATTI & POKER ROOM
+        </h2>
+        <p class="font-script italic text-2xl text-softCream">
+          "Blind khelega ya safe chalega?"
+        </p>
+        <p class="text-sm text-softCream/90 font-medium leading-relaxed">
+          Villa ke indoor air-conditioned lounge mein Teen Patti aur Poker ki high-stakes tables sajengi. Custom Plot X chips, Red Solo Cup beer pong, aur Truth-or-Drink ke bawaal rounds. Bluff master ho ya safe player — sabka hisaab table pe hoga!
+        </p>
+
+        <div class="grid grid-cols-2 gap-3 pt-2 text-xs font-bold text-pureBlack">
+          <div class="card-pop bg-sunYellow p-3 rounded-2xl flex items-center gap-2">
+            <span>♠️</span> <span>Plot X Chips Included</span>
+          </div>
+          <div class="card-pop bg-softCream p-3 rounded-2xl flex items-center gap-2">
+            <span>🎯</span> <span>Red Cup Beer Pong</span>
+          </div>
+          <div class="card-pop bg-softCream p-3 rounded-2xl flex items-center gap-2">
+            <span>🎲</span> <span>Truth or Drink Rounds</span>
+          </div>
+          <div class="card-pop bg-sunYellow p-3 rounded-2xl flex items-center gap-2">
+            <span>👑</span> <span>Blind Master Trophy</span>
+          </div>
         </div>
+      </div>
 
-        <!-- Shagun Lifafa Form Card -->
-        <div class="rounded-3xl shagun-envelope p-6 sm:p-10 relative overflow-hidden">
-          <!-- Corner Traditional Diwali Ornaments -->
-          <div class="absolute top-3 left-4 text-diyaGold text-xl">🪔</div>
-          <div class="absolute top-3 right-4 text-diyaGold text-xl">🪔</div>
-          <div class="absolute bottom-3 left-4 text-diyaGold text-xl">🪔</div>
-          <div class="absolute bottom-3 right-4 text-diyaGold text-xl">🪔</div>
+      <!-- Right: Playful Graphic Taash Card Display -->
+      <div class="lg:col-span-6 flex justify-center">
+        <div class="card-pop bg-cardGreen p-6 sm:p-8 rounded-3xl w-full max-w-md shadow-pop-lg relative">
+          
+          <div class="flex items-center justify-between border-b-2 border-sunYellow/30 pb-3 mb-4">
+            <span class="font-title font-black text-xl text-sunYellow uppercase">RULE BOOK // NO CHIK-CHIK</span>
+            <span class="text-xl">♣️</span>
+          </div>
 
-          <!-- Streamlined RSVP Form -->
-          <form id="villa-rsvp-form" onsubmit="handleVillaRSVP(event)" class="space-y-6">
-            
-            <!-- 1. Name & Instagram Row -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              <div>
-                <label class="block text-xs font-bold text-diyaGold mb-1.5">
-                  <span class="morph-text" data-hi="1. आपका नाम // Full Name *" data-en="1. Your Full Name / Alias *">1. आपका नाम // Full Name *</span>
-                </label>
-                <input type="text" id="rsvp-name" required placeholder="e.g. Kabir Mehra" 
-                  class="w-full px-4 py-3.5 rounded-xl bg-velvet/90 border border-diyaGold/40 text-cream text-sm focus:outline-none focus:border-amberFlame shadow-inner">
-              </div>
+          <ul class="space-y-3 text-xs font-semibold text-softCream">
+            <li class="flex items-start gap-2.5">
+              <span class="text-sunYellow font-black">01.</span>
+              <span>Blind chalne wale ko +5,000 extra Aura points milenge.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="text-sunYellow font-black">02.</span>
+              <span>Pack karne par glass se ek sip lena mandatory hai.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="text-sunYellow font-black">03.</span>
+              <span>Aux pe sad songs bajaane par seedha bouncer escort out.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="text-sunYellow font-black">04.</span>
+              <span>Jo haarega, wo Kaju Katli ka naya dibba khol ke sabko baantega.</span>
+            </li>
+          </ul>
 
-              <div>
-                <label class="block text-xs font-bold text-diyaGold mb-1.5">
-                  <span class="morph-text" data-hi="2. इंस्टाग्राम // Instagram Handle *" data-en="2. Instagram Handle (@) *">2. इंस्टाग्राम // Instagram Handle *</span>
-                </label>
-                <input type="text" id="rsvp-insta" required placeholder="@kabir_mehra" 
-                  class="w-full px-4 py-3.5 rounded-xl bg-velvet/90 border border-diyaGold/40 text-cream text-sm focus:outline-none focus:border-amberFlame shadow-inner">
-              </div>
-            </div>
-
-            <!-- 2. Stylized Gender / Entry Type Pill Selector -->
-            <div>
-              <label class="block text-xs font-bold text-diyaGold mb-2">
-                <span class="morph-text" data-hi="3. एंट्री कैटेगरी चुनें // Select Gender / Entry Type *" data-en="3. Select Gender / Entry Category *">3. एंट्री कैटेगरी चुनें // Select Gender / Entry Type *</span>
-              </label>
-              <div class="grid grid-cols-3 gap-3" id="gender-selector">
-                <button type="button" data-gender="Male (गबरू) 🕺" class="gender-pill p-3.5 rounded-2xl bg-velvet/90 border-2 border-amberFlame text-center transition-all shadow-candle">
-                  <span class="text-2xl block mb-1">🕺</span>
-                  <span class="text-xs font-extrabold text-cream block">Male</span>
-                  <span class="text-[10px] text-diyaGold font-semibold block">गबरू / Stag Entry</span>
-                </button>
-
-                <button type="button" data-gender="Female (पटाखा) 💃" class="gender-pill p-3.5 rounded-2xl bg-velvet/90 border border-diyaGold/35 hover:border-raniPink text-center transition-all">
-                  <span class="text-2xl block mb-1">💃</span>
-                  <span class="text-xs font-extrabold text-cream block">Female</span>
-                  <span class="text-[10px] text-sand/80 font-semibold block">पटाखा / Solo Queen</span>
-                </button>
-
-                <button type="button" data-gender="Couple (जोड़ी) 👩‍❤️‍👨" class="gender-pill p-3.5 rounded-2xl bg-velvet/90 border border-diyaGold/35 hover:border-peacock text-center transition-all">
-                  <span class="text-2xl block mb-1">👩‍❤️‍👨</span>
-                  <span class="text-xs font-extrabold text-cream block">Couple Entry</span>
-                  <span class="text-[10px] text-sand/80 font-semibold block">जोड़ी / Duo Pass</span>
-                </button>
-              </div>
-            </div>
-
-            <!-- 3. WhatsApp Phone Number -->
-            <div>
-              <label class="block text-xs font-bold text-diyaGold mb-1.5">
-                <span class="morph-text" data-hi="4. व्हाट्सएप नंबर (Approval व लोकेशन पिन के लिए) *" data-en="4. WhatsApp Number (For Approval & Villa Location Pin) *">4. व्हाट्सएप नंबर (Approval व लोकेशन पिन के लिए) *</span>
-              </label>
-              <div class="flex rounded-xl overflow-hidden border border-diyaGold/45 focus-within:border-amberFlame bg-velvet/90 shadow-inner">
-                <span class="px-4 py-3.5 bg-mahogany text-diyaGold font-extrabold text-sm border-r border-diyaGold/30 flex items-center gap-1.5 select-none">
-                  🇮🇳 +91
-                </span>
-                <input type="tel" id="rsvp-phone" required pattern="[0-9]{10}" maxlength="10" placeholder="9876543210 (10-digit WhatsApp number)" 
-                  class="w-full px-4 py-3.5 bg-transparent text-cream text-sm focus:outline-none tracking-wider font-semibold">
-              </div>
-              <p class="text-[11px] text-sand/80 mt-1.5 flex items-center gap-1.5 font-medium">
-                <span class="text-peacock">💬</span>
-                <span>Submit hone ke baad host approval aur <strong>Sector 112 Noida Villa</strong> ka exact gate pass aapke WhatsApp par aayega.</span>
-              </p>
-            </div>
-
-            <!-- 4. Taash & Party Vibe -->
-            <div>
-              <label class="block text-xs font-bold text-diyaGold mb-1.5">
-                <span class="morph-text" data-hi="5. महफ़िल में आपका अंदाज़ // Your Party Vibe" data-en="5. Your Villa Party Vibe">5. महफ़िल में आपका अंदाज़ // Your Party Vibe</span>
-              </label>
-              <select id="rsvp-game" class="w-full px-4 py-3.5 rounded-xl bg-velvet/90 border border-diyaGold/40 text-cream text-sm focus:outline-none focus:border-amberFlame font-medium">
-                <option value="Teen Patti Blind Master 🃏">तीन पत्ती के खिलाड़ी (Teen Patti Blind Master)</option>
-                <option value="Poker Bluff King/Queen ♠️">पोकर बाज़ीगर (Poker High-Roller)</option>
-                <option value="Here for Daru, Mithai & Dance Floor 💃">सिर्फ़ जाम, मिठाई और डांस फ्लोर (Vibes & Dance)</option>
-              </select>
-            </div>
-
-            <!-- Submit Button with Celebration Gradient -->
-            <button type="submit" class="w-full py-4 rounded-full bg-gradient-to-r from-raniPink via-amberFlame to-marigold text-white font-extrabold text-sm uppercase tracking-wider shadow-pink-glow hover:scale-[1.01] active:scale-95 transition-all">
-              <span class="morph-text" data-hi="✨ निमंत्रण भेजें (Submit For WhatsApp Approval)" data-en="✨ SUBMIT FOR WHATSAPP APPROVAL">✨ निमंत्रण भेजें (Submit For WhatsApp Approval)</span>
-            </button>
-          </form>
-
-          <!-- WhatsApp Approval Confirmation State (Shown After Submit) -->
-          <div id="shahi-pass-container" class="hidden space-y-6 text-center pt-2">
-            <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-emerald-500/20 border-2 border-emerald-400 text-emerald-300 text-xs font-bold shadow-md">
-              <span>✅ REQUEST RECEIVED • WHATSAPP APPROVAL IN PROGRESS</span>
-            </div>
-
-            <!-- Shagun Pass Card with Royal Border & Colors -->
-            <div class="max-w-md mx-auto p-6 rounded-3xl bg-velvet/95 border-2 border-diyaGold shadow-gold-glow text-left relative overflow-hidden">
-              <div class="flex items-center justify-between border-b border-diyaGold/40 pb-4">
-                <div>
-                  <p class="font-hindiDisplay text-xl text-amberFlame">दिवाली की रात • शगुन पास</p>
-                  <h4 class="font-display font-extrabold text-2xl text-cream tracking-wide">PLOT X // VILLA 112</h4>
-                </div>
-                <div class="text-right">
-                  <span id="pass-code" class="text-xs font-mono px-2.5 py-1 rounded bg-mahogany border border-diyaGold/50 text-diyaGold font-bold">#PX-112</span>
-                  <p class="text-[10px] text-sand/80 mt-1 font-medium">2ND NOV 2026 • 8:30 PM</p>
-                </div>
-              </div>
-
-              <div class="py-4 space-y-3 text-xs">
-                <div class="flex justify-between items-center">
-                  <span class="text-sand/80">मेहमान (Guest):</span>
-                  <span id="pass-guest-name" class="font-extrabold text-cream text-sm">Kabir Mehra</span>
-                </div>
-                <div class="flex justify-between items-center">
-                  <span class="text-sand/80">एंट्री (Category):</span>
-                  <span id="pass-guest-gender" class="px-2.5 py-0.5 rounded-full bg-amberFlame/25 border border-amberFlame/50 text-diyaGold font-bold">Male (गबरू) 🕺</span>
-                </div>
-                <div class="flex justify-between items-center">
-                  <span class="text-sand/80">व्हाट्सएप (WhatsApp):</span>
-                  <span id="pass-guest-phone" class="font-mono text-emerald-300 font-bold">+91 9876543210</span>
-                </div>
-                <div class="flex justify-between items-center">
-                  <span class="text-sand/80">इंस्टाग्राम (Insta):</span>
-                  <span id="pass-guest-insta" class="text-sand font-semibold">@kabir_mehra</span>
-                </div>
-                <div class="flex justify-between items-center">
-                  <span class="text-sand/80">महफ़िल अंदाज़ (Vibe):</span>
-                  <span id="pass-guest-game" class="text-raniPink font-bold">Teen Patti Blind Master 🃏</span>
-                </div>
-                <div class="flex justify-between items-center">
-                  <span class="text-sand/80">वेन्यू (Location):</span>
-                  <span class="font-bold text-amberFlame">Private Villa, Sector 112, Noida</span>
-                </div>
-              </div>
-
-              <!-- WhatsApp Status Notice Box -->
-              <div class="p-3.5 rounded-2xl bg-emerald-950/60 border border-emerald-400/40 text-[11px] text-emerald-200 flex items-start gap-2.5">
-                <span class="text-lg">📲</span>
-                <div>
-                  <p class="font-bold text-emerald-300">WhatsApp Approval Status: PENDING HOST PING</p>
-                  <p class="opacity-90 mt-0.5">Aapke WhatsApp number par confirmation message aur Villa Gate Pin bhej diya jayega!</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Action Buttons -->
-            <div class="flex flex-col sm:flex-row justify-center gap-3">
-              <button id="download-shahi-pass" type="button" class="px-7 py-3.5 rounded-full bg-gradient-to-r from-raniPink to-amberFlame text-white font-extrabold text-xs uppercase tracking-wider hover:opacity-95 transition-all shadow-pink-glow">
-                💾 शगुन पास डाउनलोड करें (Save Pass)
-              </button>
-              <button id="edit-rsvp-btn" type="button" class="px-5 py-3.5 rounded-full bg-mahogany border border-diyaGold/40 text-xs font-bold text-sand hover:text-cream">
-                ✏️ डिटेल्स बदलें (Edit RSVP)
-              </button>
-            </div>
+          <div class="mt-6 pt-4 border-t-2 border-sunYellow/30 text-center">
+            <span class="px-4 py-1.5 rounded-full bg-sunYellow text-pureBlack font-black text-xs border border-pureBlack uppercase">
+              TABLE OPENS AT 09:45 PM
+            </span>
           </div>
 
         </div>
       </div>
-    </section>
 
-    <!-- 5. LIVE PATAKHA FIT-CHECK POLAROID WALL ("पटाखा लुक्स") -->
-    <section id="patakha-wall" class="space-y-10 scroll-mt-24">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-diyaGold/30 pb-5">
+    </div>
+
+  </section>
+
+
+  <!-- ================= CHAPTER 5: LIVE PATAKHA POLAROID WALL ================= -->
+  <section id="polaroid-scene" class="py-16 px-4 sm:px-8 border-b-4 border-pureBlack bg-softCream text-pureBlack">
+    
+    <div class="max-w-6xl mx-auto space-y-8">
+      
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
         <div>
-          <span class="text-xs uppercase tracking-widest text-amberFlame block font-bold morph-text" data-hi="लाइव फोटो बूथ // GUEST LOOKBOOK" data-en="LIVE PHOTO BOOTH // GUEST LOOKBOOK">लाइव फोटो बूथ // GUEST LOOKBOOK</span>
-          <h2 class="font-hindiDisplay text-3xl sm:text-5xl text-cream mt-1">
-            <span class="morph-text gold-gradient-text" data-hi="पटाखा लुक्स // LIVE BOOTH" data-en="PATAKHA FITS // LIVE BOOTH">पटाखा लुक्स // LIVE BOOTH</span>
+          <span class="inline-block px-3 py-1 rounded-full bg-gulabiPink text-white font-black text-xs uppercase border-2 border-pureBlack shadow-pop-sm">
+            📸 GUEST LOOKBOOK
+          </span>
+          <h2 class="font-title font-black text-5xl sm:text-6xl text-festiveRed uppercase drop-shadow-[2px_2px_0px_#000] mt-1">
+            PATAKHA POLAROID BOOTH
           </h2>
         </div>
-        <p class="text-xs sm:text-sm text-sand/85 max-w-md">
-          Apni Diwali outfit (Kurta, Saree ya Indo-Western drip) ki live photo khicho ya upload karo, cute Hindi stickers lagao aur Villa Wall pe pin karo!
+        <p class="font-body text-xs sm:text-sm text-pureBlack/80 font-medium max-w-md">
+          Apni Diwali fit (Kurta, Saree, Indo-Western drip) live snap karo ya phone gallery se upload karo, stickers lagao aur wall pe pin karo!
         </p>
       </div>
 
+      <!-- Booth & Wall Grid -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         
-        <!-- Left Column: Camera / Upload Booth -->
-        <div class="lg:col-span-5 p-6 rounded-3xl shagun-envelope space-y-5">
-          <div class="flex items-center justify-between">
-            <div>
-              <h3 class="font-hindiDisplay text-xl text-cream morph-text" data-hi="📸 अपनी फोटो खींचें" data-en="📸 SNAP OR UPLOAD FIT">📸 अपनी फोटो खींचें</h3>
-              <p class="text-xs text-sand/80">Webcam or Phone Gallery Upload</p>
-            </div>
-            <span class="text-[10px] px-3 py-1 rounded-full bg-gradient-to-r from-raniPink to-amberFlame text-white border border-diyaGold/40 font-bold">VILLA CAM</span>
+        <!-- Left: Upload / Camera Card -->
+        <div class="lg:col-span-5 card-pop bg-white p-6 rounded-3xl space-y-4">
+          
+          <div class="flex items-center justify-between border-b-2 border-pureBlack/15 pb-3">
+            <span class="font-title font-black text-lg uppercase">TAKE FIT SNAP</span>
+            <span class="text-[10px] px-2.5 py-0.5 rounded-full bg-sunYellow border border-pureBlack font-black">LIVE CAM</span>
           </div>
 
           <!-- Viewfinder Frame -->
-          <div class="relative aspect-[4/5] w-full rounded-2xl bg-velvet/95 border-2 border-dashed border-diyaGold/50 overflow-hidden flex flex-col items-center justify-center text-center p-4">
+          <div class="relative aspect-[4/5] w-full rounded-2xl bg-pureBlack border-2 border-dashed border-pureBlack/60 overflow-hidden flex flex-col items-center justify-center text-center p-4">
             <video id="webcam-video" autoplay playsinline class="hidden absolute inset-0 w-full h-full object-cover"></video>
-            <img id="captured-img" class="hidden absolute inset-0 w-full h-full object-cover" alt="Guest Fit">
+            <img id="captured-img" class="hidden absolute inset-0 w-full h-full object-cover" alt="Fit Preview">
             
-            <!-- Sticker Overlay Preview -->
+            <!-- Sticker preview layer -->
             <div id="sticker-preview-layer" class="absolute inset-0 pointer-events-none z-20 p-3 flex flex-wrap content-between justify-between"></div>
 
-            <!-- Default Placeholder -->
-            <div id="cam-placeholder" class="space-y-3 z-10 max-w-xs">
-              <div class="w-16 h-16 rounded-full bg-gradient-to-tr from-raniPink to-amberFlame border-2 border-diyaGold flex items-center justify-center text-3xl mx-auto shadow-pink-glow">
+            <div id="cam-placeholder" class="space-y-2 z-10 text-softCream">
+              <div class="w-16 h-16 rounded-full bg-sunYellow text-pureBlack border-2 border-pureBlack flex items-center justify-center text-3xl mx-auto shadow-pop-sm">
                 🪔
               </div>
-              <p class="font-display italic text-lg text-cream">"Aaj toh पटाखा lag rahe ho!"</p>
-              <p class="text-xs text-sand/80">Open your camera or upload a fit picture from your phone gallery to pin it on the live wall.</p>
+              <p class="font-title font-black text-lg">"Aaj toh पटाखा lag rahe ho!"</p>
+              <p class="text-xs text-white/70">Cam on karo ya phone gallery se photo upload karo.</p>
             </div>
           </div>
 
-          <!-- Camera Controls -->
-          <div class="grid grid-cols-2 gap-3">
-            <button id="open-cam-btn" type="button" class="py-2.5 px-4 rounded-xl bg-mahogany border border-diyaGold/40 hover:border-amberFlame text-cream text-xs font-bold flex items-center justify-center gap-2 transition-all">
-              <span>📹</span> कैमरा खोलें (Cam)
+          <!-- Controls -->
+          <div class="grid grid-cols-2 gap-2.5">
+            <button id="open-cam-btn" type="button" class="btn-pop py-2.5 px-3 rounded-xl bg-sunYellow text-pureBlack font-black text-xs uppercase flex items-center justify-center gap-1.5">
+              <span>📹</span> WEBCAM
             </button>
-            <button id="take-snap-btn" type="button" class="hidden py-2.5 px-4 rounded-xl bg-gradient-to-r from-raniPink to-amberFlame text-white text-xs font-extrabold uppercase tracking-wider shadow-candle">
-              📸 क्लिक करें (Snap)
+            <button id="take-snap-btn" type="button" class="hidden btn-pop py-2.5 px-3 rounded-xl bg-gulabiPink text-white font-black text-xs uppercase flex items-center justify-center gap-1.5">
+              📸 SNAP!
             </button>
-
-            <label class="cursor-pointer py-2.5 px-4 rounded-xl bg-mahogany border border-diyaGold/40 hover:border-amberFlame text-cream text-xs font-bold flex items-center justify-center gap-2 transition-all text-center">
-              <span>🖼️</span> गैलरी (Upload)
+            <label class="btn-pop py-2.5 px-3 rounded-xl bg-softCream text-pureBlack font-black text-xs uppercase flex items-center justify-center gap-1.5 cursor-pointer text-center">
+              <span>🖼️</span> UPLOAD
               <input type="file" id="photo-upload-input" accept="image/*" class="hidden">
             </label>
           </div>
 
-          <!-- Bilingual Sticker Selector -->
-          <div class="space-y-2 pt-2 border-t border-diyaGold/30">
-            <label class="block text-xs text-diyaGold font-bold">✨ फोटो पर दिवाली स्टीकर लगाएं (Add Stickers):</label>
+          <!-- Stickers -->
+          <div class="space-y-1.5 pt-2 border-t-2 border-pureBlack/15">
+            <span class="text-xs font-black uppercase text-pureBlack block">STICKERS SLAP KARO:</span>
             <div class="flex flex-wrap gap-1.5">
-              <button type="button" data-sticker="✨ पटाखा FIT" class="diwali-sticker-btn text-[11px] px-3 py-1 rounded-full bg-velvet border border-diyaGold/40 hover:border-amberFlame text-sand font-medium transition-all">
+              <button type="button" data-sticker="✨ पटाखा FIT" class="diwali-sticker-btn btn-pop text-[11px] px-2.5 py-1 rounded-full bg-white text-pureBlack font-bold">
                 ✨ पटाखा FIT
               </button>
-              <button type="button" data-sticker="🃏 तीन पत्ती PRO" class="diwali-sticker-btn text-[11px] px-3 py-1 rounded-full bg-velvet border border-diyaGold/40 hover:border-amberFlame text-sand font-medium transition-all">
-                🃏 तीन पत्ती PRO
+              <button type="button" data-sticker="🃏 BLIND MASTER" class="diwali-sticker-btn btn-pop text-[11px] px-2.5 py-1 rounded-full bg-white text-pureBlack font-bold">
+                🃏 BLIND MASTER
               </button>
-              <button type="button" data-sticker="🍬 काजू कतली LOVER" class="diwali-sticker-btn text-[11px] px-3 py-1 rounded-full bg-velvet border border-diyaGold/40 hover:border-amberFlame text-sand font-medium transition-all">
-                🍬 काजू कतली LOVER
+              <button type="button" data-sticker="🍬 KAJU KATLI CREW" class="diwali-sticker-btn btn-pop text-[11px] px-2.5 py-1 rounded-full bg-white text-pureBlack font-bold">
+                🍬 KAJU KATLI CREW
               </button>
-              <button type="button" data-sticker="🪔 घर वाली दिवाली" class="diwali-sticker-btn text-[11px] px-3 py-1 rounded-full bg-velvet border border-diyaGold/40 hover:border-amberFlame text-sand font-medium transition-all">
-                🪔 घर वाली दिवाली
+              <button type="button" data-sticker="🔥 +10,000 AURA" class="diwali-sticker-btn btn-pop text-[11px] px-2.5 py-1 rounded-full bg-white text-pureBlack font-bold">
+                🔥 +10,000 AURA
               </button>
             </div>
           </div>
 
-          <!-- Name & Caption Input -->
-          <div class="space-y-2.5">
-            <input type="text" id="snap-name" placeholder="आपका नाम / Your Name & @Insta" 
-              class="w-full px-4 py-2.5 rounded-xl bg-velvet/90 border border-diyaGold/40 text-cream text-xs placeholder:text-sand/50 focus:outline-none focus:border-amberFlame">
-            <input type="text" id="snap-caption" placeholder="कैप्शन लिखें / Caption (e.g. Kurta ready, taash table waiting!)" 
-              class="w-full px-4 py-2.5 rounded-xl bg-velvet/90 border border-diyaGold/40 text-cream text-xs placeholder:text-sand/50 focus:outline-none focus:border-amberFlame">
+          <!-- Inputs -->
+          <div class="space-y-2">
+            <input type="text" id="snap-name" placeholder="Aapka Naam & @Instagram" class="w-full px-3.5 py-2.5 rounded-xl border-2 border-pureBlack text-xs font-semibold focus:outline-none focus:bg-sunYellow/10">
+            <input type="text" id="snap-caption" placeholder="Ek mast caption (e.g. Saree sorted, scene on!)" class="w-full px-3.5 py-2.5 rounded-xl border-2 border-pureBlack text-xs font-semibold focus:outline-none focus:bg-sunYellow/10">
           </div>
 
-          <button id="pin-polaroid-btn" type="button" class="w-full py-3.5 rounded-full bg-gradient-to-r from-raniPink via-amberFlame to-marigold text-white font-extrabold text-xs uppercase tracking-wider shadow-pink-glow hover:opacity-95 transition-all">
-            📌 महफ़िल वॉल पर लगाएं (Pin To Villa Wall)
+          <button id="pin-polaroid-btn" type="button" class="btn-pop w-full py-3.5 rounded-xl bg-festiveRed text-softCream font-black text-xs uppercase tracking-wider">
+            📌 WALL PE PIN KARO
           </button>
+
         </div>
 
-        <!-- Right Column: Live Polaroids Masonry -->
+        <!-- Right: The Polaroid Wall Grid -->
         <div class="lg:col-span-7 space-y-4">
           <div class="flex items-center justify-between">
-            <span class="text-xs text-sand/90 font-bold uppercase tracking-wider">यारों की महफ़िल // LIVE GUEST POLAROIDS</span>
-            <span id="wall-count-badge" class="text-xs px-3 py-0.5 rounded-full bg-gradient-to-r from-raniPink to-amberFlame border border-diyaGold text-white font-bold">2 Polaroids Pinned</span>
+            <span class="text-xs font-black uppercase tracking-wider text-pureBlack">YAARON KA LOOKBOOK</span>
+            <span id="wall-count-badge" class="px-3 py-1 rounded-full bg-sunYellow border-2 border-pureBlack text-pureBlack font-black text-xs">2 Polaroids Pinned</span>
           </div>
 
-          <div id="polaroid-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <!-- Populated by JavaScript -->
+          <div id="polaroid-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <!-- Populated via JS -->
           </div>
         </div>
 
       </div>
-    </section>
 
-    <!-- 6. EVENING FLOW ("रात का माहौल <-> FLOW OF THE NIGHT") -->
-    <section id="baithak" class="space-y-10 scroll-mt-24">
-      <div class="text-center max-w-2xl mx-auto space-y-2">
-        <span class="text-xs uppercase tracking-widest text-amberFlame block font-bold">2ND NOVEMBER 2026 // SECTOR 112 VILLA</span>
-        <h2 class="font-hindiDisplay text-3xl sm:text-5xl text-cream min-h-[3rem] flex items-center justify-center">
-          <span class="morph-text gold-gradient-text" data-hi="रात का माहौल" data-en="FLOW OF THE NIGHT">रात का माहौल</span>
+    </div>
+
+  </section>
+
+
+  <!-- ================= CHAPTER 6: SHAGUN RSVP GATE (Get Pass) ================= -->
+  <section id="rsvp-scene" class="py-16 px-4 sm:px-8 border-b-4 border-pureBlack bg-festiveRed text-softCream">
+    
+    <div class="max-w-3xl mx-auto space-y-8">
+      
+      <div class="text-center space-y-2">
+        <span class="inline-block px-4 py-1.5 rounded-full bg-sunYellow text-pureBlack font-black text-xs uppercase border-2 border-pureBlack shadow-pop-sm">
+          💌 30 INVITES ONLY // FIRST COME FIRST SERVE
+        </span>
+        <h2 class="font-title font-black text-5xl sm:text-6xl text-softCream uppercase drop-shadow-[4px_4px_0px_#000]">
+          SHAGUN RSVP PASS
         </h2>
-        <p class="text-xs sm:text-sm text-sand/85">
-          Shuruati welcome shots se lekar midnight Kaju Katli aur Bollywood naach-gaane tak ka poora safar:
+        <p class="font-body text-sm text-softCream/90 font-medium max-w-lg mx-auto">
+          Apni entry lock karo. Form bharte hi aapka <strong>Digital Shagun Pass</strong> ready ho jayega aur WhatsApp pe Google Maps gate pin drop ho jayegi!
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
-        <!-- Slot 1 -->
-        <div class="p-6 rounded-3xl festive-card relative space-y-2 border-t-2 border-t-amberFlame">
-          <span class="text-xs font-extrabold text-amberFlame tracking-wider">08:30 PM</span>
-          <h3 class="font-hindiDisplay text-xl text-cream morph-text" data-hi="स्वागत और पहला जाम" data-en="Warm Welcome & Shots">स्वागत और पहला जाम</h3>
-          <p class="font-display italic text-sm text-diyaGold">Villa Entry & Green Apple Shots</p>
-          <p class="text-xs text-sand/85 leading-relaxed">
-            Fairy-lit villa lawn mein yaaron se milna, Polaroid fit-check aur chilled 30ml Green Apple welcome shots.
-          </p>
+      <!-- Shagun Lifafa Box Card -->
+      <div class="card-pop bg-softCream text-pureBlack p-6 sm:p-10 rounded-3xl relative">
+        
+        <!-- Form -->
+        <form id="villa-rsvp-form" onsubmit="handleVillaRSVP(event)" class="space-y-5">
+          
+          <!-- Name & Insta -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-black uppercase mb-1">1. Aapka Naam (Full Name) *</label>
+              <input type="text" id="rsvp-name" required placeholder="e.g. Aryan Malhotra" class="w-full px-4 py-3 rounded-xl border-2 border-pureBlack text-xs font-bold focus:outline-none focus:bg-sunYellow/20">
+            </div>
+            <div>
+              <label class="block text-xs font-black uppercase mb-1">2. Instagram Handle (@) *</label>
+              <input type="text" id="rsvp-insta" required placeholder="@aryan_malhotra" class="w-full px-4 py-3 rounded-xl border-2 border-pureBlack text-xs font-bold focus:outline-none focus:bg-sunYellow/20">
+            </div>
+          </div>
+
+          <!-- Gender / Entry Category Selector -->
+          <div>
+            <label class="block text-xs font-black uppercase mb-1.5">3. Entry Category *</label>
+            <div class="grid grid-cols-3 gap-3" id="gender-selector">
+              <button type="button" data-gender="Male (गबरू) 🕺" class="gender-pill btn-pop p-3 rounded-xl bg-sunYellow text-center">
+                <span class="text-xl block mb-0.5">🕺</span>
+                <span class="text-xs font-black block">Male</span>
+                <span class="text-[9px] font-bold block text-pureBlack/80">गबरू Entry</span>
+              </button>
+              <button type="button" data-gender="Female (पटाखा) 💃" class="gender-pill btn-pop p-3 rounded-xl bg-white text-center">
+                <span class="text-xl block mb-0.5">💃</span>
+                <span class="text-xs font-black block">Female</span>
+                <span class="text-[9px] font-bold block text-pureBlack/80">पटाखा Entry</span>
+              </button>
+              <button type="button" data-gender="Couple (जोड़ी) 👩‍❤️‍👨" class="gender-pill btn-pop p-3 rounded-xl bg-white text-center">
+                <span class="text-xl block mb-0.5">👩‍❤️‍👨</span>
+                <span class="text-xs font-black block">Couple</span>
+                <span class="text-[9px] font-bold block text-pureBlack/80">जोड़ी Pass</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- WhatsApp Number -->
+          <div>
+            <label class="block text-xs font-black uppercase mb-1">4. WhatsApp Number (Approval & Location Pin Ke Liye) *</label>
+            <div class="flex rounded-xl overflow-hidden border-2 border-pureBlack bg-white">
+              <span class="px-3.5 py-3 bg-sunYellow border-r-2 border-pureBlack font-black text-xs select-none">
+                🇮🇳 +91
+              </span>
+              <input type="tel" id="rsvp-phone" required pattern="[0-9]{10}" maxlength="10" placeholder="9876543210 (10-digit number)" class="w-full px-3.5 py-3 text-xs font-black tracking-wider focus:outline-none">
+            </div>
+            <p class="text-[10px] text-pureBlack/70 font-semibold mt-1">
+              📲 Approval status aur Noida Villa ka exact Google Maps pin isi number pe aayega.
+            </p>
+          </div>
+
+          <!-- Taash Vibe -->
+          <div>
+            <label class="block text-xs font-black uppercase mb-1">5. Aapka Party Vibe // Taash Strategy</label>
+            <select id="rsvp-game" class="w-full px-4 py-3 rounded-xl border-2 border-pureBlack text-xs font-bold focus:outline-none focus:bg-sunYellow/20">
+              <option value="Blind Player (+10,000 Aura) 🃏">Teen Patti Blind Master (+10,000 Aura)</option>
+              <option value="Poker Bluff Master ♠️">Poker Bluff King / Queen</option>
+              <option value="Only Here For Daru, Mithai & Dance Floor 💃">Sirf Daru, Mithai aur Dance Floor!</option>
+            </select>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="btn-pop w-full py-4 rounded-full bg-festiveRed text-softCream font-black text-sm uppercase tracking-wider">
+            HAAN BHAI, PASS CONFIRM KARO! 🎟️
+          </button>
+
+        </form>
+
+        <!-- Pass Result Screen (Shown After Submit) -->
+        <div id="shahi-pass-container" class="hidden space-y-6 text-center pt-2">
+          
+          <div class="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-cardGreen text-sunYellow font-black text-xs border-2 border-pureBlack shadow-pop-sm uppercase">
+            <span>✅ SCENE LOCKED • PASS RESERVED</span>
+          </div>
+
+          <!-- Visual Pass (Emerald & Gold) -->
+          <div class="card-pop bg-cardGreen text-softCream p-6 rounded-2xl max-w-md mx-auto text-left relative shadow-pop-lg">
+            
+            <div class="flex items-center justify-between border-b-2 border-sunYellow/30 pb-3">
+              <div>
+                <p class="text-[10px] font-black uppercase tracking-widest text-sunYellow">DIL WAALI DIWALI</p>
+                <h4 class="font-title font-black text-xl text-softCream uppercase">PLOT X // VILLA PASS</h4>
+              </div>
+              <div class="text-right">
+                <span id="pass-code" class="px-2 py-0.5 rounded bg-sunYellow text-pureBlack font-mono font-black text-xs">#PX-942</span>
+                <p class="text-[9px] text-softCream/80 mt-0.5 font-bold">2ND NOV • 8:30 PM</p>
+              </div>
+            </div>
+
+            <div class="py-3.5 space-y-2.5 text-xs font-medium">
+              <div class="flex justify-between items-center">
+                <span class="text-softCream/70 font-semibold">ATTENDEE:</span>
+                <span id="pass-guest-name" class="font-black text-softCream text-sm">Aryan Malhotra</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-softCream/70 font-semibold">CATEGORY:</span>
+                <span id="pass-guest-gender" class="font-bold text-sunYellow">Male (गबरू) 🕺</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-softCream/70 font-semibold">WHATSAPP:</span>
+                <span id="pass-guest-phone" class="font-bold text-softCream font-mono">+91 9876543210</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-softCream/70 font-semibold">VENUE:</span>
+                <span class="font-bold text-sunYellow">Sector 112, Noida Private Villa</span>
+              </div>
+            </div>
+
+            <div class="p-2.5 rounded-xl bg-pureBlack/40 border border-white/20 text-[10px] font-bold text-sunYellow flex items-center gap-2">
+              <span>📲</span>
+              <span>Host approval & Google Maps pin WhatsApp pe direct aayegi!</span>
+            </div>
+
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="flex flex-wrap justify-center gap-3">
+            <button id="download-shahi-pass" type="button" class="btn-pop px-6 py-3 rounded-full bg-sunYellow text-pureBlack font-black text-xs uppercase tracking-wide flex items-center gap-2">
+              <span>💾</span> SAVE PASS IMAGE
+            </button>
+            <button id="edit-rsvp-btn" type="button" class="btn-pop px-4 py-3 rounded-full bg-white text-pureBlack font-bold text-xs uppercase">
+              ✏️ EDIT DETAILS
+            </button>
+          </div>
+
         </div>
 
-        <!-- Slot 2 -->
-        <div class="p-6 rounded-3xl festive-card relative space-y-2 border-t-2 border-t-peacock">
-          <span class="text-xs font-extrabold text-peacock tracking-wider">09:45 PM</span>
-          <h3 class="font-hindiDisplay text-xl text-cream morph-text" data-hi="ताश और गरम चखना" data-en="Teen Patti & Starters">ताश और गरम चखना</h3>
-          <p class="font-display italic text-sm text-diyaGold">Baithak Goes Live</p>
-          <p class="text-xs text-sand/85 leading-relaxed">
-            Garma-garam tikkas aur starters serve honge, aur indoor lounge mein Teen Patti & Poker ke high-energy rounds!
-          </p>
-        </div>
-
-        <!-- Slot 3 -->
-        <div class="p-6 rounded-3xl festive-card relative space-y-2 border-t-2 border-t-raniPink">
-          <span class="text-xs font-extrabold text-raniPink tracking-wider">11:15 PM</span>
-          <h3 class="font-hindiDisplay text-xl text-cream morph-text" data-hi="बवाल गाने और ठुमके" data-en="Bollywood & Aux Bangers">बवाल गाने और ठुमके</h3>
-          <p class="font-display italic text-sm text-diyaGold">Jungle Juice & Dance Floor</p>
-          <p class="text-xs text-sand/85 leading-relaxed">
-            Jungle Juice punch bowl live, Bollywood retro hits se lekar Punjabi bangers tak—poora villa dance floor!
-          </p>
-        </div>
-
-        <!-- Slot 4 -->
-        <div class="p-6 rounded-3xl festive-card relative space-y-2 border-t-2 border-t-diyaGold">
-          <span class="text-xs font-extrabold text-diyaGold tracking-wider">01:30 AM</span>
-          <h3 class="font-hindiDisplay text-xl text-cream morph-text" data-hi="मिठाई और गप-शप" data-en="Mithai, Feast & Chill">मिठाई और गप-शप</h3>
-          <p class="font-display italic text-sm text-diyaGold">Kaju Katli & Late Night Feast</p>
-          <p class="text-xs text-sand/85 leading-relaxed">
-            Late-night dinner, garma-garam Gulab Jamun & Kaju Katli ke dibbe, aur lawn mein baith kar lambi baatein.
-          </p>
-        </div>
       </div>
-    </section>
 
-  </main>
+    </div>
 
-  <!-- Toast Notification -->
-  <div id="warm-toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none px-5 py-3.5 rounded-2xl bg-mahogany border-2 border-diyaGold shadow-pink-glow flex items-center gap-3 text-xs text-cream font-semibold">
-    <span id="warm-toast-icon" class="text-base">🪔</span>
-    <span id="warm-toast-msg">शगुन अपडेट!</span>
-  </div>
+  </section>
 
-  <!-- Footer -->
-  <footer class="mt-20 border-t border-diyaGold/30 bg-velvet/95 py-10 px-4 text-center space-y-2">
-    <p class="font-hindiDisplay text-2xl text-amberFlame morph-text" data-hi="शुभ दिवाली • ताश, जाम, मिठाई और यार" data-en="HAPPY DIWALI • CARDS, BOOZE, SWEETS & TRIBE">शुभ दिवाली • ताश, जाम, मिठाई और यार</p>
-    <p class="font-display text-lg text-cream">PLOT X // Private Villa, Sector 112, Noida • 2nd November 2026</p>
-    <p class="text-xs text-sand/70">Official approval & exact Villa gate pin shared via WhatsApp upon RSVP.</p>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-pureBlack text-softCream py-10 px-4 text-center border-t-4 border-pureBlack space-y-3">
+    <div class="flex items-center justify-center gap-2 text-2xl font-black text-sunYellow">
+      <span>🪔</span>
+      <span class="font-title uppercase tracking-widest">PLOT X : DIWALI SCENE</span>
+      <span>🪔</span>
+    </div>
+    <p class="font-script italic text-xl text-softCream">
+      “Scene set hai, tu bas aaja.”
+    </p>
+    <p class="text-xs text-softCream/60 font-semibold">
+      PLOT X © 2026 // Private Villa, Sector 112, Noida • Strictly 30 Headcount Cap.
+    </p>
   </footer>
 
-  <!-- Interactive Scripts -->
+
+  <!-- ================= JAVASCRIPT LOGIC ================= -->
   <script>
-    // --- 1. Warm Toast Helper ---
-    function showWarmToast(message, icon = '🪔') {
-      const toast = document.getElementById('warm-toast');
-      document.getElementById('warm-toast-msg').innerText = message;
-      document.getElementById('warm-toast-icon').innerText = icon;
-      toast.classList.remove('translate-y-24', 'opacity-0');
-      toast.classList.add('translate-y-0', 'opacity-100');
-      setTimeout(() => {
-        toast.classList.add('translate-y-24', 'opacity-0');
-        toast.classList.remove('translate-y-0', 'opacity-100');
-      }, 3600);
-    }
-
-    // --- 2. Bilingual Text Engine (Manual Switch Only - Auto-convert OFF) ---
-    let currentLang = 'hi';
-
-    function flipAllMorphTexts() {
-      currentLang = currentLang === 'hi' ? 'en' : 'hi';
-      const elements = document.querySelectorAll('.morph-text');
-      const indicator = document.getElementById('lang-indicator-text');
-      if (indicator) {
-        indicator.innerText = currentLang === 'hi' ? 'हिन्दी ⇄ EN' : 'EN ⇄ हिन्दी';
-      }
-
-      elements.forEach((el) => {
-        el.classList.add('morph-fade-out');
-        setTimeout(() => {
-          const nextText = el.getAttribute(`data-${currentLang}`);
-          if (nextText) el.innerText = nextText;
-          el.classList.remove('morph-fade-out');
-          el.classList.add('morph-fade-in');
-        }, 220);
-      });
-    }
-
-    // Manual click only
-    document.getElementById('lang-flip-btn').addEventListener('click', () => {
-      flipAllMorphTexts();
-      showWarmToast(
-        currentLang === 'hi' ? "भाषा: हिन्दी चुनी गई (Language: Hindi)" : "Language: English selected (भाषा: अंग्रेजी)",
-        "✨"
-      );
-    });
-
-    // --- 3. Countdown to 2nd November 2026, 8:30 PM ---
-    function startNov2Countdown() {
-      const eventDate = new Date('2026-11-02T20:30:00+05:30').getTime();
-
-      function updateTimer() {
-        const now = new Date().getTime();
-        const diff = eventDate - now;
-
-        if (diff <= 0) {
-          document.getElementById('cd-days').innerText = '00';
-          document.getElementById('cd-hours').innerText = '00';
-          document.getElementById('cd-mins').innerText = '00';
-          document.getElementById('cd-secs').innerText = '00';
-          return;
-        }
-
-        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const s = Math.floor((diff % (1000 * 60)) / 1000);
-
-        document.getElementById('cd-days').innerText = String(d).padStart(2, '0');
-        document.getElementById('cd-hours').innerText = String(h).padStart(2, '0');
-        document.getElementById('cd-mins').innerText = String(m).padStart(2, '0');
-        document.getElementById('cd-secs').innerText = String(s).padStart(2, '0');
-      }
-
-      updateTimer();
-      setInterval(updateTimer, 1000);
-    }
-    startNov2Countdown();
-
-    // --- 4. Upgraded Colorful Sparklers & Marigold Petals Canvas ---
-    const canvas = document.getElementById('diya-canvas');
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-
-    function resizeDiyaCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resizeDiyaCanvas);
-    resizeDiyaCanvas();
-
-    // Festive Marigold Petal / Sparkler Particle
-    class FestiveParticle {
-      constructor() {
-        this.reset();
-      }
-      reset() {
-        this.type = Math.random() > 0.4 ? 'petal' : 'spark';
-        this.x = Math.random() * canvas.width;
-        this.y = this.type === 'petal' ? -20 : canvas.height + 20;
-        this.size = this.type === 'petal' ? Math.random() * 5 + 4 : Math.random() * 2.5 + 1.2;
-        this.speedY = this.type === 'petal' ? Math.random() * 0.9 + 0.4 : -(Math.random() * 0.8 + 0.3);
-        this.speedX = Math.random() * 0.8 - 0.4;
-        this.sway = Math.random() * 0.03 + 0.01;
-        this.angle = Math.random() * Math.PI * 2;
-        this.rotation = Math.random() * Math.PI * 2;
-        this.rotSpeed = (Math.random() - 0.5) * 0.03;
-        this.alpha = Math.random() * 0.65 + 0.3;
-        
-        // Rich celebratory colors: Rani Pink, Marigold Orange, Diya Gold, Peacock Teal
-        const palette = ['#ff007f', '#ff7b00', '#ffd166', '#00f5d4', '#ffa200'];
-        this.color = palette[Math.floor(Math.random() * palette.length)];
-      }
-      update() {
-        this.y += this.speedY;
-        this.angle += this.sway;
-        this.x += Math.sin(this.angle) * 0.75 + this.speedX;
-        this.rotation += this.rotSpeed;
-
-        if (this.type === 'petal' && this.y > canvas.height + 30) this.reset();
-        if (this.type === 'spark' && this.y < -30) this.reset();
-      }
-      draw() {
-        ctx.save();
-        ctx.translate(this.x, this.y);
-        ctx.rotate(this.rotation);
-        ctx.globalAlpha = this.alpha;
-
-        if (this.type === 'petal') {
-          // Floating Marigold Petal Shape
-          ctx.beginPath();
-          ctx.moveTo(0, -this.size);
-          ctx.quadraticCurveTo(this.size * 0.8, 0, 0, this.size);
-          ctx.quadraticCurveTo(-this.size * 0.8, 0, 0, -this.size);
-          ctx.fillStyle = this.color;
-          ctx.shadowBlur = 10;
-          ctx.shadowColor = this.color;
-          ctx.fill();
-        } else {
-          // Twinkling Phuljhadi Spark Star
-          ctx.beginPath();
-          ctx.arc(0, 0, this.size, 0, Math.PI * 2);
-          ctx.fillStyle = this.color;
-          ctx.shadowBlur = 14;
-          ctx.shadowColor = this.color;
-          ctx.fill();
-        }
-
-        ctx.restore();
-      }
-    }
-
-    for (let i = 0; i < 48; i++) {
-      particles.push(new FestiveParticle());
-    }
-
-    function animateFestiveParticles() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(p => {
-        p.update();
-        p.draw();
-      });
-      requestAnimationFrame(animateFestiveParticles);
-    }
-    animateFestiveParticles();
-
-    // Mouse movement sparkles
-    window.addEventListener('mousemove', (e) => {
-      if (Math.random() > 0.6) {
-        const p = new FestiveParticle();
-        p.x = e.clientX + (Math.random() * 20 - 10);
-        p.y = e.clientY + (Math.random() * 20 - 10);
-        p.speedY = (Math.random() - 0.5) * 1.5;
-        p.speedX = (Math.random() - 0.5) * 1.5;
-        p.size = Math.random() * 2 + 1;
-        p.alpha = 0.9;
-        particles.push(p);
-        if (particles.length > 70) particles.shift();
-      }
-    });
-
-    // --- 5. Soft Festive Sitar / Warm Chimes Audio (Web Audio API) ---
+    // --- 1. Sound Synth (Festive Sitar & Chimes) ---
     let audioCtx = null;
     let soundPlaying = false;
     let chimeTimer = null;
+    const notes = [261.63, 293.66, 329.63, 370.00, 392.00, 440.00, 493.88, 523.25];
 
-    const festiveNotes = [261.63, 293.66, 329.63, 370.00, 392.00, 440.00, 493.88, 523.25];
-
-    function playWarmPluck(freq, duration = 1.4) {
+    function playPluck(freq) {
       if (!audioCtx) return;
       const now = audioCtx.currentTime;
       const osc = audioCtx.createOscillator();
       const gain = audioCtx.createGain();
-
       osc.type = 'triangle';
       osc.frequency.setValueAtTime(freq, now);
-
       gain.gain.setValueAtTime(0.001, now);
-      gain.gain.linearRampToValueAtTime(0.065, now + 0.04);
-      gain.gain.exponentialRampToValueAtTime(0.0008, now + duration);
-
+      gain.gain.linearRampToValueAtTime(0.06, now + 0.04);
+      gain.gain.exponentialRampToValueAtTime(0.0008, now + 1.2);
       osc.connect(gain);
       gain.connect(audioCtx.destination);
       osc.start(now);
-      osc.stop(now + duration);
+      osc.stop(now + 1.2);
     }
 
     document.getElementById('sound-btn').addEventListener('click', () => {
-      if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      }
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       if (audioCtx.state === 'suspended') audioCtx.resume();
-
       soundPlaying = !soundPlaying;
       const label = document.getElementById('sound-text');
-
       if (soundPlaying) {
-        label.innerText = 'महफ़िल धुन: ON ✨';
-        label.classList.add('text-amberFlame');
-        playWarmPluck(392.00);
+        label.innerText = 'Sound: ON ✨';
+        playPluck(392.00);
         chimeTimer = setInterval(() => {
-          const randomNote = festiveNotes[Math.floor(Math.random() * festiveNotes.length)];
-          playWarmPluck(randomNote, 1.7);
-        }, 900);
-        showWarmToast("मधुर दिवाली धुन शुरू! (Festive Lounge Chimes ON)", "🪕");
+          const r = notes[Math.floor(Math.random() * notes.length)];
+          playPluck(r);
+        }, 950);
       } else {
-        label.innerText = 'महफ़िल धुन: OFF';
-        label.classList.remove('text-amberFlame');
+        label.innerText = 'Sound: OFF';
         clearInterval(chimeTimer);
-        showWarmToast("धुन बंद कर दी गई है (Audio Muted)", "🔇");
       }
     });
 
-    // --- 6. Streamlined Shagun RSVP (Gender + WhatsApp Number Approval) ---
+    // --- 2. Add to Google Calendar Helper ---
+    function addToGoogleCalendar() {
+      const title = encodeURIComponent("PLOT X // Dil Waali Diwali Villa Scene 🪔");
+      const details = encodeURIComponent("Plot X Diwali Villa Scene at Sector 112 Noida! High-stakes Teen Patti, drinks, hot starters & bangers.");
+      const location = encodeURIComponent("Sector 112, Noida Private Villa");
+      const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=20261102T150000Z/20261102T220000Z&details=${details}&location=${location}`;
+      window.open(url, '_blank');
+    }
+
+    // --- 3. Shagun RSVP Form Handler ---
     let selectedGender = "Male (गबरू) 🕺";
 
     document.querySelectorAll('.gender-pill').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.gender-pill').forEach(b => {
-          b.classList.remove('border-2', 'border-amberFlame', 'shadow-candle');
-          b.classList.add('border', 'border-diyaGold/35');
+          b.classList.remove('bg-sunYellow');
+          b.classList.add('bg-white');
         });
-        btn.classList.remove('border', 'border-diyaGold/35');
-        btn.classList.add('border-2', 'border-amberFlame', 'shadow-candle');
+        btn.classList.remove('bg-white');
+        btn.classList.add('bg-sunYellow');
         selectedGender = btn.getAttribute('data-gender');
       });
     });
@@ -1131,27 +957,22 @@
       const name = document.getElementById('rsvp-name').value.trim() || "VIP Guest";
       const insta = document.getElementById('rsvp-insta').value.trim() || "@guest";
       const phone = document.getElementById('rsvp-phone').value.trim();
-      const game = document.getElementById('rsvp-game').value;
 
       if (!/^[0-9]{10}$/.test(phone)) {
-        showWarmToast("कृपया सही 10-अंकों का WhatsApp नंबर डालें!", "⚠️");
+        alert("Bhai, sahi 10-digit WhatsApp number daalo!");
         return;
       }
 
       const randomNum = Math.floor(100 + Math.random() * 900);
-
-      document.getElementById('pass-code').innerText = `#SEC112-${randomNum}`;
+      document.getElementById('pass-code').innerText = `#PX-${randomNum}`;
       document.getElementById('pass-guest-name').innerText = name;
       document.getElementById('pass-guest-gender').innerText = selectedGender;
       document.getElementById('pass-guest-phone').innerText = `+91 ${phone}`;
-      document.getElementById('pass-guest-insta').innerText = insta.startsWith('@') ? insta : `@${insta}`;
-      document.getElementById('pass-guest-game').innerText = game;
 
       document.getElementById('villa-rsvp-form').classList.add('hidden');
       document.getElementById('shahi-pass-container').classList.remove('hidden');
 
-      if (audioCtx && soundPlaying) playWarmPluck(523.25, 1.5);
-      showWarmToast(`निमंत्रण दर्ज! +91 ${phone} पर WhatsApp Approval आएगा 📲`, "✅");
+      if (audioCtx && soundPlaying) playPluck(523.25);
     };
 
     document.getElementById('edit-rsvp-btn').addEventListener('click', () => {
@@ -1159,91 +980,93 @@
       document.getElementById('villa-rsvp-form').classList.remove('hidden');
     });
 
-    // High-Res Royal Festive Shagun Pass Download
+    // --- 4. High-Res Visual Pass Download (Canvas Graphic) ---
     document.getElementById('download-shahi-pass').addEventListener('click', () => {
       const guestName = document.getElementById('pass-guest-name').innerText;
       const code = document.getElementById('pass-code').innerText;
       const gender = document.getElementById('pass-guest-gender').innerText;
       const phone = document.getElementById('pass-guest-phone').innerText;
-      const insta = document.getElementById('pass-guest-insta').innerText;
-      const game = document.getElementById('pass-guest-game').innerText;
 
       const c = document.createElement('canvas');
       c.width = 800;
-      c.height = 940;
-      const ctxP = c.getContext('2d');
+      c.height = 960;
+      const ctx = c.getContext('2d');
 
-      // Royal Midnight Violet-Ruby Gradient
-      const bgGrad = ctxP.createLinearGradient(0, 0, 800, 940);
-      bgGrad.addColorStop(0, '#2d0a4e');
-      bgGrad.addColorStop(0.5, '#19042b');
-      bgGrad.addColorStop(1, '#0e021a');
-      ctxP.fillStyle = bgGrad;
-      ctxP.fillRect(0, 0, 800, 940);
+      // Base Festive Red background
+      ctx.fillStyle = '#E12A2A';
+      ctx.fillRect(0, 0, 800, 960);
 
-      // Festive Ambient Glows on canvas
-      const glowGrad = ctxP.createRadialGradient(700, 100, 10, 700, 100, 350);
-      glowGrad.addColorStop(0, 'rgba(255, 0, 127, 0.35)');
-      glowGrad.addColorStop(1, 'transparent');
-      ctxP.fillStyle = glowGrad;
-      ctxP.fillRect(0, 0, 800, 940);
+      // Neo-brutalist solid black border
+      ctx.strokeStyle = '#000000';
+      ctx.lineWidth = 12;
+      ctx.strokeRect(20, 20, 760, 920);
 
-      // Double Royal Gold & Rani Pink Border
-      ctxP.strokeStyle = '#ffd166';
-      ctxP.lineWidth = 6;
-      ctxP.strokeRect(30, 30, 740, 880);
-      ctxP.strokeStyle = '#ff007f';
-      ctxP.lineWidth = 2;
-      ctxP.strokeRect(44, 44, 712, 852);
+      // Inner Emerald Card Box
+      ctx.fillStyle = '#12543A';
+      ctx.fillRect(50, 50, 700, 860);
+      ctx.lineWidth = 6;
+      ctx.strokeRect(50, 50, 700, 860);
 
-      // Header Text
-      ctxP.fillStyle = '#ffaa00';
-      ctxP.font = 'bold 26px sans-serif';
-      ctxP.fillText('🪔 शुभ दिवाली • शगुन का निमंत्रण (OFFICIAL PASS)', 80, 115);
+      // Yellow Header Bar
+      ctx.fillStyle = '#FFD000';
+      ctx.fillRect(50, 50, 700, 110);
+      ctx.strokeRect(50, 50, 700, 110);
 
-      ctxP.fillStyle = '#ffffff';
-      ctxP.font = 'bold 44px serif';
-      ctxP.fillText('PLOT X : THE VILLA SCENE', 80, 175);
+      ctx.fillStyle = '#000000';
+      ctx.font = 'bold 36px sans-serif';
+      ctx.fillText('🪔 PLOT X : DIL WAALI DIWALI', 80, 118);
 
-      ctxP.fillStyle = '#ffd166';
-      ctxP.font = 'bold 20px sans-serif';
-      ctxP.fillText(`2ND NOVEMBER 2026 • SECTOR 112, NOIDA  |  ${code}`, 80, 215);
+      // Card Content
+      ctx.fillStyle = '#FFD000';
+      ctx.font = 'bold 24px sans-serif';
+      ctx.fillText('OFFICIAL VILLA ENTRY PASS', 80, 220);
 
-      ctxP.strokeStyle = 'rgba(255, 209, 102, 0.45)';
-      ctxP.beginPath();
-      ctxP.moveTo(80, 245);
-      ctxP.lineTo(720, 245);
-      ctxP.stroke();
+      ctx.fillStyle = '#FFFDF0';
+      ctx.font = 'bold 44px sans-serif';
+      ctx.fillText(code, 80, 280);
 
-      const drawRow = (label, val, y, valColor = '#ffffff') => {
-        ctxP.fillStyle = '#f3e8f7';
-        ctxP.font = 'bold 18px sans-serif';
-        ctxP.fillText(label, 80, y);
-        ctxP.fillStyle = valColor;
-        ctxP.font = 'bold 26px sans-serif';
-        ctxP.fillText(val, 80, y + 34);
+      const drawRow = (label, val, y) => {
+        ctx.fillStyle = '#FFD000';
+        ctx.font = 'bold 18px sans-serif';
+        ctx.fillText(label, 80, y);
+        ctx.fillStyle = '#FFFDF0';
+        ctx.font = 'bold 30px sans-serif';
+        ctx.fillText(val, 80, y + 36);
       };
 
-      drawRow('मेहमान / GUEST NAME:', guestName.toUpperCase(), 300, '#ffffff');
-      drawRow('एंट्री कैटेगरी / GENDER CATEGORY:', gender, 395, '#ffd166');
-      drawRow('व्हाट्सएप नंबर / WHATSAPP NO (FOR PIN):', phone, 490, '#00f5d4');
-      drawRow('इंस्टाग्राम / INSTAGRAM:', insta, 585, '#f3e8f7');
-      drawRow('महफ़िल अंदाज़ / PARTY VIBE:', game, 680, '#ff007f');
-      drawRow('पता / VENUE:', 'Private Villa, Sector 112, Noida (2nd Nov)', 775, '#ffaa00');
+      drawRow('ATTENDEE NAME:', guestName.toUpperCase(), 370);
+      drawRow('ENTRY CATEGORY:', gender, 480);
+      drawRow('WHATSAPP NO:', phone, 590);
+      drawRow('VENUE:', 'Sector 112, Noida Private Villa', 700);
 
-      ctxP.fillStyle = '#ffd166';
-      ctxP.font = 'bold 16px sans-serif';
-      ctxP.fillText('📲 Official Host Approval & Exact Villa Map Pin will arrive on your WhatsApp.', 80, 865);
+      // Stamp Graphic
+      ctx.fillStyle = '#FFD000';
+      ctx.beginPath();
+      ctx.arc(630, 730, 70, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = '#000000';
+      ctx.lineWidth = 4;
+      ctx.stroke();
+
+      ctx.fillStyle = '#000000';
+      ctx.font = 'bold 18px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('GHAR KA SCENE', 630, 725);
+      ctx.fillText('100% APPROVED', 630, 748);
+      ctx.textAlign = 'left';
+
+      // Footer note
+      ctx.fillStyle = '#FFD000';
+      ctx.font = 'bold 18px sans-serif';
+      ctx.fillText('Sunday, 2 November 2026 • 8:30 PM Onwards', 80, 830);
 
       const link = document.createElement('a');
       link.download = `PlotX_Diwali_Pass_${guestName.replace(/\s+/g, '_')}.png`;
       link.href = c.toDataURL('image/png');
       link.click();
-
-      showWarmToast("शगुन पास आपके फोन में सेव हो गया है! 💾", "✨");
     });
 
-    // --- 7. Live Patakha Polaroid Booth & Wall ---
+    // --- 5. Live Polaroid Photo Booth ---
     const videoEl = document.getElementById('webcam-video');
     const capturedImg = document.getElementById('captured-img');
     const placeholderEl = document.getElementById('cam-placeholder');
@@ -1268,9 +1091,8 @@
         placeholderEl.classList.add('hidden');
         openCamBtn.classList.add('hidden');
         takeSnapBtn.classList.remove('hidden');
-        showWarmToast("कैमरा चालू है! अपनी पटाखा स्माइल दें 📸", "✨");
       } catch (e) {
-        showWarmToast("कैमरा परमिशन नहीं मिली—गैलरी से फोटो अपलोड करें!", "🖼️");
+        alert("Camera permission blocked! Phone gallery se photo upload kar lo.");
       }
     });
 
@@ -1279,17 +1101,14 @@
       tempCanvas.width = videoEl.videoWidth || 640;
       tempCanvas.height = videoEl.videoHeight || 800;
       tempCanvas.getContext('2d').drawImage(videoEl, 0, 0, tempCanvas.width, tempCanvas.height);
-
       currentImgData = tempCanvas.toDataURL('image/jpeg');
       capturedImg.src = currentImgData;
       capturedImg.classList.remove('hidden');
       videoEl.classList.add('hidden');
-
       if (streamRef) streamRef.getTracks().forEach(t => t.stop());
       takeSnapBtn.classList.add('hidden');
       openCamBtn.classList.remove('hidden');
-      openCamBtn.innerHTML = '<span>🔄</span> दोबारा खींचें (Retake)';
-      showWarmToast("शानदार फोटो! अब स्टीकर लगाएं ✨", "📸");
+      openCamBtn.innerHTML = '<span>🔄</span> RETAKE';
     });
 
     uploadInput.addEventListener('change', (e) => {
@@ -1303,8 +1122,7 @@
         placeholderEl.classList.add('hidden');
         if (videoEl) videoEl.classList.add('hidden');
         openCamBtn.classList.remove('hidden');
-        openCamBtn.innerHTML = '<span>🔄</span> दूसरी फोटो चुनें (Change)';
-        showWarmToast("फोटो लोड हो गई! अब स्टीकर लगाएं ✨", "🖼️");
+        openCamBtn.innerHTML = '<span>🔄</span> CHANGE';
       };
       reader.readAsDataURL(file);
     });
@@ -1314,63 +1132,65 @@
         const tag = btn.getAttribute('data-sticker');
         if (chosenStickers.includes(tag)) {
           chosenStickers = chosenStickers.filter(s => s !== tag);
-          btn.classList.remove('bg-amberFlame', 'text-midnight', 'font-bold');
+          btn.classList.remove('bg-sunYellow');
+          btn.classList.add('bg-white');
         } else {
           chosenStickers.push(tag);
-          btn.classList.add('bg-amberFlame', 'text-midnight', 'font-bold');
+          btn.classList.remove('bg-white');
+          btn.classList.add('bg-sunYellow');
         }
-        renderStickerPreview();
+        renderStickers();
       });
     });
 
-    function renderStickerPreview() {
+    function renderStickers() {
       stickerLayer.innerHTML = '';
       chosenStickers.forEach((st) => {
         const span = document.createElement('span');
-        span.className = "text-[11px] font-bold px-3 py-1 rounded-full bg-cream text-midnight shadow-md border border-diyaGold";
+        span.className = "text-[11px] font-black px-2.5 py-0.5 rounded-full bg-sunYellow text-pureBlack border border-pureBlack shadow-sm";
         span.innerText = st;
         stickerLayer.appendChild(span);
       });
     }
 
-    // Seeded Warm Festive Polaroids with Rich Festive Gradients
+    // Seeded Polaroids
     let guestPolaroids = [
       {
         id: 101,
-        name: "आरव और सिया (Aarav & Siya)",
-        caption: "Kurta pajama & saree ready! Sector 112 Villa, hum aa rahe hain 🪔✨",
-        stickers: ["✨ पटाखा FIT", "🪔 घर वाली दिवाली"],
-        likes: 24,
-        gradient: "from-[#ff007f] via-[#d90429] to-[#ffaa00]"
+        name: "Aarav & Siya 👫",
+        caption: "Kurta pajama & saree scene locked! Sec 112 Villa, hum aa rahe hain 🔥",
+        stickers: ["✨ पटाखा FIT", "🔥 +10,000 AURA"],
+        likes: 29,
+        gradient: "from-[#FFD000] via-[#FF007F] to-[#E12A2A]"
       },
       {
         id: 102,
-        name: "रोहन (Rohan K.)",
-        caption: "Aaj Teen Patti mein blind khelunga. Kaju Katli ka dibba mera! 🃏🍬",
-        stickers: ["🃏 तीन पत्ती PRO", "🍬 काजू कतली LOVER"],
-        likes: 19,
-        gradient: "from-[#2b0938] via-[#7b2cbf] to-[#00f5d4]"
+        name: "Rohan & The Boys 🃏",
+        caption: "Teen Patti mein blind khelunga. Kaju Katli ka hisaab pakka hai!",
+        stickers: ["🃏 BLIND MASTER", "🍬 KAJU KATLI CREW"],
+        likes: 21,
+        gradient: "from-[#12543A] via-[#FFD000] to-[#E12A2A]"
       }
     ];
 
-    function renderPolaroidGallery() {
+    function renderPolaroidWall() {
       polaroidGrid.innerHTML = '';
       document.getElementById('wall-count-badge').innerText = `${guestPolaroids.length} Polaroids Pinned`;
 
       guestPolaroids.forEach((item) => {
         const card = document.createElement('div');
-        card.className = "polaroid-frame p-3.5 pb-4 rounded-2xl shadow-festive-card flex flex-col justify-between space-y-3";
+        card.className = "card-pop bg-white p-3.5 pb-4 rounded-2xl flex flex-col justify-between space-y-3";
 
         const badgesHtml = item.stickers.map(s =>
-          `<span class="text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-velvet text-diyaGold border border-diyaGold/50">${s}</span>`
+          `<span class="text-[10px] font-black px-2 py-0.5 rounded-full bg-sunYellow text-pureBlack border border-pureBlack">${s}</span>`
         ).join('');
 
         const mediaHtml = item.image
-          ? `<img src="${item.image}" class="w-full aspect-[4/5] object-cover rounded-xl" alt="Guest Fit">`
-          : `<div class="w-full aspect-[4/5] rounded-xl bg-gradient-to-br ${item.gradient} flex flex-col items-center justify-center p-4 text-center text-cream shadow-inner">
+          ? `<img src="${item.image}" class="w-full aspect-[4/5] object-cover rounded-xl border border-pureBlack" alt="Guest Fit">`
+          : `<div class="w-full aspect-[4/5] rounded-xl bg-gradient-to-br ${item.gradient} border border-pureBlack flex flex-col items-center justify-center p-4 text-center text-pureBlack">
                <span class="text-4xl mb-2">🪔✨</span>
-               <p class="font-hindiDisplay text-2xl font-bold">दिवाली की रात</p>
-               <p class="font-display italic text-sm opacity-95">Sector 112 Villa Lookbook</p>
+               <p class="font-title font-black text-xl uppercase text-softCream drop-shadow-[2px_2px_0px_#000]">DIL WAALI DIWALI</p>
+               <p class="font-script italic text-sm text-sunYellow drop-shadow-[1px_1px_0px_#000]">Sector 112 Villa Scene</p>
              </div>`;
 
         card.innerHTML = `
@@ -1380,39 +1200,38 @@
               ${badgesHtml}
             </div>
           </div>
-          <div class="px-1">
+          <div>
             <div class="flex items-center justify-between">
-              <h4 class="font-bold text-sm text-midnight">${item.name}</h4>
-              <span class="text-[10px] text-terracotta font-extrabold">2ND NOV • SEC 112</span>
+              <h4 class="font-black text-sm text-pureBlack">${item.name}</h4>
+              <span class="text-[10px] text-festiveRed font-black">2ND NOV • VILLA</span>
             </div>
-            <p class="font-display italic text-sm text-midnight/85 mt-0.5">"${item.caption}"</p>
+            <p class="font-body text-xs text-pureBlack/80 mt-0.5">"${item.caption}"</p>
           </div>
-          <div class="px-1 pt-2 border-t border-midnight/15 flex items-center justify-between">
-            <button onclick="reactPolaroid(${item.id})" class="px-3 py-1 rounded-full bg-terracotta/15 hover:bg-terracotta/25 text-terracotta text-xs font-bold flex items-center gap-1.5 transition-all">
-              <span>🪔</span> <span>${item.likes} दुआएं (Love)</span>
+          <div class="pt-2 border-t border-pureBlack/15 flex items-center justify-between">
+            <button onclick="likePolaroid(${item.id})" class="btn-pop px-3 py-1 rounded-full bg-sunYellow text-pureBlack text-xs font-black flex items-center gap-1.5">
+              <span>❤️</span> <span>${item.likes} Love</span>
             </button>
-            <span class="text-[10px] text-midnight/60 font-semibold">PLOT X VILLA</span>
+            <span class="text-[10px] font-black text-pureBlack/60">PLOT X VILLA</span>
           </div>
         `;
         polaroidGrid.appendChild(card);
       });
     }
 
-    window.reactPolaroid = function(id) {
+    window.likePolaroid = function(id) {
       const found = guestPolaroids.find(p => p.id === id);
       if (found) {
         found.likes++;
-        renderPolaroidGallery();
-        showWarmToast("आपने दिवाली की शुभकामनाएं भेजीं! 🪔❤️", "✨");
+        renderPolaroidWall();
       }
     };
 
     document.getElementById('pin-polaroid-btn').addEventListener('click', () => {
-      const nameVal = document.getElementById('snap-name').value.trim() || "यार की महफ़िल (VIP Guest)";
-      const captionVal = document.getElementById('snap-caption').value.trim() || "Diwali Villa Scene ready! ✨";
+      const nameVal = document.getElementById('snap-name').value.trim() || "Plot X Yaar";
+      const captionVal = document.getElementById('snap-caption').value.trim() || "Scene set hai, Diwali sorted! 🪔";
 
       if (!currentImgData) {
-        showWarmToast("पहले अपनी फोटो खींचें या गैलरी से अपलोड करें!", "📸");
+        alert("Pehle webcam se snap lo ya gallery se photo upload karo!");
         return;
       }
 
@@ -1425,21 +1244,23 @@
         image: currentImgData
       });
 
-      renderPolaroidGallery();
+      renderPolaroidWall();
 
-      // Reset booth
+      // Reset
       currentImgData = null;
       capturedImg.classList.add('hidden');
       placeholderEl.classList.remove('hidden');
       chosenStickers = [];
-      renderStickerPreview();
-      document.querySelectorAll('.diwali-sticker-btn').forEach(b => b.classList.remove('bg-amberFlame', 'text-midnight', 'font-bold'));
+      renderStickers();
+      document.querySelectorAll('.diwali-sticker-btn').forEach(b => {
+        b.classList.remove('bg-sunYellow');
+        b.classList.add('bg-white');
+      });
       document.getElementById('snap-caption').value = '';
-
-      showWarmToast("आपकी फोटो महफ़िल वॉल पर लग गई है! 🎉", "🪔");
+      alert("Aapki photo Wall pe pin ho gayi hai! 📌🔥");
     });
 
-    renderPolaroidGallery();
+    renderPolaroidWall();
   </script>
 </body>
 </html>
