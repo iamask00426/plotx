@@ -601,13 +601,18 @@
                 <p class="text-[10px] text-sunYellow font-semibold mt-0.5">✨ +10,000 Aura Guaranteed</p>
               </div>
 
-              <!-- 4. RSVP STATUS -->
+              <!-- 4. RSVP STATUS & PASS CONTRIBUTION -->
               <div class="pt-1">
-                <span class="text-[10px] font-black uppercase tracking-wider text-sunYellow block mb-1">RSVP STATUS</span>
-                <p class="font-extrabold text-sm text-softCream flex items-center gap-1.5">
+                <span class="text-[10px] font-black uppercase tracking-wider text-sunYellow block mb-1">RSVP STATUS & PASSES</span>
+                <p class="font-extrabold text-sm text-softCream flex items-center gap-1.5 mb-1.5">
                   <span class="text-sunYellow font-black">Haan bhai, I'm in ✔</span>
                   <span class="text-[11px] text-white/80 font-normal">— 24/30 Locked</span>
                 </p>
+                <div class="flex flex-wrap gap-1.5 text-[10px] font-black uppercase">
+                  <span class="px-2 py-0.5 rounded-md bg-sunYellow text-pureBlack">Stag Boy ₹1,499</span>
+                  <span class="px-2 py-0.5 rounded-md bg-white text-festiveRed">Stag Girl ₹1,399</span>
+                  <span class="px-2 py-0.5 rounded-md bg-gulabiPink text-white">Couple ₹2,399</span>
+                </div>
               </div>
 
             </div>
@@ -937,6 +942,53 @@
       <!-- Shagun Lifafa Box Card -->
       <div class="card-pop bg-softCream text-pureBlack p-6 sm:p-10 rounded-3xl relative reveal-scale">
         
+        <!-- Official Pass Pricing Strip -->
+        <div class="mb-8 p-4 sm:p-5 rounded-2xl bg-white border-2 border-pureBlack shadow-pop-sm">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 pb-3 mb-3 border-b-2 border-pureBlack/15">
+            <div>
+              <span class="text-[10px] font-black uppercase tracking-wider text-festiveRed flex items-center gap-1.5">
+                <span>🎟️</span> OFFICIAL ENTRY PASS CONTRIBUTION
+              </span>
+              <p class="text-xs font-bold text-pureBlack">All-Inclusive Unlimited Cover (Daru, Live Starters, Mithai & DJ)</p>
+            </div>
+            <span class="inline-flex items-center gap-1 text-[10px] font-black bg-cardGreen text-sunYellow px-3 py-1 rounded-full border border-pureBlack">
+              <span>🔥</span> LIMITED 30 GUESTS ONLY
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <!-- Stag Boy -->
+            <div class="p-3.5 rounded-xl bg-sunYellow border-2 border-pureBlack shadow-pop-sm text-center flex flex-col justify-between">
+              <div>
+                <span class="text-[10px] font-black uppercase tracking-wider text-pureBlack/80 block">🕺 STAG BOY</span>
+                <span class="font-title font-black text-2xl sm:text-3xl text-pureBlack block my-0.5">₹1,499</span>
+                <span class="text-[10px] font-bold text-pureBlack/85 block">गबरू Entry</span>
+              </div>
+              <span class="mt-2 text-[9px] font-black uppercase bg-white/80 py-0.5 px-2 rounded-md border border-pureBlack/30">All-Inclusive</span>
+            </div>
+
+            <!-- Stag Girl -->
+            <div class="p-3.5 rounded-xl bg-softCream border-2 border-pureBlack shadow-pop-sm text-center flex flex-col justify-between">
+              <div>
+                <span class="text-[10px] font-black uppercase tracking-wider text-festiveRed block">💃 STAG GIRL</span>
+                <span class="font-title font-black text-2xl sm:text-3xl text-festiveRed block my-0.5">₹1,399</span>
+                <span class="text-[10px] font-bold text-pureBlack/85 block">पटाखा Entry</span>
+              </div>
+              <span class="mt-2 text-[9px] font-black uppercase bg-festiveRed/10 text-festiveRed py-0.5 px-2 rounded-md border border-festiveRed/30">All-Inclusive</span>
+            </div>
+
+            <!-- Couple -->
+            <div class="p-3.5 rounded-xl bg-cardGreen border-2 border-pureBlack shadow-pop-sm text-center flex flex-col justify-between text-softCream">
+              <div>
+                <span class="text-[10px] font-black uppercase tracking-wider text-sunYellow block">👩‍❤️‍👨 COUPLE</span>
+                <span class="font-title font-black text-2xl sm:text-3xl text-sunYellow block my-0.5">₹2,399</span>
+                <span class="text-[10px] font-bold text-softCream/90 block">जोड़ी Pass</span>
+              </div>
+              <span class="mt-2 text-[9px] font-black uppercase bg-sunYellow/20 text-sunYellow py-0.5 px-2 rounded-md border border-sunYellow/30">Cover For Two</span>
+            </div>
+          </div>
+        </div>
+
         <!-- Form -->
         <form id="villa-rsvp-form" onsubmit="handleVillaRSVP(event)" class="space-y-5">
           
@@ -952,23 +1004,26 @@
             </div>
           </div>
 
-          <!-- Gender / Entry Category Selector -->
+          <!-- Gender / Entry Category Selector with Exact Prices -->
           <div>
-            <label class="block text-xs font-black uppercase mb-1.5">3. Entry Category *</label>
-            <div class="grid grid-cols-3 gap-3" id="gender-selector">
-              <button type="button" data-gender="Male (गबरू) 🕺" class="gender-pill btn-pop p-3 rounded-xl bg-sunYellow text-center">
-                <span class="text-xl block mb-0.5">🕺</span>
-                <span class="text-xs font-black block">Male</span>
+            <label class="block text-xs font-black uppercase mb-1.5">3. Select Your Pass Category *</label>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3" id="gender-selector">
+              <button type="button" data-gender="Stag Boy (गबरू) 🕺" data-price="₹1,499" class="gender-pill btn-pop p-3 rounded-xl bg-sunYellow text-center border-2 border-pureBlack">
+                <span class="text-2xl block mb-0.5">🕺</span>
+                <span class="text-xs font-black block text-pureBlack">Stag Boy</span>
+                <span class="font-title font-black text-lg block text-festiveRed">₹1,499</span>
                 <span class="text-[9px] font-bold block text-pureBlack/80">गबरू Entry</span>
               </button>
-              <button type="button" data-gender="Female (पटाखा) 💃" class="gender-pill btn-pop p-3 rounded-xl bg-white text-center">
-                <span class="text-xl block mb-0.5">💃</span>
-                <span class="text-xs font-black block">Female</span>
+              <button type="button" data-gender="Stag Girl (पटाखा) 💃" data-price="₹1,399" class="gender-pill btn-pop p-3 rounded-xl bg-white text-center border-2 border-pureBlack">
+                <span class="text-2xl block mb-0.5">💃</span>
+                <span class="text-xs font-black block text-pureBlack">Stag Girl</span>
+                <span class="font-title font-black text-lg block text-festiveRed">₹1,399</span>
                 <span class="text-[9px] font-bold block text-pureBlack/80">पटाखा Entry</span>
               </button>
-              <button type="button" data-gender="Couple (जोड़ी) 👩‍❤️‍👨" class="gender-pill btn-pop p-3 rounded-xl bg-white text-center">
-                <span class="text-xl block mb-0.5">👩‍❤️‍👨</span>
-                <span class="text-xs font-black block">Couple</span>
+              <button type="button" data-gender="Couple (जोड़ी) 👩‍❤️‍👨" data-price="₹2,399" class="gender-pill btn-pop p-3 rounded-xl bg-white text-center border-2 border-pureBlack">
+                <span class="text-2xl block mb-0.5">👩‍❤️‍👨</span>
+                <span class="text-xs font-black block text-pureBlack">Couple</span>
+                <span class="font-title font-black text-lg block text-festiveRed">₹2,399</span>
                 <span class="text-[9px] font-bold block text-pureBlack/80">जोड़ी Pass</span>
               </button>
             </div>
@@ -1032,8 +1087,12 @@
                 <span id="pass-guest-name" class="font-black text-softCream text-sm">Aryan Malhotra</span>
               </div>
               <div class="flex justify-between items-center">
-                <span class="text-softCream/70 font-semibold">CATEGORY:</span>
-                <span id="pass-guest-gender" class="font-bold text-sunYellow">Male (गबरू) 🕺</span>
+                <span class="text-softCream/70 font-semibold">PASS TYPE:</span>
+                <span id="pass-guest-gender" class="font-bold text-sunYellow">Stag Boy (गबरू) 🕺</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-softCream/70 font-semibold">PASS AMOUNT:</span>
+                <span id="pass-guest-price" class="font-black text-sunYellow text-sm">₹1,499 (All-Inclusive Cover)</span>
               </div>
               <div class="flex justify-between items-center">
                 <span class="text-softCream/70 font-semibold">WHATSAPP:</span>
@@ -1270,7 +1329,8 @@
     }
 
     // --- 7. Shagun RSVP Form Handler ---
-    let selectedGender = "Male (गबरू) 🕺";
+    let selectedGender = "Stag Boy (गबरू) 🕺";
+    let selectedPrice = "₹1,499";
 
     document.querySelectorAll('.gender-pill').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -1281,6 +1341,7 @@
         btn.classList.remove('bg-white');
         btn.classList.add('bg-sunYellow');
         selectedGender = btn.getAttribute('data-gender');
+        selectedPrice = btn.getAttribute('data-price') || "₹1,499";
       });
     });
 
@@ -1299,6 +1360,7 @@
       document.getElementById('pass-code').innerText = `#PX-${randomNum}`;
       document.getElementById('pass-guest-name').innerText = name;
       document.getElementById('pass-guest-gender').innerText = selectedGender;
+      document.getElementById('pass-guest-price').innerText = `${selectedPrice} (All-Inclusive Cover)`;
       document.getElementById('pass-guest-phone').innerText = `+91 ${phone}`;
 
       document.getElementById('villa-rsvp-form').classList.add('hidden');
@@ -1318,24 +1380,25 @@
       const guestName = document.getElementById('pass-guest-name').innerText;
       const code = document.getElementById('pass-code').innerText;
       const gender = document.getElementById('pass-guest-gender').innerText;
+      const priceText = document.getElementById('pass-guest-price').innerText;
       const phone = document.getElementById('pass-guest-phone').innerText;
 
       const c = document.createElement('canvas');
       c.width = 800;
-      c.height = 960;
+      c.height = 1040;
       const ctx = c.getContext('2d');
 
       ctx.fillStyle = '#E12A2A';
-      ctx.fillRect(0, 0, 800, 960);
+      ctx.fillRect(0, 0, 800, 1040);
 
       ctx.strokeStyle = '#000000';
       ctx.lineWidth = 12;
-      ctx.strokeRect(20, 20, 760, 920);
+      ctx.strokeRect(20, 20, 760, 1000);
 
       ctx.fillStyle = '#12543A';
-      ctx.fillRect(50, 50, 700, 860);
+      ctx.fillRect(50, 50, 700, 940);
       ctx.lineWidth = 6;
-      ctx.strokeRect(50, 50, 700, 860);
+      ctx.strokeRect(50, 50, 700, 940);
 
       ctx.fillStyle = '#FFD000';
       ctx.fillRect(50, 50, 700, 110);
@@ -1347,29 +1410,30 @@
 
       ctx.fillStyle = '#FFD000';
       ctx.font = 'bold 24px sans-serif';
-      ctx.fillText('OFFICIAL VILLA ENTRY PASS', 80, 220);
+      ctx.fillText('OFFICIAL VILLA ENTRY PASS', 80, 215);
 
       ctx.fillStyle = '#FFFDF0';
       ctx.font = 'bold 44px sans-serif';
-      ctx.fillText(code, 80, 280);
+      ctx.fillText(code, 80, 270);
 
       const drawRow = (label, val, y) => {
         ctx.fillStyle = '#FFD000';
         ctx.font = 'bold 18px sans-serif';
         ctx.fillText(label, 80, y);
         ctx.fillStyle = '#FFFDF0';
-        ctx.font = 'bold 30px sans-serif';
-        ctx.fillText(val, 80, y + 36);
+        ctx.font = 'bold 28px sans-serif';
+        ctx.fillText(val, 80, y + 34);
       };
 
-      drawRow('ATTENDEE NAME:', guestName.toUpperCase(), 370);
-      drawRow('ENTRY CATEGORY:', gender, 480);
-      drawRow('WHATSAPP NO:', phone, 590);
-      drawRow('VENUE:', 'Sector 112, Noida Private Villa', 700);
+      drawRow('ATTENDEE NAME:', guestName.toUpperCase(), 350);
+      drawRow('PASS CATEGORY:', gender, 440);
+      drawRow('PASS CONTRIBUTION:', priceText.toUpperCase(), 530);
+      drawRow('WHATSAPP NO:', phone, 620);
+      drawRow('VENUE:', 'Sector 112, Noida Private Villa', 710);
 
       ctx.fillStyle = '#FFD000';
       ctx.beginPath();
-      ctx.arc(630, 730, 70, 0, Math.PI * 2);
+      ctx.arc(630, 800, 70, 0, Math.PI * 2);
       ctx.fill();
       ctx.strokeStyle = '#000000';
       ctx.lineWidth = 4;
@@ -1378,13 +1442,13 @@
       ctx.fillStyle = '#000000';
       ctx.font = 'bold 18px sans-serif';
       ctx.textAlign = 'center';
-      ctx.fillText('GHAR KA SCENE', 630, 725);
-      ctx.fillText('100% APPROVED', 630, 748);
+      ctx.fillText('GHAR KA SCENE', 630, 795);
+      ctx.fillText('100% APPROVED', 630, 818);
       ctx.textAlign = 'left';
 
       ctx.fillStyle = '#FFD000';
       ctx.font = 'bold 18px sans-serif';
-      ctx.fillText('Sunday, 2 November 2026 • 8:30 PM Onwards', 80, 830);
+      ctx.fillText('Sunday, 2 November 2026 • 8:30 PM Onwards', 80, 920);
 
       const link = document.createElement('a');
       link.download = `PlotX_Diwali_Pass_${guestName.replace(/\s+/g, '_')}.png`;
