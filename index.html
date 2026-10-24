@@ -1061,6 +1061,103 @@
             </select>
           </div>
 
+          <!-- STEP 6: UPI PAYMENT QR CODE BOX -->
+          <div class="p-4 sm:p-5 rounded-2xl bg-white border-2 border-pureBlack shadow-pop-sm space-y-4">
+            
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b-2 border-pureBlack/15 pb-3">
+              <div>
+                <span class="text-[10px] font-black uppercase tracking-wider text-festiveRed flex items-center gap-1.5">
+                  <span>💳</span> STEP 1: SCAN & PAY VIA ANY UPI APP
+                </span>
+                <h4 class="font-title font-black text-lg text-pureBlack">PAYTM / GPAY / PHONEPE UPI</h4>
+              </div>
+              <div class="text-left sm:text-right">
+                <span class="text-[10px] font-bold text-pureBlack/70 block uppercase">Selected Pass Amount:</span>
+                <span id="upi-payable-amount" class="font-title font-black text-2xl text-festiveRed">₹1,499</span>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-12 gap-5 items-center">
+              
+              <!-- QR Code Image -->
+              <div class="sm:col-span-5 flex justify-center">
+                <div class="p-2.5 rounded-2xl bg-white border-2 border-pureBlack shadow-pop-sm text-center max-w-[210px] w-full">
+                  <img src="./upi_qr.jpg" alt="Aakash Kashyap UPI QR Code" class="w-full rounded-xl object-contain">
+                  <span class="text-[9px] font-black text-pureBlack/70 uppercase block mt-1.5 tracking-wider">
+                    SCAN WITH ANY UPI APP
+                  </span>
+                </div>
+              </div>
+
+              <!-- Payment Details & Copy Buttons -->
+              <div class="sm:col-span-7 space-y-2.5">
+                <div class="p-2.5 rounded-xl bg-sunYellow/25 border-2 border-pureBlack">
+                  <span class="text-[9px] font-black text-pureBlack/70 uppercase block">Account Holder:</span>
+                  <div class="flex items-center gap-1.5">
+                    <span class="font-title font-black text-sm text-pureBlack">AAKASH KASHYAP</span>
+                    <span class="text-blue-600 text-xs" title="Verified">☑️</span>
+                  </div>
+                </div>
+
+                <div class="p-2.5 rounded-xl bg-softCream border-2 border-pureBlack">
+                  <span class="text-[9px] font-black text-pureBlack/70 uppercase block mb-0.5">Official UPI ID:</span>
+                  <div class="flex items-center justify-between gap-2">
+                    <code id="upi-id-text" class="font-mono font-black text-xs text-pureBlack select-all">7303118242@ptaxis</code>
+                    <button type="button" onclick="copyUpiId()" class="btn-pop px-2.5 py-1 rounded-lg bg-sunYellow text-pureBlack text-[10px] font-black uppercase tracking-wider flex items-center gap-1">
+                      <span id="copy-upi-btn-text">📋 COPY</span>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Pay Directly Link (Mobile Intent) -->
+                <a id="pay-upi-intent" href="upi://pay?pa=7303118242@ptaxis&pn=Aakash%20Kashyap&am=1499&cu=INR&tn=PlotX%20Diwali%20Pass" class="btn-pop block text-center py-2.5 px-3 rounded-xl bg-cardGreen text-sunYellow font-black text-xs uppercase tracking-wider">
+                  ⚡ TAP TO PAY VIA UPI APP (MOBILE)
+                </a>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- STEP 7: PAYMENT SCREENSHOT UPLOAD -->
+          <div class="p-4 sm:p-5 rounded-2xl bg-white border-2 border-pureBlack shadow-pop-sm space-y-3">
+            <div class="flex items-center justify-between">
+              <label class="block text-xs font-black uppercase text-festiveRed">
+                📸 STEP 2: UPLOAD PAYMENT SCREENSHOT (RECEIPT / UTR) *
+              </label>
+              <span class="text-[10px] font-bold bg-sunYellow text-pureBlack px-2 py-0.5 rounded-md border border-pureBlack">
+                Required for Pass
+              </span>
+            </div>
+
+            <p class="text-[11px] text-pureBlack/75 font-medium">
+              Payment complete karne ke baad uska screenshot yahan upload karein taki approval turant verify ho sake.
+            </p>
+
+            <!-- File Upload Zone -->
+            <div class="relative border-2 border-dashed border-pureBlack rounded-2xl p-4 text-center bg-softCream hover:bg-sunYellow/10 transition-colors">
+              <input type="file" id="payment-screenshot-input" accept="image/*" required class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" onchange="handleScreenshotUpload(event)">
+              
+              <div id="upload-placeholder" class="space-y-1">
+                <span class="text-3xl block">🧾</span>
+                <p class="text-xs font-black text-pureBlack uppercase">CLICK TO UPLOAD SCREENSHOT</p>
+                <p class="text-[10px] text-pureBlack/60 font-semibold">PNG, JPG, JPEG accepted</p>
+              </div>
+
+              <!-- Preview when image chosen -->
+              <div id="screenshot-preview-box" class="hidden flex items-center justify-center gap-3">
+                <img id="screenshot-preview-img" src="" alt="Screenshot Preview" class="w-16 h-20 object-cover rounded-lg border-2 border-pureBlack shadow-pop-sm">
+                <div class="text-left">
+                  <p class="text-xs font-black text-cardGreen flex items-center gap-1">
+                    <span>✅</span> SCREENSHOT ATTACHED
+                  </p>
+                  <p id="screenshot-filename" class="text-[10px] font-mono font-bold text-pureBlack/70 truncate max-w-[180px]">receipt.jpg</p>
+                  <span class="text-[9px] text-festiveRed font-bold underline cursor-pointer mt-0.5 block">Tap to change image</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <!-- Submit Button with Confetti Blast -->
           <button type="submit" class="btn-pop sheen-btn w-full py-4 rounded-full bg-festiveRed text-softCream font-black text-sm uppercase tracking-wider">
             HAAN BHAI, PASS CONFIRM KARO! 🎟️
@@ -1101,6 +1198,10 @@
               <div class="flex justify-between items-center">
                 <span class="text-softCream/70 font-semibold">PASS AMOUNT:</span>
                 <span id="pass-guest-price" class="font-black text-sunYellow text-sm">₹1,499 (All-Inclusive Cover)</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-softCream/70 font-semibold">PAYMENT:</span>
+                <span class="font-bold text-cardGreen bg-sunYellow px-2 py-0.5 rounded text-[11px]">Screenshot Uploaded ✔</span>
               </div>
               <div class="flex justify-between items-center">
                 <span class="text-softCream/70 font-semibold">WHATSAPP:</span>
@@ -1369,6 +1470,12 @@
     // --- 7. Shagun RSVP Form Handler ---
     let selectedGender = "Stag Boy (गबरू) 🕺";
     let selectedPrice = "₹1,499";
+    let currentPaymentScreenshot = null;
+    let currentScreenshotFilename = "";
+
+    function getRawNumericAmount(priceStr) {
+      return priceStr.replace(/[^0-9]/g, '') || '1499';
+    }
 
     document.querySelectorAll('.gender-pill').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -1380,8 +1487,81 @@
         btn.classList.add('bg-sunYellow');
         selectedGender = btn.getAttribute('data-gender');
         selectedPrice = btn.getAttribute('data-price') || "₹1,499";
+
+        // Update UPI payable amount display & mobile intent
+        const upiAmountEl = document.getElementById('upi-payable-amount');
+        if (upiAmountEl) upiAmountEl.innerText = selectedPrice;
+
+        const numAmt = getRawNumericAmount(selectedPrice);
+        const upiIntentEl = document.getElementById('pay-upi-intent');
+        if (upiIntentEl) {
+          upiIntentEl.href = `upi://pay?pa=7303118242@ptaxis&pn=Aakash%20Kashyap&am=${numAmt}&cu=INR&tn=PlotX%20Diwali%20Pass`;
+        }
       });
     });
+
+    // Copy UPI ID to Clipboard
+    window.copyUpiId = function() {
+      const upiId = "7303118242@ptaxis";
+      navigator.clipboard.writeText(upiId).then(() => {
+        const btnText = document.getElementById('copy-upi-btn-text');
+        if (btnText) {
+          btnText.innerText = "✅ COPIED!";
+          setTimeout(() => { btnText.innerText = "📋 COPY"; }, 2500);
+        }
+        triggerPartyConfetti();
+      });
+    };
+
+    // Handle Payment Screenshot Upload & Compress to Light Base64
+    window.handleScreenshotUpload = function(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      currentScreenshotFilename = file.name;
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        const img = new Image();
+        img.onload = function() {
+          // Compress to lightweight JPEG (max 800px width/height)
+          const canvas = document.createElement('canvas');
+          let width = img.width;
+          let height = img.height;
+          const maxDim = 800;
+
+          if (width > maxDim || height > maxDim) {
+            if (width > height) {
+              height = Math.round((height * maxDim) / width);
+              width = maxDim;
+            } else {
+              width = Math.round((width * maxDim) / height);
+              height = maxDim;
+            }
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+
+          currentPaymentScreenshot = canvas.toDataURL('image/jpeg', 0.7);
+
+          // Update Preview UI
+          const previewBox = document.getElementById('screenshot-preview-box');
+          const placeholder = document.getElementById('upload-placeholder');
+          const previewImg = document.getElementById('screenshot-preview-img');
+          const filenameEl = document.getElementById('screenshot-filename');
+
+          if (previewImg) previewImg.src = currentPaymentScreenshot;
+          if (filenameEl) filenameEl.innerText = file.name;
+          if (previewBox) previewBox.classList.remove('hidden');
+          if (placeholder) placeholder.classList.add('hidden');
+          triggerPartyConfetti();
+        };
+        img.src = event.target.result;
+      };
+      reader.readAsDataURL(file);
+    };
 
     window.handleVillaRSVP = function(e) {
       e.preventDefault();
@@ -1391,6 +1571,11 @@
 
       if (!/^[0-9]{10}$/.test(phone)) {
         alert("Bhai, sahi 10-digit WhatsApp number daalo!");
+        return;
+      }
+
+      if (!currentPaymentScreenshot) {
+        alert("Bhai, payment complete karke screenshot upload karna zaroori hai!");
         return;
       }
 
@@ -1416,14 +1601,15 @@
               category: selectedGender,
               price: selectedPrice,
               phone: phone,
-              party_vibe: gameVal
+              party_vibe: gameVal,
+              payment_screenshot: currentPaymentScreenshot
             }
           ])
           .then(({ error }) => {
             if (error) {
               console.warn('Supabase RSVP insert notice:', error.message);
             } else {
-              console.log('✅ RSVP successfully saved to Supabase!');
+              console.log('✅ RSVP & Payment Screenshot successfully saved to Supabase!');
               syncLiveRsvpCount();
             }
           });
