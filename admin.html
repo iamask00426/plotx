@@ -10,7 +10,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
   
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
   <script>
@@ -158,16 +157,16 @@
 
       <!-- Filter Buttons -->
       <div class="flex items-center gap-1.5 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0">
-        <button onclick="filterCategory('ALL')" class="cat-filter-btn btn-pop px-3 py-1.5 rounded-lg bg-sunYellow text-pureBlack text-xs font-black">
+        <button onclick="filterCategory('ALL', this)" class="cat-filter-btn btn-pop px-3 py-1.5 rounded-lg bg-sunYellow text-pureBlack text-xs font-black">
           ALL (<span id="count-all">0</span>)
         </button>
-        <button onclick="filterCategory('Male')" class="cat-filter-btn btn-pop px-3 py-1.5 rounded-lg bg-white text-pureBlack text-xs font-bold">
+        <button onclick="filterCategory('Male', this)" class="cat-filter-btn btn-pop px-3 py-1.5 rounded-lg bg-white text-pureBlack text-xs font-bold">
           STAG BOY (<span id="count-male">0</span>)
         </button>
-        <button onclick="filterCategory('Female')" class="cat-filter-btn btn-pop px-3 py-1.5 rounded-lg bg-white text-pureBlack text-xs font-bold">
+        <button onclick="filterCategory('Female', this)" class="cat-filter-btn btn-pop px-3 py-1.5 rounded-lg bg-white text-pureBlack text-xs font-bold">
           STAG GIRL (<span id="count-female">0</span>)
         </button>
-        <button onclick="filterCategory('Couple')" class="cat-filter-btn btn-pop px-3 py-1.5 rounded-lg bg-white text-pureBlack text-xs font-bold">
+        <button onclick="filterCategory('Couple', this)" class="cat-filter-btn btn-pop px-3 py-1.5 rounded-lg bg-white text-pureBlack text-xs font-bold">
           COUPLE (<span id="count-couple">0</span>)
         </button>
       </div>
@@ -265,223 +264,169 @@
 
   <!-- ================= JAVASCRIPT LOGIC ================= -->
   <script>
-    const SUPABASE_PROJECT_URL = 'https://eitlezsgeqojhuqtkubn.supabase.co';
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVpdGxlenNnZXFvamh1cXRrdWJuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI4NTYwMzEsImV4cCI6MjEwODQzMjAzMX0.1ac00TTMhzQ4R9ZCXt9a1Gdlf0Frd-mVn-c8wZuWyiM';
+    // ── CONFIG ──────────────────────────────────────────────────────────────
+    const SUPABASE_URL  = 'https://eitlezsgeqojhuqtkubn.supabase.co';
+    const SUPABASE_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVpdGxlenNnZXFvamh1cXRrdWJuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI4NTYwMzEsImV4cCI6MjEwODQzMjAzMX0.1ac00TTMhzQ4R9ZCXt9a1Gdlf0Frd-mVn-c8wZuWyiM';
+    const HEADERS       = { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY };
 
-    const supabase = (window.supabase && window.supabase.createClient)
-      ? window.supabase.createClient(SUPABASE_PROJECT_URL, SUPABASE_ANON_KEY)
-      : null;
+    // ── STATE ────────────────────────────────────────────────────────────────
+    let allRsvps              = [];
+    let currentFilter         = 'ALL';
+    const receiptCache        = {};
 
-    let allRsvps = [];
-    let currentCategoryFilter = 'ALL';
-    let isFetching = false;
+    // ── DOM HELPERS ──────────────────────────────────────────────────────────
+    const $  = id => document.getElementById(id);
+    const el = {
+      loading  : () => $('loading-state'),
+      table    : () => $('table-container'),
+      empty    : () => $('empty-state'),
+      tbody    : () => $('rsvps-tbody'),
+      countTxt : () => $('filtered-records-text'),
+      searchIn : () => $('search-input'),
+    };
 
-    function triggerPartyConfetti() {
+    function show(id) { $(id) && $(id).classList.remove('hidden'); }
+    function hide(id) { $(id) && $(id).classList.add('hidden');    }
+
+    // ── CONFETTI ─────────────────────────────────────────────────────────────
+    function popConfetti() {
       if (typeof confetti === 'function') {
-        try {
-          confetti({ particleCount: 40, spread: 50, origin: { y: 0.6 } });
-        } catch (e) {
-          console.log(e);
-        }
+        confetti({ particleCount: 40, spread: 50, origin: { y: 0.6 } });
       }
     }
 
-    // Fast Cache-First Rendering (Instant display in 0ms)
-    try {
-      const cached = sessionStorage.getItem('plotx_rsvps_cache');
-      if (cached) {
-        allRsvps = JSON.parse(cached);
-        if (allRsvps && allRsvps.length > 0) {
-          updateMetrics(allRsvps);
-          applyFilters();
-          const loadingEl = document.getElementById('loading-state');
-          if (loadingEl) loadingEl.classList.add('hidden');
-        }
-      }
-    } catch (e) {
-      console.warn('Cache read notice:', e);
-    }
-
-    // Direct Native Fetch to Supabase REST API (Lightning Fast & 100% Reliable)
+    // ── MAIN FETCH ───────────────────────────────────────────────────────────
     async function fetchRsvps() {
-      const loadingEl = document.getElementById('loading-state');
-      const tableEl = document.getElementById('table-container');
-      const emptyEl = document.getElementById('empty-state');
-
-      if (allRsvps.length === 0 && loadingEl) {
-        loadingEl.classList.remove('hidden');
-      }
+      show('loading-state');
+      hide('table-container');
+      hide('empty-state');
 
       try {
-        const endpoint = `${SUPABASE_PROJECT_URL}/rest/v1/rsvps?select=id,created_at,pass_code,name,instagram,category,price,phone,party_vibe&order=created_at.desc`;
-        const response = await fetch(endpoint, {
-          method: 'GET',
-          headers: {
-            'apikey': SUPABASE_ANON_KEY,
-            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
-          }
-        });
+        const res  = await fetch(
+          SUPABASE_URL + '/rest/v1/rsvps?select=id,created_at,pass_code,name,instagram,category,price,phone,party_vibe&order=created_at.desc',
+          { headers: HEADERS }
+        );
 
-        if (loadingEl) loadingEl.classList.add('hidden');
-
-        if (!response.ok) {
-          const errText = await response.text();
-          console.error('Supabase fetch error:', errText);
-          if (allRsvps.length === 0 && emptyEl) {
-            emptyEl.classList.remove('hidden');
-            emptyEl.querySelector('p').innerText = "Notice: " + errText;
-          }
-          return;
+        if (!res.ok) {
+          const txt = await res.text();
+          throw new Error('HTTP ' + res.status + ': ' + txt);
         }
 
-        const data = await response.json();
-        allRsvps = Array.isArray(data) ? data : [];
-
-        try {
-          sessionStorage.setItem('plotx_rsvps_cache', JSON.stringify(allRsvps));
-        } catch (storageErr) {}
-
-        updateMetrics(allRsvps);
-        applyFilters();
+        const data = await res.json();
+        allRsvps   = Array.isArray(data) ? data : [];
 
       } catch (err) {
-        console.error('Network error fetching RSVPs:', err);
-        if (loadingEl) loadingEl.classList.add('hidden');
-        if (allRsvps.length === 0 && emptyEl) {
-          emptyEl.classList.remove('hidden');
-          emptyEl.querySelector('p').innerText = "Network check: " + err.message;
-        }
+        console.error('[PlotX Admin] fetch error:', err);
+        hide('loading-state');
+        $('empty-state').querySelector('p').innerText = '⚠️ Load failed: ' + err.message;
+        show('empty-state');
+        return;
       }
-    }
 
-    // Auto-run immediately
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', fetchRsvps);
-    } else {
-      fetchRsvps();
-    }
-
-    // Update Summary Metrics
-    function updateMetrics(list) {
-      document.getElementById('metric-total-count').innerText = list.length;
-      
-      let revenue = 0;
-      let stagBoys = 0;
-      let stagGirls = 0;
-      let couples = 0;
-
-      list.forEach(item => {
-        const cat = (item.category || '').toLowerCase();
-        const priceNum = parseInt((item.price || '').replace(/[^0-9]/g, '')) || 0;
-
-        if (cat.includes('male') || cat.includes('boy') || cat.includes('गबरू')) {
-          stagBoys++;
-          revenue += (priceNum || 1499);
-        } else if (cat.includes('female') || cat.includes('girl') || cat.includes('पटाखा')) {
-          stagGirls++;
-          revenue += (priceNum || 1399);
-        } else if (cat.includes('couple') || cat.includes('जोड़ी')) {
-          couples++;
-          revenue += (priceNum || 2399);
-        } else {
-          revenue += priceNum;
-        }
-      });
-
-      document.getElementById('metric-total-revenue').innerText = '₹' + revenue.toLocaleString('en-IN');
-      document.getElementById('metric-stag-boys').innerText = stagBoys;
-      document.getElementById('metric-stag-girls').innerText = stagGirls;
-      document.getElementById('metric-couples').innerText = couples;
-
-      document.getElementById('count-all').innerText = list.length;
-      document.getElementById('count-male').innerText = stagBoys;
-      document.getElementById('count-female').innerText = stagGirls;
-      document.getElementById('count-couple').innerText = couples;
-    }
-
-    // Filter Buttons
-    function filterCategory(cat) {
-      currentCategoryFilter = cat;
-      document.querySelectorAll('.cat-filter-btn').forEach(btn => {
-        btn.classList.remove('bg-sunYellow');
-        btn.classList.add('bg-white');
-      });
-      event.target.closest('.cat-filter-btn').classList.remove('bg-white');
-      event.target.closest('.cat-filter-btn').classList.add('bg-sunYellow');
+      hide('loading-state');
+      updateMetrics(allRsvps);
       applyFilters();
     }
 
-    // Filter logic
+    // Run as soon as DOM is ready
+    document.addEventListener('DOMContentLoaded', fetchRsvps);
+
+    // ── METRICS ──────────────────────────────────────────────────────────────
+    function updateMetrics(list) {
+      let revenue = 0, boys = 0, girls = 0, couples = 0;
+
+      list.forEach(item => {
+        const cat   = (item.category || '').toLowerCase();
+        const price = parseInt((item.price || '0').replace(/[^0-9]/g, '')) || 0;
+
+        if (cat.includes('male') || cat.includes('boy')) {
+          boys++;    revenue += price || 1499;
+        } else if (cat.includes('female') || cat.includes('girl')) {
+          girls++;   revenue += price || 1399;
+        } else if (cat.includes('couple')) {
+          couples++; revenue += price || 2399;
+        } else {
+          revenue += price;
+        }
+      });
+
+      $('metric-total-count').innerText   = list.length;
+      $('metric-total-revenue').innerText = '₹' + revenue.toLocaleString('en-IN');
+      $('metric-stag-boys').innerText     = boys;
+      $('metric-stag-girls').innerText    = girls;
+      $('metric-couples').innerText       = couples;
+      $('count-all').innerText            = list.length;
+      $('count-male').innerText           = boys;
+      $('count-female').innerText         = girls;
+      $('count-couple').innerText         = couples;
+    }
+
+    // ── FILTERS ──────────────────────────────────────────────────────────────
+    function filterCategory(cat, btnEl) {
+      currentFilter = cat;
+      document.querySelectorAll('.cat-filter-btn').forEach(b => {
+        b.classList.remove('bg-sunYellow');
+        b.classList.add('bg-white');
+      });
+      if (btnEl) {
+        btnEl.classList.remove('bg-white');
+        btnEl.classList.add('bg-sunYellow');
+      }
+      applyFilters();
+    }
+
     function applyFilters() {
-      const searchTerm = document.getElementById('search-input').value.toLowerCase().trim();
-      
+      const q = (el.searchIn().value || '').toLowerCase().trim();
+
       const filtered = allRsvps.filter(item => {
-        const matchesCategory = (currentCategoryFilter === 'ALL') ||
-          (currentCategoryFilter === 'Male' && (item.category || '').toLowerCase().includes('male')) ||
-          (currentCategoryFilter === 'Female' && (item.category || '').toLowerCase().includes('female')) ||
-          (currentCategoryFilter === 'Couple' && (item.category || '').toLowerCase().includes('couple'));
+        const cat = (item.category || '').toLowerCase();
+        const matchCat =
+          currentFilter === 'ALL' ||
+          (currentFilter === 'Male'   && (cat.includes('male')   || cat.includes('boy')))   ||
+          (currentFilter === 'Female' && (cat.includes('female') || cat.includes('girl')))  ||
+          (currentFilter === 'Couple' &&  cat.includes('couple'));
 
-        const matchesSearch = !searchTerm ||
-          (item.name || '').toLowerCase().includes(searchTerm) ||
-          (item.phone || '').toLowerCase().includes(searchTerm) ||
-          (item.instagram || '').toLowerCase().includes(searchTerm) ||
-          (item.pass_code || '').toLowerCase().includes(searchTerm);
+        const matchQ = !q ||
+          (item.name      || '').toLowerCase().includes(q) ||
+          (item.phone     || '').toLowerCase().includes(q) ||
+          (item.instagram || '').toLowerCase().includes(q) ||
+          (item.pass_code || '').toLowerCase().includes(q);
 
-        return matchesCategory && matchesSearch;
+        return matchCat && matchQ;
       });
 
       renderTable(filtered);
     }
 
-    // Render Table Rows
+    // ── RENDER TABLE ─────────────────────────────────────────────────────────
     function renderTable(list) {
-      const tbody = document.getElementById('rsvps-tbody');
-      const tableEl = document.getElementById('table-container');
-      const emptyEl = document.getElementById('empty-state');
-      const countText = document.getElementById('filtered-records-text');
-
-      countText.innerText = `Showing ${list.length} of ${allRsvps.length} entries`;
+      el.countTxt().innerText = 'Showing ' + list.length + ' of ' + allRsvps.length + ' entries';
 
       if (list.length === 0) {
-        tableEl.classList.add('hidden');
-        emptyEl.classList.remove('hidden');
+        hide('table-container');
+        show('empty-state');
         return;
       }
 
-      emptyEl.classList.add('hidden');
-      tableEl.classList.remove('hidden');
+      hide('empty-state');
+      show('table-container');
 
-      tbody.innerHTML = list.map((item, idx) => {
-        const createdDate = item.created_at ? new Date(item.created_at).toLocaleString('en-IN', {
-          day: 'numeric',
-          month: 'short',
-          hour: '2-digit',
-          minute: '2-digit'
-        }) : 'N/A';
-
-        const cleanPhone = (item.phone || '').replace(/[^0-9]/g, '');
-        const instaClean = (item.instagram || '').replace('@', '').trim();
-        const instaUrl = instaClean ? `https://instagram.com/${instaClean}` : '#';
-
-        // Pre-filled WhatsApp Approval Message
-        const waApprovalMsg = encodeURIComponent(
-          `Hi ${item.name}! 🪔✨\n\nAapka PLOT X // DIWALI AFTERHOURS Pass (${item.pass_code || '#PX'}) confirm ho gaya hai! 🎉\n\n` +
-          `🗓️ Date: Saturday, 2 Nov 2026 (7:00 PM – 12:00 AM)\n` +
-          `📍 Venue: Sector 112, Noida Private Villa\n` +
-          `📌 Google Maps Pin: https://maps.google.com/?q=Sector+112+Noida\n\n` +
-          `Scene set hai, see you on the dance floor & Teen Patti table! 🕺💃`
+      el.tbody().innerHTML = list.map((item, idx) => {
+        const date       = item.created_at
+          ? new Date(item.created_at).toLocaleString('en-IN', { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' })
+          : 'N/A';
+        const phone      = (item.phone || '').replace(/[^0-9]/g, '');
+        const insta      = (item.instagram || '').replace('@','').trim();
+        const instaUrl   = insta ? 'https://instagram.com/' + insta : '#';
+        const waMsg      = encodeURIComponent(
+          'Hi ' + item.name + '! 🪔✨\n\nAapka PLOT X // DIWALI AFTERHOURS Pass (' + (item.pass_code||'#PX') + ') confirm ho gaya hai! 🎉\n\n' +
+          '🗓️ Date: Saturday, 2 Nov 2026 (7:00 PM – 12:00 AM)\n' +
+          '📍 Venue: Sector 112, Noida Private Villa\n\n' +
+          'Scene set hai, see you there! 🕺💃'
         );
-        const waLink = `https://wa.me/91${cleanPhone}?text=${waApprovalMsg}`;
-
-        const receiptButton = `
-          <button onclick="openLightbox(${item.id}, ${idx})" class="btn-pop px-3 py-1.5 rounded-xl bg-sunYellow text-pureBlack text-[11px] font-black uppercase tracking-wider flex items-center gap-1.5 hover:bg-white transition-colors">
-            <span>🧾</span> VIEW RECEIPT
-          </button>
-        `;
 
         return `
           <tr class="hover:bg-sunYellow/15 transition-colors">
-            <!-- Guest & Insta -->
             <td class="p-3">
               <div class="flex items-center gap-2">
                 <span class="w-7 h-7 rounded-full bg-festiveRed text-softCream font-black flex items-center justify-center text-xs border border-pureBlack">
@@ -490,45 +435,34 @@
                 <div>
                   <div class="font-black text-sm text-pureBlack flex items-center gap-1.5">
                     <span>${item.name || 'Guest'}</span>
-                    <span class="text-[10px] font-mono px-1.5 py-0.2 rounded bg-sunYellow border border-pureBlack">${item.pass_code || '#PX'}</span>
+                    <span class="text-[10px] font-mono px-1.5 rounded bg-sunYellow border border-pureBlack">${item.pass_code || '#PX'}</span>
                   </div>
-                  ${instaClean ? `<a href="${instaUrl}" target="_blank" class="text-xs font-bold text-festiveRed hover:underline flex items-center gap-1">@${instaClean} ↗</a>` : '<span class="text-[10px] text-pureBlack/50">No Insta</span>'}
+                  ${insta ? `<a href="${instaUrl}" target="_blank" class="text-xs font-bold text-festiveRed hover:underline">@${insta} ↗</a>` : '<span class="text-[10px] text-pureBlack/50">No Insta</span>'}
                 </div>
               </div>
             </td>
-
-            <!-- Pass Type & Price -->
             <td class="p-3">
-              <span class="font-black text-xs text-pureBlack block">${item.category || 'Pass'}</span>
-              <span class="font-title font-black text-xs text-festiveRed bg-festiveRed/10 px-2 py-0.5 rounded border border-festiveRed/30 inline-block mt-0.5">${item.price || '₹1,499'}</span>
+              <span class="font-black text-xs block">${item.category || 'Pass'}</span>
+              <span class="text-xs font-black text-festiveRed bg-festiveRed/10 px-2 py-0.5 rounded border border-festiveRed/30 inline-block mt-0.5">${item.price || '₹1,499'}</span>
             </td>
-
-            <!-- WhatsApp Phone -->
             <td class="p-3">
-              <a href="https://wa.me/91${cleanPhone}" target="_blank" class="font-mono font-bold text-xs text-pureBlack hover:text-cardGreen hover:underline flex items-center gap-1">
-                <span>💬</span> +91 ${cleanPhone}
+              <a href="https://wa.me/91${phone}" target="_blank" class="font-mono font-bold text-xs hover:text-cardGreen hover:underline flex items-center gap-1">
+                💬 +91 ${phone}
               </a>
             </td>
-
-            <!-- Screenshot Thumbnail / View Receipt Button -->
             <td class="p-3">
-              ${receiptButton}
+              <button onclick="openLightbox(${item.id}, ${idx})" class="btn-pop px-3 py-1.5 rounded-xl bg-sunYellow text-pureBlack text-[11px] font-black uppercase flex items-center gap-1.5">
+                🧾 VIEW RECEIPT
+              </button>
             </td>
-
-            <!-- Taash Vibe -->
-            <td class="p-3 text-[11px] text-pureBlack/80 font-bold max-w-[160px] truncate" title="${item.party_vibe || 'Diwali Party'}">
+            <td class="p-3 text-[11px] text-pureBlack/80 font-bold max-w-[160px] truncate" title="${item.party_vibe || ''}">
               ${item.party_vibe || 'Diwali Vibe'}
             </td>
-
-            <!-- Timestamp -->
-            <td class="p-3 text-[11px] font-mono text-pureBlack/70">
-              ${createdDate}
-            </td>
-
-            <!-- Action: WhatsApp Approval -->
+            <td class="p-3 text-[11px] font-mono text-pureBlack/70">${date}</td>
             <td class="p-3 text-right">
-              <a href="${waLink}" target="_blank" class="btn-pop inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cardGreen text-sunYellow text-[11px] font-black uppercase tracking-wider">
-                <span>📲</span> APPROVE & PIN
+              <a href="https://wa.me/91${phone}?text=${waMsg}" target="_blank"
+                 class="btn-pop inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cardGreen text-sunYellow text-[11px] font-black uppercase">
+                📲 APPROVE & PIN
               </a>
             </td>
           </tr>
@@ -536,109 +470,72 @@
       }).join('');
     }
 
-    // In-Memory Cache for Single Receipts
-    const receiptMemoryCache = {};
-
-    // Open Lightbox for Payment Screenshot (Fast On-Demand Fetch)
-    window.openLightbox = async function(id, index) {
-      const item = allRsvps[index];
+    // ── RECEIPT LIGHTBOX ─────────────────────────────────────────────────────
+    window.openLightbox = async function(id, idx) {
+      const item = allRsvps[idx];
       if (!item) return;
 
-      document.getElementById('lightbox-guest-name').innerText = (item.name || 'GUEST').toUpperCase() + "'S PAYMENT RECEIPT";
-      document.getElementById('lightbox-guest-details').innerText = 
-        `Pass: ${item.pass_code || '#PX'} • ${item.category || 'Pass'} (${item.price || ''}) • WhatsApp: +91 ${item.phone || ''}`;
+      $('lightbox-guest-name').innerText    = (item.name || 'GUEST').toUpperCase() + "'S RECEIPT";
+      $('lightbox-guest-details').innerText = `${item.pass_code || '#PX'} • ${item.category || ''} ${item.price || ''} • +91 ${item.phone || ''}`;
 
-      const loader = document.getElementById('lightbox-loader');
-      const img = document.getElementById('lightbox-img');
-      const emptyMsg = document.getElementById('lightbox-empty-msg');
-      const downloadLink = document.getElementById('lightbox-download-link');
+      show('lightbox-loader');
+      hide('lightbox-img');
+      hide('lightbox-empty-msg');
+      hide('lightbox-download-link');
+      show('screenshot-lightbox');
 
-      loader.classList.remove('hidden');
-      img.classList.add('hidden');
-      emptyMsg.classList.add('hidden');
-      downloadLink.classList.add('hidden');
-
-      document.getElementById('screenshot-lightbox').classList.remove('hidden');
-
-      // Check cache first
-      if (receiptMemoryCache[id]) {
-        renderReceiptInModal(receiptMemoryCache[id], item.name, item.pass_code);
-        return;
+      if (receiptCache[id]) {
+        return renderReceipt(receiptCache[id], item.name, item.pass_code);
       }
 
       try {
-        const res = await fetch(`${SUPABASE_PROJECT_URL}/rest/v1/rsvps?id=eq.${id}&select=payment_screenshot`, {
-          headers: {
-            'apikey': SUPABASE_ANON_KEY,
-            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
-          }
-        });
+        const res  = await fetch(SUPABASE_URL + '/rest/v1/rsvps?id=eq.' + id + '&select=payment_screenshot', { headers: HEADERS });
         const rows = await res.json();
-        const screenshot = (rows && rows[0] && rows[0].payment_screenshot) ? rows[0].payment_screenshot : null;
+        const shot = rows && rows[0] && rows[0].payment_screenshot;
 
-        if (screenshot && screenshot.length > 50) {
-          receiptMemoryCache[id] = screenshot;
-          renderReceiptInModal(screenshot, item.name, item.pass_code);
+        if (shot && shot.length > 50) {
+          receiptCache[id] = shot;
+          renderReceipt(shot, item.name, item.pass_code);
         } else {
-          loader.classList.add('hidden');
-          emptyMsg.classList.remove('hidden');
+          hide('lightbox-loader');
+          show('lightbox-empty-msg');
         }
       } catch (err) {
-        console.error('Receipt fetch err:', err);
-        loader.classList.add('hidden');
-        emptyMsg.innerText = "Error loading receipt: " + err.message;
-        emptyMsg.classList.remove('hidden');
+        hide('lightbox-loader');
+        $('lightbox-empty-msg').innerText = 'Error: ' + err.message;
+        show('lightbox-empty-msg');
       }
     };
 
-    function renderReceiptInModal(src, name, passCode) {
-      const loader = document.getElementById('lightbox-loader');
-      const img = document.getElementById('lightbox-img');
-      const downloadLink = document.getElementById('lightbox-download-link');
-
-      img.src = src;
+    function renderReceipt(src, name, code) {
+      const img  = $('lightbox-img');
+      const dl   = $('lightbox-download-link');
+      img.src    = src;
       img.classList.remove('hidden');
-      loader.classList.add('hidden');
-
-      downloadLink.href = src;
-      downloadLink.download = `Receipt_${(name || 'guest').replace(/\s+/g, '_')}_${passCode || 'PX'}.jpg`;
-      downloadLink.classList.remove('hidden');
-      triggerPartyConfetti();
+      hide('lightbox-loader');
+      dl.href     = src;
+      dl.download = 'Receipt_' + (name||'guest').replace(/\s+/g,'_') + '_' + (code||'PX') + '.jpg';
+      dl.classList.remove('hidden');
+      popConfetti();
     }
 
-    window.closeLightbox = function() {
-      document.getElementById('screenshot-lightbox').classList.add('hidden');
-    };
+    window.closeLightbox = function() { hide('screenshot-lightbox'); };
 
-    // Export RSVPs to CSV
+    // ── CSV EXPORT ───────────────────────────────────────────────────────────
     window.exportToCSV = function() {
-      if (!allRsvps.length) {
-        alert("Export karne ke liye koi data nahi hai!");
-        return;
-      }
+      if (!allRsvps.length) { alert('Koi data nahi hai!'); return; }
+      const hdr  = ['Pass Code','Name','Instagram','Category','Price','Phone','Party Vibe','Submitted At'];
+      const rows = allRsvps.map(r => [
+        r.pass_code, r.name, r.instagram, r.category, r.price,
+        '+91 '+(r.phone||''), r.party_vibe, r.created_at
+      ].map(v => '"'+(v||'')+'"'));
 
-      const headers = ["Pass Code", "Name", "Instagram", "Category", "Price", "WhatsApp Phone", "Party Vibe", "Submitted At", "Has Screenshot"];
-      const rows = allRsvps.map(item => [
-        `"${item.pass_code || ''}"`,
-        `"${item.name || ''}"`,
-        `"${item.instagram || ''}"`,
-        `"${item.category || ''}"`,
-        `"${item.price || ''}"`,
-        `"+91 ${item.phone || ''}"`,
-        `"${item.party_vibe || ''}"`,
-        `"${item.created_at || ''}"`,
-        `"${item.payment_screenshot ? 'YES' : 'NO'}"`
-      ]);
-
-      const csvContent = "data:text/csv;charset=utf-8," + [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
-      const encodedUri = encodeURI(csvContent);
-      const link = document.createElement('a');
-      link.setAttribute('href', encodedUri);
-      link.setAttribute('download', `PlotX_Diwali_RSVP_List_${new Date().toISOString().slice(0,10)}.csv`);
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      triggerPartyConfetti();
+      const uri  = 'data:text/csv;charset=utf-8,' + encodeURIComponent([hdr, ...rows].map(r=>r.join(',')).join('\n'));
+      const a    = document.createElement('a');
+      a.href     = uri;
+      a.download = 'PlotX_RSVP_' + new Date().toISOString().slice(0,10) + '.csv';
+      a.click();
+      popConfetti();
     };
   </script>
 </body>
