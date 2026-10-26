@@ -589,7 +589,7 @@
               <!-- 1. WHEN -->
               <div class="pb-3 border-b border-white/15">
                 <span class="text-[10px] font-black uppercase tracking-wider text-sunYellow block mb-1">WHEN</span>
-                <p class="font-bold text-sm text-softCream">Saturday, 2 November 2026 • 7:00 PM – 12:00 AM</p>
+                <p class="font-bold text-sm text-softCream">Sunday, 3 November 2026 • 7:00 PM – 12:00 AM</p>
               </div>
 
               <!-- 2. WHERE -->
@@ -813,7 +813,7 @@
 
           <div class="mt-6 pt-4 border-t-2 border-sunYellow/30 text-center">
             <span class="px-4 py-1.5 rounded-full bg-sunYellow text-pureBlack font-black text-xs border border-pureBlack uppercase">
-              SATURDAY 7:00 PM – 12:00 AM
+              SUNDAY 7:00 PM – 12:00 AM
             </span>
           </div>
 
@@ -1201,7 +1201,7 @@
               </div>
               <div class="text-right">
                 <span id="pass-code" class="px-2 py-0.5 rounded bg-sunYellow text-pureBlack font-mono font-black text-xs">#PX-942</span>
-                <p class="text-[9px] text-softCream/80 mt-0.5 font-bold">2ND NOV • 8:30 PM</p>
+                <p class="text-[9px] text-softCream/80 mt-0.5 font-bold">3RD NOV • 7:00 PM</p>
               </div>
             </div>
 
@@ -1450,9 +1450,9 @@
       revealObserver.observe(el);
     });
 
-    // --- 4. Countdown Clock Helper (Target: Saturday, 2 Nov 2026, 7:00 PM) ---
+    // --- 4. Countdown Clock Helper (Target: Sunday, 3 Nov 2026, 7:00 PM) ---
     function updateCountdown() {
-      const target = new Date('2026-11-02T19:00:00+05:30').getTime();
+      const target = new Date('2026-11-03T19:00:00+05:30').getTime();
       const now = new Date().getTime();
       const diff = target - now;
 
@@ -1487,7 +1487,7 @@
       const title = encodeURIComponent("PLOT X // Diwali Afterhours Villa Scene 🪔✨");
       const details = encodeURIComponent("PLOT X // Diwali Afterhours at Sector 112 Noida! Curated 20 guests only. Unlimited house fruit punch, 6 hard drinks, loaded nachos, tandoori starters, high-stakes Teen Patti, karaoke & projector screening.");
       const location = encodeURIComponent("Sector 112, Noida Private Villa");
-      const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=20261102T133000Z/20261102T183000Z&details=${details}&location=${location}`;
+      const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=20261103T133000Z/20261103T183000Z&details=${details}&location=${location}`;
       window.open(url, '_blank');
     }
 
@@ -1725,7 +1725,7 @@
 
       ctx.fillStyle = '#FFD000';
       ctx.font = 'bold 18px sans-serif';
-      ctx.fillText('Saturday, 2 November 2026 • 7:00 PM – 12:00 AM', 80, 920);
+      ctx.fillText('Sunday, 3 November 2026 • 7:00 PM – 12:00 AM', 80, 920);
 
       const link = document.createElement('a');
       link.download = `PlotX_Diwali_Pass_${guestName.replace(/\s+/g, '_')}.png`;
@@ -1870,7 +1870,7 @@
           <div>
             <div class="flex items-center justify-between">
               <h4 class="font-black text-sm text-pureBlack">${item.name}</h4>
-              <span class="text-[10px] text-festiveRed font-black">2ND NOV • VILLA</span>
+              <span class="text-[10px] text-festiveRed font-black">3RD NOV • VILLA</span>
             </div>
             <p class="font-body text-xs text-pureBlack/80 mt-0.5">"${item.caption}"</p>
           </div>
